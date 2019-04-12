@@ -3,8 +3,8 @@
     <div class="px-4 md:px-8 flex-auto flex">
       <button
         :class="[
-          menuVisible ? 'border-red' : 'border-transparent',
-          'px-2 sm:px-4 py-3 md:py-6 flex-none flex items-center border-b-2 margin-t-2 hover:border-red text-theme-text-secondary transition'
+          menuVisible ? 'border-orange' : 'border-transparent',
+          'px-2 sm:px-4 py-3 md:py-6 flex-none flex items-center border-b-2 margin-t-2 hover:border-orange text-theme-text-secondary transition'
         ]"
         @click="$store.dispatch('ui/setMenuVisible', !menuVisible)"
       >
@@ -38,7 +38,7 @@
         >
         <label
           for="search"
-          class="search-icon text-grey hover:text-blue p-3 md:p-4 transition"
+          class="search-icon text-grey hover:text-orange p-3 md:p-4 transition"
           @click="$store.dispatch('ui/setHeaderType', 'search')"
         >
           <svg

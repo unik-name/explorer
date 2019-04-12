@@ -45,7 +45,7 @@
     </div>
 
     <div class="w-1/2 lg:w-1/4 flex items-center px-6 my-6 flex-col sm:flex-row text-center sm:text-left">
-      <div class="meter flex-none text-blue mb-4 sm:mb-0">
+      <div class="meter flex-none text-orange mb-4 sm:mb-0">
         <ArkMeter :percentage="percentage(totals.remainingBlocks)" />
       </div>
       <div class="p-0 sm:pl-4">

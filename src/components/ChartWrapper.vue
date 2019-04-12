@@ -168,18 +168,20 @@ export default {
     chartData () {
       return {
         labels: this.labels,
-        datasets: [{
-          type: 'line',
-          pointHoverBackgroundColor: '#fff',
-          borderColor: '#535972',
-          pointHoverBorderColor: '#037cff',
-          pointBackgroundColor: 'rgba(0,0,0,0)',
-          pointBorderColor: 'rgba(0,0,0,0)',
-          pointHoverRadius: 7,
-          pointHoverBorderWidth: 4,
-          fill: false,
-          data: this.datasets
-        }]
+        datasets: [
+          {
+            type: 'line',
+            pointHoverBackgroundColor: '#fff',
+            borderColor: '#535972',
+            pointHoverBorderColor: '#ffa407',
+            pointBackgroundColor: 'rgba(0,0,0,0)',
+            pointBorderColor: 'rgba(0,0,0,0)',
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 4,
+            fill: false,
+            data: this.datasets
+          }
+        ]
       }
     },
 

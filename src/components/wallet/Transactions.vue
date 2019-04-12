@@ -7,8 +7,8 @@
       <nav class="mx-5 md:mx-10 mb-8 border-b flex items-end">
         <div
           :class="[
-            !isTypeSent && !isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-blue'
+            !isTypeSent && !isTypeReceived ? 'text-2xl border-orange text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
+            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-primary hover:border-orange'
           ]"
           @click="setType('all')"
         >
@@ -16,9 +16,9 @@
         </div>
         <div
           :class="[
-            isTypeSent ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
+            isTypeSent ? 'text-2xl border-orange text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             !sentCount ? 'pointer-events-none text-theme-text-tertiary' : '',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
+            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-orange'
           ]"
           @click="setType('sent')"
         >
@@ -32,9 +32,9 @@
         </div>
         <div
           :class="[
-            isTypeReceived ? 'text-2xl border-blue text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
+            isTypeReceived ? 'text-2xl border-orange text-theme-text-primary' : 'text-lg text-theme-text-secondary border-transparent',
             !receivedCount ? 'pointer-events-none text-theme-text-tertiary' : '',
-            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-blue'
+            'mr-4 py-4 px-2 cursor-pointer border-b-3 hover:text-theme-text-primary hover:border-orange'
           ]"
           @click="setType('received')"
         >

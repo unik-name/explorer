@@ -118,8 +118,8 @@
       <div class="flex-none px-8">
         <button
           :disabled="!wallet.publicKey"
-          :class="view === 'public' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue"
+          :class="view === 'public' ? 'bg-orange-darker' : 'bg-transparent text-orange-light'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-orange"
           @click="setView('public')"
         >
           <svg
@@ -138,8 +138,8 @@
         </button>
         <button
           v-if="wallet.publicKey"
-          :class="view === 'private' ? 'bg-blue-darker' : 'bg-transparent text-blue-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-blue"
+          :class="view === 'private' ? 'bg-orange-darker' : 'bg-transparent text-orange-light'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-orange"
           @click="setView('private')"
         >
           <svg
