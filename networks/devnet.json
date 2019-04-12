@@ -1,14 +1,14 @@
 {
-  "title": "DARK Explorer",
-  "server": "https://dexplorer.ark.io/api/v2",
+  "title": "Unikname Devnet Explorer",
+  "server": "https://forger1.testnet.unik-name.com/api/v2",
   "alias": "Development",
-  "activeDelegates": 51,
-  "rewardOffset": 10800,
+  "activeDelegates": 2,
+  "rewardOffset": 1,
   "currencies": [],
   "knownWallets": {},
   "defaults": {
-    "token": "DARK",
-    "symbol": "DѦ",
+    "token": "UNS",
+    "symbol": "UNS",
     "currency": null,
     "priceChart": false
   }
