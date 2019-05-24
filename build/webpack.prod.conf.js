@@ -18,6 +18,8 @@ const argumentParser = require('./argument-parser')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const safeParser = require('postcss-safe-parser')
 
+const circleciPath = '.circleci';
+
 class TailwindExtractor {
   static extract(content) {
     return content.match(/[A-z0-9-:\/]+/g) || [];
@@ -130,6 +132,11 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
           from: path.resolve(__dirname, '../static'),
           to: config.build.assetsSubDirectory,
           ignore: ['.*']
+        },
+        {
+          // Circleci config to avoid build error, for eg., on gh-pages branch
+          from: circleciPath + '/config.yml',
+          to: path.resolve(baseWebpackConfig.output.path, circleciPath),
         }
       ])
     ],
