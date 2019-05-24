@@ -1,64 +1,79 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
 version: 2
+
 jobs:
-  test-node-10:
-    working_directory: ~/explorer
+  # /!\ Beware! This named job is called from "GUN/reserve" and "HUB" CircleCI jobs
+  # for the production environment.
+  # If you rename it, you have to update the build script of the other projects
+  build-deploy: # todo: split this into small jobs
+
     docker:
+      # specify the version you desire here
       - image: circleci/node:10-browsers
-    steps: &teststeps
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/explorer
+
+    steps:
+
       - checkout
+
       - run:
           name: Update npm to @latest
           command: 'sudo npm install -g npm@latest'
-      - run: mkdir test-reports
-      - run:
-          name: Download Selenium
-          command: curl -O https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.141.59.jar -log test-reports/selenium.log
-          background: true
+
+      # Download and cache dependencies
       - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: 
           name: Install
-          command: yarn install
+          command: yarn
+
       - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
-      - run:
-          name: Lint
-          command: yarn lint
-      - run:
-          name: Unit tests
-          command: yarn unit
-      - run:
-          name: Codecov
-          when: on_success
-          command: bash <(curl -s https://codecov.io/bash)
-      - run:
-          name: e2e tests
-          command: yarn e2e
-          environment:
-            WITHOUT_SELENIUM_SERVER: true
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+
       - run:
           name: Build
-          command: yarn build
-      - store_artifacts:
-          path: test-reports/
-          destination: test-results
-      - store_test_results:
-          path: test-reports/
-      
-  test-node-stable:
-    working_directory: ~/explorer
-    docker:
-      - image: circleci/node:latest-browsers
-    steps: *teststeps
+          command: yarn build --network devnet --verbose --base https://unik-name.github.io/explorer/
 
+      - run:
+          name: Deploy
+          shell: /bin/sh
+          command: ./.circleci/deploy.sh
+
+####################################
+## Workflows
+####################################
 workflows:
   version: 2
-  test:
+  build-deploy:
     jobs:
-      - test-node-10
-      - test-node-stable
+      - build-deploy:
+          filters:
+            branches:
+              only:
+                - master
+
+####################################
+## Notifications
+####################################
+# It's a 1.0 CircleCI config, but it's still working
+# See https://discuss.circleci.com/t/experimental-branch-notifications-from-1-0/12964
+experimental:
+  notify:
+    branches:
+      only:
+        - master
