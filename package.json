@@ -69,6 +69,7 @@
     "chalk": "^2.4.1",
     "chromedriver": "^2.43.3",
     "compression-webpack-plugin": "1.1.11",
+    "create-file-webpack": "^1.0.0",
     "copy-webpack-plugin": "4.5.2",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",

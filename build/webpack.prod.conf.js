@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CreateFileWebpack = require('create-file-webpack');
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const gitRevision = require('./utils/git-revision')()
@@ -51,6 +52,11 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
         },
         GIT_VERSION: JSON.stringify(gitRevision.version),
         GIT_DATE: JSON.stringify(gitRevision.date)
+      }),
+      new CreateFileWebpack({
+        path: baseWebpackConfig.output.path,
+        fileName: 'CNAME',
+        content: 'explorer.testnet.unik-name.com',
       }),
       new UglifyJsPlugin({
         uglifyOptions: {
