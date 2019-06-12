@@ -4202,6 +4202,11 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
+ghpages-spa-webpack-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ghpages-spa-webpack-plugin/-/ghpages-spa-webpack-plugin-1.0.0.tgz#9d6c0e3e39f5deadbe393bb4ae8183b515372413"
+  integrity sha512-NfLJxwVAKiEBAaar/ghwCbWnnPZH/ZxQBpOKFuqZE/DTYKOEWnxIDIs3zflZFt/CAFHjC/wkE0yo9V9DILcz2w==
+
 glob-all@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-all/-/glob-all-3.1.0.tgz#8913ddfb5ee1ac7812656241b03d5217c64b02ab"

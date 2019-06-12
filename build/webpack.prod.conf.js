@@ -11,6 +11,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CreateFileWebpack = require('create-file-webpack');
+const GHPagesSPAWebpackPlugin = require('ghpages-spa-webpack-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const gitRevision = require('./utils/git-revision')()
@@ -138,7 +139,10 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
           from: circleciPath + '/config.yml',
           to: path.resolve(baseWebpackConfig.output.path, circleciPath),
         }
-      ])
+      ]),
+      new GHPagesSPAWebpackPlugin({
+        domain: 'explorer.testnet.unik-name.com',
+      })
     ],
     optimization: {
       // enable scope hoisting
