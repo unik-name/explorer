@@ -12,10 +12,11 @@
           {{ $t("Network") }}: {{ $t(alias) }}
         </div>
         <div :class="{ 'pr-6': isMain }">
-          {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+          {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} - {{ unikSupply+" UNIK" }}</span>
         </div>
         <div v-if="isMain">
-          {{ $t("Market Cap") }}: <Currency :amount="+supply" />
+          {{ $t("Market Cap") }}:
+          <Currency :amount="+supply" />
         </div>
       </div>
     </div>
@@ -43,7 +44,7 @@ export default {
   name: 'ContentHeader',
 
   computed: {
-    ...mapGetters('network', ['alias', 'supply', 'height']),
+    ...mapGetters('network', ['alias', 'supply', 'height', 'unikSupply']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),
 
     isMain () {

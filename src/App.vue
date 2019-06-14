@@ -16,7 +16,7 @@
 <script type="text/ecmascript-6">
 import AppHeader from '@/components/header/AppHeader'
 import AppFooter from '@/components/AppFooter'
-import { BlockchainService, CryptoCompareService, DelegateService, NodeService } from '@/services'
+import { BlockchainService, CryptoCompareService, DelegateService, UnikService, NodeService } from '@/services'
 import { mapGetters } from 'vuex'
 import moment from 'moment'
 
@@ -94,6 +94,7 @@ export default {
     this.updateLocale()
     this.updateCurrencyRate()
     this.updateSupply()
+    this.updateUnikSupply()
     this.updateHeight()
     this.updateDelegates()
   },
@@ -123,6 +124,11 @@ export default {
       this.$store.dispatch('network/setSupply', supply)
     },
 
+    async updateUnikSupply () {
+      const unikSupply = await UnikService.supply()
+      this.$store.dispatch('network/setUnikSupply', unikSupply)
+    },
+
     async updateHeight () {
       const height = await BlockchainService.height()
       this.$store.dispatch('network/setHeight', height)
@@ -148,6 +154,7 @@ export default {
 
       this.networkTimer = setInterval(() => {
         this.updateSupply()
+        this.updateUnikSupply()
         this.updateHeight()
         this.updateDelegates()
       }, 8 * 1000)
