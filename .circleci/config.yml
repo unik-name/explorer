@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: Build
-          command: yarn build --network devnet --verbose --base https://explorer.testnet.unik-name.com/ --history
+          command: yarn build --network devnet --verbose --base https://explorer.testnet.unik-name.com/
 
       - run:
           name: Deploy
