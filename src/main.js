@@ -10,6 +10,7 @@ import i18n from './i18n'
 import directives from './directives'
 import VTooltip from 'v-tooltip'
 import TableComponent from 'vue-table-component'
+import JSONView from 'vue-json-component'
 import { orderBy } from 'lodash'
 
 require('./components')
@@ -28,6 +29,8 @@ Vue.use(TableComponent, {
   sortHandler: (rows, column, order) => orderBy(rows, `data.${column}`, order),
   filterNoResults: i18n.t('No results')
 })
+
+Vue.use(JSONView)
 
 /* eslint-disable no-new */
 new Vue({

@@ -3,6 +3,7 @@
   "Network": "Network",
   "Main": "Main",
   "Development": "Development",
+  "Testnet": "Testnet",
   "Supply": "Supply",
   "Market Cap": "Market Cap",
 
@@ -16,6 +17,15 @@
   "No results": "No results",
   "Not yet available": "Not yet available",
   "This is a verified address": "This is a verified address",
+
+  "UNIK summary": "UNIK summary",
+  "UNIK ID": "UNIK ID",
+  "Owner": "Owner",
+  "Creation date": "Creation date",
+  "Category": "Category",
+  "Status": "Status",
+  "Labels": "Labels",
+  "No labels attached": "No labels attached",
 
   "Transaction": "Transaction",
   "Transactions": "Transactions",

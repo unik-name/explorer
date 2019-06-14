@@ -16,6 +16,7 @@ const TransactionsComponent = () => import('@/pages/Transactions')
 const DelegateMonitorComponent = () => import('@/pages/DelegateMonitor')
 const TopWalletsComponent = () => import('@/pages/TopWallets')
 const NotFoundComponent = () => import('@/pages/404')
+const UnikComponent = () => import('@/pages/Unik')
 
 Vue.use(Router)
 
@@ -31,6 +32,12 @@ const router = new Router({
       name: 'home',
       component: HomeComponent,
       meta: { title: route => { return getTitle('Home') } }
+    },
+    {
+      path: '/uniks/:id',
+      name: 'unik',
+      component: UnikComponent,
+      meta: { title: route => { return getTitle('UNIK ' + route.params.id.substr(0, 5)) } }
     },
     {
       path: '/wallets/:address',
