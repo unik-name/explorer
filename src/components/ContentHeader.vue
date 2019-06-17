@@ -8,7 +8,10 @@
         <div class="pr-6">
           {{ $t("Height") }}: {{ height.toLocaleString() }}
         </div>
-        <div class="pr-6">
+        <div
+          class="pr-6"
+          :class="{'text-red font-black':!isMain}"
+        >
           {{ $t("Network") }}: {{ $t(alias) }}
         </div>
         <div :class="{ 'pr-6': isMain }">
