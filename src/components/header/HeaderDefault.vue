@@ -121,7 +121,7 @@ export default {
     setMobilePlaceholder (showMobile) {
       this.placeholder = showMobile
         ? this.$i18n.t('Search')
-        : this.$i18n.t('Find a block, transaction, address or delegate')
+        : this.$i18n.t('Find a block, transaction, address, delegate or UNIK')
     }
   }
 }

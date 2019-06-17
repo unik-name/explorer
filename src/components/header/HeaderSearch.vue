@@ -142,6 +142,16 @@ export default {
       } catch (e) {
         this.updateSearchCount(e)
       }
+
+      try {
+        const responseUnik = await SearchService.unikById(
+          this.query
+        )
+        this.changePage('unik', { id: responseUnik.id })
+        return
+      } catch (e) {
+        this.updateSearchCount(e)
+      }
     },
 
     updateSearchCount (err) {
@@ -161,7 +171,7 @@ export default {
     setMobilePlaceholder (showMobile) {
       this.placeholder = showMobile
         ? this.$i18n.t('Search')
-        : this.$i18n.t('Find a block, transaction, address or delegate')
+        : this.$i18n.t('Find a block, transaction, address, delegate or UNIK')
     },
 
     changePage (name, params) {

@@ -2,6 +2,7 @@ import {
   BlockService,
   DelegateService,
   WalletService,
+  UnikService,
   TransactionService
 } from '@/services'
 
@@ -20,6 +21,10 @@ class SearchService {
 
   async transactionById (id) {
     return TransactionService.find(id)
+  }
+
+  async unikById (id) {
+    return UnikService.find(id)
   }
 }
 
