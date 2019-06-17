@@ -24,7 +24,7 @@ class TransactionService {
     }
 
     if (type !== -1) {
-      params.type = type
+      params.type = type === 5 ? 9 : type // TODO tweak for discontinued transaction type (remove when new transaction types (AIP 11) will work with explorer )
     }
 
     const response = await ApiService.get('transactions', {

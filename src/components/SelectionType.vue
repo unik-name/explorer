@@ -105,7 +105,7 @@ export default {
 
   data: () => ({
     types: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
+      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration', 'UNIK'
     ],
     transactionType: -1,
     selectOpen: false

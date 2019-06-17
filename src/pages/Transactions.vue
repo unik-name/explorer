@@ -59,7 +59,7 @@ export default {
     meta: null,
     currentPage: 0,
     types: [
-      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration'
+      'All', 'Transfer', 'Second Signature', 'Delegate Registration', 'Vote', 'Multisignature Registration', 'UNIK'
     ],
     transactionType: -1
   }),
