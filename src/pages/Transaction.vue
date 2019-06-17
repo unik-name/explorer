@@ -29,8 +29,14 @@
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center">
           <div class="mr-6 flex-none">
             <img
+              v-if="transaction.type !== 9"
               class="block"
               src="@/assets/images/icons/transaction.svg"
+            >
+            <img
+              v-else
+              class="block"
+              src="@/assets/images/icons/transaction-unik.svg"
             >
           </div>
           <div class="flex-auto min-w-0">
