@@ -47,7 +47,7 @@
       </table-column>
 
       <table-column
-        :label="$t('Recipient')"
+        :label="$t('Recipient or type')"
         show="recipient"
         header-class="left-header-cell"
         cell-class="left-cell"

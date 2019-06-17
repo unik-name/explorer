@@ -20,6 +20,7 @@
 
   "UNIK summary": "UNIK summary",
   "UNIK ID": "UNIK ID",
+  "Creation": "Creation",
   "Owner": "Owner",
   "Creation date": "Creation date",
   "Category": "Category",
@@ -112,7 +113,7 @@
   "Fee (token)": "Fee ({token})",
   "Fee": "Fee",
   "Sender": "Sender",
-  "Recipient": "Recipient",
+  "Recipient or type": "Recipient or type",
   "Smartbridge": "Smartbridge",
   "Well confirmed": "Well confirmed",
   "Balance": "Balance",

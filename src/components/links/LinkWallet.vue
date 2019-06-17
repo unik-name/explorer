@@ -57,6 +57,14 @@
     <span v-else-if="type === 6">{{ $t("Timelock Transfer") }}</span>
     <span v-else-if="type === 7">{{ $t("Multipayment") }}</span>
     <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
+    <span v-else-if="type === 9">
+      <RouterLink
+        v-tooltip="asset.nft.tokenId"
+        :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
+      >UNIK
+      </RouterLink>
+      {{ $t("Creation") }}
+    </span>
   </span>
 </template>
 

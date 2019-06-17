@@ -15,7 +15,7 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t("Recipient") }}
+          {{ $t("Recipient or type") }}
         </div>
         <div class="truncate">
           <LinkWallet
