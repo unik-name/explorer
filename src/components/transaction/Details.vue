@@ -13,6 +13,18 @@
         </div>
       </div>
 
+      <div
+        v-if="transaction.type === 9"
+        class="list-row-border-b-no-wrap"
+      >
+        <div class="mr-4">
+          {{ $t("UNIK ID") }}
+        </div>
+        <div>
+          <LinkUNIK :id="transaction.asset.nft.tokenId" />
+        </div>
+      </div>
+
       <div class="list-row-border-b">
         <div class="mr-4">
           {{ $t("Recipient or type") }}
