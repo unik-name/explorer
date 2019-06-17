@@ -12,7 +12,7 @@
           {{ $t("Network") }}: {{ $t(alias) }}
         </div>
         <div :class="{ 'pr-6': isMain }">
-          {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} - {{ unikSupply+" UNIK" }}</span>
+          {{ $t("Supply") }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }}  UNIK</span>
         </div>
         <div v-if="isMain">
           {{ $t("Market Cap") }}:
@@ -31,7 +31,7 @@
       </div>
       <div>
         <span>{{ $t("Supply") }}:</span>
-        <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
+        <span class="block md:inline-block whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }}  UNIK</span>
       </div>
     </div>
   </div>
