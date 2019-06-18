@@ -6,7 +6,7 @@
     >
       <div class="flex items-center justify-center absolute pin">
         <div
-          class="modal-container bg-theme-page-background text-theme-text-content rounded shadow mx-auto relative p-10"
+          class="modal-container bg-theme-page-background text-theme-content-background rounded shadow mx-auto relative p-10"
           @click.stop=""
         >
           <button

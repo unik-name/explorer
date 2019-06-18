@@ -125,7 +125,7 @@ export default {
     },
 
     secondaryTextColor () {
-      return this.inBanner ? 'grey' : 'theme-text-secondary'
+      return this.inBanner ? 'grey' : 'theme-content-background'
     },
 
     bannerClasses () {
