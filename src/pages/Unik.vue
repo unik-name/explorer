@@ -57,7 +57,7 @@
 
 <script type="text/ecmascript-6">
 import NotFound from '@/components/utils/NotFound'
-import UnikDetails from '@/components/unik/Details'
+import { UnikDetails } from '@/components/unik'
 import UnikService from '@/services/unik'
 
 export default {

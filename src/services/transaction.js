@@ -45,6 +45,15 @@ class TransactionService {
     return response
   }
 
+  async byUnik (unik, page = 1, limit = 25) {
+    const response = await ApiService.post(`transactions/search`,
+      { type: 9 }, // TODO: complete
+      { page, limit }
+    )
+
+    return response
+  }
+
   async allByAddress (address, page = 1, limit = 25) {
     const response = await ApiService.get(`wallets/${address}/transactions`, {
       params: {
