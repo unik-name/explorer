@@ -158,6 +158,15 @@ const methods = {
 
   emojify (text) {
     return emoji.emojify(text)
+  },
+
+  // TODO tweak for discontinued transaction type (remove when new transaction types (AIP 11) will work with explorer )
+  isNFTTransaction (type) {
+    return type >= 5
+  },
+
+  getNFTTransactionType (type) {
+    return type + 4
   }
 }
 

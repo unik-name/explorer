@@ -14,9 +14,11 @@
   "Not yet available": "Pas encore disponible",
   "This is a verified address": "Ceci est une adresse vérifiée",
 
-  "UNIK summary": "Détails du token UNIK",
+  "UNIK summary": "Détails d'un token UNIK",
   "UNIK ID": "Identifiant du token UNIK",
-  "Creation": "Création",
+  "UNIK Creation": "Création d'un UNIK",
+  "UNIK Update": "mise à jour d'un UNIK",
+  "UNIK Transfer": "Création d'un UNIK",
   "Owner": "Possesseur",
   "Creation date": "Date de création",
   "Category": "Catégorie",

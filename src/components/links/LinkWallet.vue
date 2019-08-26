@@ -61,9 +61,22 @@
       <RouterLink
         v-tooltip="asset.nft.tokenId"
         :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
-      >UNIK
+      >{{ $t("UNIK Transfer") }}
       </RouterLink>
-      {{ $t("Creation") }}
+    </span>
+    <span v-else-if="type === 10">
+      <RouterLink
+        v-tooltip="asset.nft.tokenId"
+        :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
+      >{{ $t("UNIK Update") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="type === 11">
+      <RouterLink
+        v-tooltip="asset.nft.tokenId"
+        :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
+      >{{ $t("UNIK Creation") }}
+      </RouterLink>
     </span>
   </span>
 </template>
