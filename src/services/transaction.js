@@ -1,4 +1,7 @@
 import ApiService from '@/services/api'
+import mixins from '@/mixins'
+
+const { isNFTTransaction, getNFTTransactionType } = mixins
 
 class TransactionService {
   async latest (limit = 25) {
@@ -24,7 +27,7 @@ class TransactionService {
     }
 
     if (type !== -1) {
-      params.type = type === 5 ? 9 : type // TODO tweak for discontinued transaction type (remove when new transaction types (AIP 11) will work with explorer )
+      params.type = isNFTTransaction(type) ? getNFTTransactionType(type) : type
     }
 
     const response = await ApiService.get('transactions', {

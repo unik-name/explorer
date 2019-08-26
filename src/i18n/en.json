@@ -20,7 +20,9 @@
 
   "UNIK summary": "UNIK summary",
   "UNIK ID": "UNIK ID",
-  "Creation": "Creation",
+  "UNIK Creation": "UNIK Creation",
+  "UNIK Update": "UNIK Update",
+  "UNIK Transfer": "UNIK Transfer",
   "Owner": "Owner",
   "Creation date": "Creation date",
   "Category": "Category",
