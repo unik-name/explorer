@@ -7,7 +7,7 @@
         </div>
         <div class="truncate">
           <LinkWallet
-            :address="unik.owner"
+            :address="unik.ownerId"
             :trunc="false"
           />
         </div>
