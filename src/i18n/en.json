@@ -27,8 +27,13 @@
   "Creation date": "Creation date",
   "Category": "Category",
   "Status": "Status",
-  "Labels": "Labels",
-  "No labels attached": "No labels attached",
+  "Properties": "Properties",
+  "No properties": "No properties",
+  "Individual": "Individual",
+  "Corporate": "Corporate",
+
+  "Key": "Key",
+  "Value": "Value",
 
   "Transaction": "Transaction",
   "Transactions": "Transactions",

@@ -13,38 +13,19 @@
         </div>
       </div>
 
+      <div class="list-row-border-b">
+        <div class="mr-4">
+          {{ $t("Type") }}
+        </div>
+        {{ $t(unik.type) }}
+      </div>
+
       <div class="list-row-border-b-no-wrap">
         <div class="mr-4">
           {{ $t("Creation date") }}
         </div>
         <div v-if="unik.creation">
-          {{ readableTimestamp(unik.creation.unix) }}
-        </div>
-        <div v-else>
-          <i>{{ $t("Not yet available" ) }}</i>
-        </div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("Category") }}
-        </div>
-        <div v-if="unik.category">
-          Individual
-          <!--TODO: component category -->
-        </div>
-        <div v-else>
-          <i>{{ $t("Not yet available" ) }}</i>
-        </div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
-          {{ $t("Status") }}
-        </div>
-        <div v-if="unik.status">
-          Minted
-          <!--TODO: component status -->
+          {{ readableTimestamp(unik.creation) }}
         </div>
         <div v-else>
           <i>{{ $t("Not yet available" ) }}</i>
@@ -55,28 +36,25 @@
     <div class="px-5 sm:px-10">
       <div class="list-row">
         <div class="mr-4">
-          {{ $t("Labels") }}
+          {{ $t("Properties") }}
         </div>
       </div>
-      <div
-        v-if="unik.labels && unik.labels !== {}"
-        class="py-2"
-      >
-        <Labels :labels="unik.labels" />
-      </div>
-      <div
-        v-else
-        class="py-2"
-      >
-        <i>{{ $t("No labels attached" ) }}</i>
+      <div class="py-2">
+        <UnikProperties :properties="unik.properties" />
       </div>
     </div>
   </section>
 </template>
 
 <script type="text/ecmascript-6">
+import UnikProperties from '@/components/unik/UnikProperties'
+
 export default {
   name: 'UnikDetails',
+
+  components: {
+    UnikProperties
+  },
 
   props: {
     unik: {
