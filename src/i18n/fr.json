@@ -23,8 +23,13 @@
   "Creation date": "Date de création",
   "Category": "Catégorie",
   "Status": "Statut",
-  "Labels": "Labels",
-  "No labels attached": "Aucuns labels rattachés",
+  "Properties": "Propriétés",
+  "No properties": "Aucunes propriétés",
+  "Key": "Clé",
+  "Value": "Valeur",
+  "Individual": "Individu",
+  "Corporate": "Entreprise",
+
 
   "Transaction": "Transaction",
   "Transactions": "Transactions",
