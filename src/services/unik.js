@@ -4,7 +4,7 @@ const UNIKTypes = ['Individual', 'Corporate']
 
 class UnikService {
   async findUnikProperties (unikId) {
-    const response = await ApiService.get(`nfts/${unikId}/properties`)
+    const response = await ApiService.get(`uniks/${unikId}/properties`)
     return response.data
   }
 
@@ -15,14 +15,14 @@ class UnikService {
   async findUnikProperty (unikId, unikProperty) {
     let ret
     try {
-      const response = await ApiService.get(`nfts/${unikId}/properties/${unikProperty}`)
+      const response = await ApiService.get(`uniks/${unikId}/properties/${unikProperty}`)
       ret = response.data
     } catch (e) {}
     return ret
   }
 
   async find (id) {
-    const response = await ApiService.get(`nfts/${id}`)
+    const response = await ApiService.get(`uniks/${id}`)
     const unik = response.data
     unik.properties = await this.findUnikProperties(id).then(this.formatProperties)
     unik.type = await this.findUnikProperty(unik.id, 'type').then(type => UNIKTypes[--type])
@@ -31,7 +31,7 @@ class UnikService {
   }
 
   async supply () {
-    const response = await ApiService.get('nfts')
+    const response = await ApiService.get('uniks')
     return response.meta.totalCount
   }
 
