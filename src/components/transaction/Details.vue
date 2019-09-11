@@ -14,14 +14,14 @@
       </div>
 
       <div
-        v-if="transaction.type === 9"
+        v-if="isNFTTransaction(transaction.type)"
         class="list-row-border-b-no-wrap"
       >
         <div class="mr-4">
           {{ $t("UNIK ID") }}
         </div>
         <div>
-          <LinkUNIK :id="transaction.asset.nft.tokenId" />
+          <LinkUNIK :id="transaction.asset.nft.unik.tokenId" />
         </div>
       </div>
 

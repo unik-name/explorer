@@ -59,22 +59,22 @@
     <span v-else-if="type === 8">{{ $t("Delegate Resignation") }}</span>
     <span v-else-if="type === 9">
       <RouterLink
-        v-tooltip="asset.nft.tokenId"
-        :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
+        v-tooltip="asset.nft.unik.tokenId"
+        :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
       >{{ $t("UNIK Transfer") }}
       </RouterLink>
     </span>
     <span v-else-if="type === 10">
       <RouterLink
-        v-tooltip="asset.nft.tokenId"
-        :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
+        v-tooltip="asset.nft.unik.tokenId"
+        :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
       >{{ $t("UNIK Update") }}
       </RouterLink>
     </span>
     <span v-else-if="type === 11">
       <RouterLink
-        v-tooltip="asset.nft.tokenId"
-        :to="{ name: 'unik', params: { id: asset.nft.tokenId } }"
+        v-tooltip="asset.nft.unik.tokenId"
+        :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
       >{{ $t("UNIK Creation") }}
       </RouterLink>
     </span>
