@@ -958,10 +958,10 @@
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-12.0.12.tgz#45dd1d0638e8c8f153e87d296907659296873916"
   integrity sha512-SOhuU4wNBxhhTHxYaiG5NY4HBhDIDnJF60GU+2LqHAdKKer86//e4yg69aENCtQ04n0ovz+tq2YPME5t5yp4pw==
 
-"@uns/crypto@^3.0.0-alpha.1":
-  version "3.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@uns/crypto/-/crypto-3.0.0-alpha.1.tgz#4713b6296283f1ed37a0def4cab29a67664d5638"
-  integrity sha512-Ki99loK922YYGVNPngYqFYCnqwMaIntG6uN96UoTC9p3pl0M0zpsIr2CtNcPTzHAog5BabCbI+L4m+4kJ9Y+iA==
+"@uns/crypto@^3.0.0-alpha.3":
+  version "3.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@uns/crypto/-/crypto-3.0.0-alpha.3.tgz#678d6ee194d09da95550f05377f2a7b8e6de9f6e"
+  integrity sha512-h63Y9g9GEdEYKOPyTFwAvYV3JiYrtLyT25ECOiJ4ApH83DGE/6jNhereLlj5RsquLD8FeHjqDk4ccf7DYfLauw==
   dependencies:
     "@faustbrian/dato" "^0.2.0"
     ajv "^6.10.0"
@@ -988,14 +988,14 @@
     tiny-glob "^0.2.6"
     wif "^2.0.6"
 
-"@uns/ts-sdk@^1.0.0-alpha.0":
-  version "1.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@uns/ts-sdk/-/ts-sdk-1.0.0-alpha.0.tgz#28af095c32e299bfe2e54e2bcacdb2ccfdea47d3"
-  integrity sha512-DLbbfLipKAZtEHWZjas5L/vl1M9XBA0h0MyscNINKlYa5iyqtpGyXSs5I1Bj/DtSPqyKv4sYGisKuDTjqWCPAw==
+"@uns/ts-sdk@^1.0.0-alpha.1":
+  version "1.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@uns/ts-sdk/-/ts-sdk-1.0.0-alpha.1.tgz#5ecceade146960c984ee99e2fb67060079da7e7e"
+  integrity sha512-DE3BXcmas/0bGNWongesgOJQaOYO+O4/y4NWRR8ebr9KzNcQmAXXHIIpRC2a94WJB1WLMppWSyNsFY9S72xDpg==
   dependencies:
     "@types/deepmerge" "^2.2.0"
     "@types/is-url-superb" "^3.0.0"
-    "@uns/crypto" "^3.0.0-alpha.1"
+    "@uns/crypto" "^3.0.0-alpha.3"
     deepmerge "^4.0.0"
     is-url-superb "^3.0.0"
     ky "^0.13.0"
