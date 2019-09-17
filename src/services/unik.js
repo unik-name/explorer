@@ -1,6 +1,5 @@
+import { DIDTypes } from '@uns/ts-sdk'
 import { ApiService, TransactionService } from '@/services'
-
-const UNIKTypes = ['Individual', 'Corporate']
 
 class UnikService {
   async findUnikProperties (unikId) {
@@ -25,7 +24,7 @@ class UnikService {
     const response = await ApiService.get(`uniks/${id}`)
     const unik = response.data
     unik.properties = await this.findUnikProperties(id).then(this.formatProperties)
-    unik.type = await this.findUnikProperty(unik.id, 'type').then(type => UNIKTypes[--type])
+    unik.type = await this.findUnikProperty(unik.id, 'type').then(type => DIDTypes[type])
     unik.creation = await this.extractUnikCreationUnixTimestamp(unik)
     return unik
   }

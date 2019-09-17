@@ -22,13 +22,13 @@
   "Owner": "Possesseur",
   "Creation date": "Date de création",
   "Category": "Catégorie",
-  "Status": "Statut",
   "Properties": "Propriétés",
   "No properties": "Aucunes propriétés",
   "Key": "Clé",
   "Value": "Valeur",
-  "Individual": "Individu",
-  "Corporate": "Entreprise",
+  "INDIVIDUAL": "Individu",
+  "ORGANIZATION": "Organisation",
+  "NETWORK": "Réseau",
 
 
   "Transaction": "Transaction",
