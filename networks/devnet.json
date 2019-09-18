@@ -2,7 +2,7 @@
   "title": "Unikname Devnet Explorer",
   "server": "https://forger1.devnet.uns.network/api/v2",
   "alias": "Devnet",
-  "activeDelegates": 2,
+  "activeDelegates": 7,
   "rewardOffset": 1,
   "currencies": [],
   "knownWallets": {},
