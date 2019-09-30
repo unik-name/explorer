@@ -126,7 +126,7 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
         }
       ]),
       new GHPagesSPAWebpackPlugin({
-        domain: 'explorer.devnet.uns.network',
+        domain: "https://explorer."+ network +".uns.network",
       })
     ],
     optimization: {

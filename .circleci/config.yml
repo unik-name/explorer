@@ -47,7 +47,7 @@ jobs:
 
       - run:
           name: Build
-          command: yarn build --network devnet --verbose --base https://explorer.devnet.uns.network/
+          command: yarn build:devnet --verbose
 
       - run:
           name: Deploy
