@@ -14,7 +14,7 @@
   "scripts": {
     "build": "node build/build.js",
     "build:mainnet": "node build/build.js --network mainnet",
-    "build:devnet": "node build/build.js --network devnet --base https://explorer.devnet.uns.network/",
+    "build:devnet": "node build/build.js --network devnet",
     "build:testnet": "node build/build.js --network testnet",
     "build:dalinet": "node build/build.js --network dalinet",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
