@@ -1,0 +1,8 @@
+[build]
+    publish = "dist/"
+
+[context."devnet"]
+  command = "yarn build:devnet --verbose"
+
+[context."develop"]
+  command = "yarn build:dalinet --verbose"
