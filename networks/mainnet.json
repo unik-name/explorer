@@ -1,5 +1,5 @@
 {
-  "title": "Ark Explorer",
+  "title": "uns.network MAINNET Explorer",
   "server": "https://explorer.ark.io/api/v2",
   "alias": "Main",
   "activeDelegates": 51,

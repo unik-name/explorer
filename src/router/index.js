@@ -21,7 +21,11 @@ const UnikComponent = () => import('@/pages/Unik')
 Vue.use(Router)
 
 function getTitle (title) {
-  return `${title} - ${process.env.TITLE}`
+  var ret = `${process.env.TITLE}`
+  if (title) {
+    ret = `${title} - ` + ret
+  }
+  return ret
 }
 
 const router = new Router({
@@ -31,7 +35,7 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: HomeComponent,
-      meta: { title: route => { return getTitle('Home') } }
+      meta: { title: _ => { return getTitle() } }
     },
     {
       path: '/uniks/:id',
