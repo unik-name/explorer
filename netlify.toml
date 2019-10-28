@@ -6,3 +6,9 @@
 
 [context."develop"]
   command = "yarn build:dalinet --verbose"
+
+[[redirects]]
+  from = "https://explorer.uns.network/*"
+  to = "https://devnet.explorer.uns.network/"
+  status = 302
+  force = true
