@@ -78,6 +78,13 @@
       >{{ $t("UNIK Creation") }}
       </RouterLink>
     </span>
+    <span v-else-if="type === 12">
+      <RouterLink
+        v-tooltip="asset['disclose-demand'].payload.sub"
+        :to="{ name: 'unik', params: { id: asset['disclose-demand'].payload.sub } }"
+      >{{ $t("Disclose") }}
+      </RouterLink>
+    </span>
   </span>
 </template>
 
