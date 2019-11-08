@@ -61,11 +61,11 @@
 
   "Menu": "Menu",
   "Search": "Search",
-  "Find a block, transaction, address, delegate or UNIK": "Find a block, transaction, address, delegate or UNIK",
+  "Find a block, transaction, address, delegate or UNIK": "Find a block, transaction, address, network player or UNIK",
   "Nothing matched your search": "Nothing matched your search",
   "Home": "Home",
   "Top Wallets": "Top Wallets",
-  "Delegate Monitor": "Delegate Monitor",
+  "Delegate Monitor": "Network player Monitor",
 
   "Show more": "Show more",
 
@@ -76,8 +76,8 @@
   "Last forged": "Last forged",
   "Status": "Status",
   "Percentage of the total supply": "Percentage of the total supply",
-  "Delegates": "Delegates",
-  "Delegate": "Delegate",
+  "Delegates": "Network players",
+  "Delegate": "Network player",
   "Forged block recently": "Forged block recently",
   "Missed block": "Missed block",
   "Never forged": "Never forged",
@@ -146,14 +146,14 @@
   "Type": "Type",
   "Transaction type": "Transaction type",
   "2nd Signature Registration": "2nd Signature Registration",
-  "Delegate Registration": "Delegate Registration",
+  "Delegate Registration": "Network player Registration",
   "Vote": "Vote",
   "Unvote": "Unvote",
   "Multisignature Registration": "Multisignature Registration",
   "IPFS": "IPFS",
   "Timelock Transfer": "Timelock Transfer",
   "Multipayment": "Multipayment",
-  "Delegate Resignation": "Delegate Resignation",
+  "Delegate Resignation": "Network player Resignation",
   "Second Signature": "Second Signature",
   "Transfer": "Transfer"
 }

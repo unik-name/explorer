@@ -56,11 +56,11 @@
 
   "Menu": "Menu",
   "Search": "Recherche",
-  "Find a block, transaction, address or delegate": "Trouver un bloc, une transaction, une adresse ou un délégué",
+  "Find a block, transaction, address or delegate": "Trouver un bloc, une transaction, une adresse ou un network player",
   "Nothing matched your search": "Rien ne correspond à votre recherche",
   "Home": "Accueil",
   "Top Wallets": "Top des Portefeuilles",
-  "Delegate Monitor": "Moniteur des Délégués",
+  "Delegate Monitor": "Moniteur des Network players",
 
   "Show more": "Montrez plus",
 
@@ -71,8 +71,8 @@
   "Last forged": "Dernier forgé",
   "Status": "Statut",
   "Percentage of the total supply": "Pourcentage de l'offre totale",
-  "Delegates": "Délégués",
-  "Delegate": "Délégué",
+  "Delegates": "Network players",
+  "Delegate": "Network player",
   "Forged block recently": "Ont forgé récemment",
   "Missed block": "Ont manqué un bloc",
   "Never forged": "Jamais forgé",
@@ -141,14 +141,14 @@
   "Type": "Type",
   "Transaction type": "Type de transaction",
   "2nd Signature Registration": "Enregistrement de seconde Signature",
-  "Delegate Registration": "Inscription de Délégué",
+  "Delegate Registration": "Inscription de Network player",
   "Vote": "Vote",
   "Unvote": "Annuler le vote",
   "Multisignature Registration": "Enregistrement Multisignature",
   "IPFS": "IPFS",
   "Timelock Transfer": "Transfert différé",
   "Multipayment": "Multi-Paiement",
-  "Delegate Resignation": "Résignation de Délégué",
+  "Delegate Resignation": "Résignation de Network player",
   "Second Signature": "Deuxième Signature",
   "Transfer": "Transfert"
 }
