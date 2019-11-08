@@ -27,6 +27,39 @@
         {{ $t("Delegate Monitor") }}
       </RouterLink>
     </li>
+    <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+      <div class="cursor-pointer py-5 w-64 flex-none">
+        <a
+          href="https://uns.network"
+          target="_blank"
+          style="color:inherit"
+        >
+          uns.network
+        </a>
+      </div>
+    </li>
+    <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+      <div class="cursor-pointer py-5 w-64 flex-none">
+        <a
+          href="https://forum.unik-name.com"
+          target="_blank"
+          style="color:inherit"
+        >
+          Forum
+        </a>
+      </div>
+    </li>
+    <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+      <div class="cursor-pointer py-5 w-64 flex-none">
+        <a
+          href="https://docs.uns.network"
+          target="_blank"
+          style="color:inherit"
+        >
+          Docs
+        </a>
+      </div>
+    </li>
     <!-- <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
       <RouterLink :to="{ name: 'statistics' }" tag="div" class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border">Statistics</RouterLink>
     </li> -->

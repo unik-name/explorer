@@ -47,6 +47,36 @@
       {{ $t("Delegate Monitor") }}
     </RouterLink>
 
+    <button class="menu-button">
+      <a
+        href="https://uns.network"
+        target="_blank"
+        style="color: inherit"
+      >
+        uns.network
+      </a>
+    </button>
+
+    <button class="menu-button">
+      <a
+        href="https://forum.unik-name.com"
+        target="_blank"
+        style="color: inherit"
+      >
+        Forum
+      </a>
+    </button>
+
+    <button class="menu-button">
+      <a
+        href="https://docs.uns.network"
+        target="_blank"
+        style="color: inherit"
+      >
+        Docs
+      </a>
+    </button>
+
     <!-- <RouterLink :to="{ name: 'statistics' }" tag="button" class="menu-button">Statistics</RouterLink> -->
 
     <div class="flex-auto" />
