@@ -42,11 +42,9 @@
 
   "Menu": "Menu",
   "Search": "Cerca",
-  "Find a block, transaction, address or delegate": "Trova un blocco, transazione, indirizzo o delegato",
   "Nothing matched your search": "Niente corrisponde alla tua ricerca",
   "Home": "Home",
   "Top Wallets": "Portafogli Maggiori",
-  "Delegate Monitor": "Monitor Delegati",
 
   "Show more": "Mostra di più",
 
@@ -57,8 +55,6 @@
   "Last forged": "Ultimo forgiato",
   "Status": "Stato",
   "Percentage of the total supply": "Percentuale della distribuzione totale",
-  "Delegates": "Delegati",
-  "Delegate": "Delegato",
   "Forged block recently": "Blocco forgiato recentemente",
   "Missed block": "Blocco perso",
   "Never forged": "Mai forgiato",
@@ -127,14 +123,12 @@
   "Type": "Tipo",
   "Transaction type": "Tipo transazione",
   "2nd Signature Registration": "Registrazione 2ª Firma",
-  "Delegate Registration": "Registrazione Delegato",
   "Vote": "Voto",
   "Unvote": "Voto rimosso",
   "Multisignature Registration": "Registrazione Multisignature",
   "IPFS": "IPFS",
   "Timelock Transfer": "Trasferimento Timelock",
   "Multipayment": "Pagamento multiplo",
-  "Delegate Resignation": "Dimissioni Delegato",
   "Second Signature": "Seconda Firma",
   "Transfer": "Trasferimento"
 }

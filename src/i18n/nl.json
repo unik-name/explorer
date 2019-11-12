@@ -39,11 +39,9 @@
 
   "Menu": "Menu",
   "Search": "Zoeken",
-  "Find a block, transaction, address or delegate": "Vind een block, transactie, adres of afgevaardigde",
   "Nothing matched your search": "We konden niets vinden",
   "Home": "Home",
   "Top Wallets": "Top Wallets",
-  "Delegate Monitor": "Afgevaardigde Monitor",
 
   "Show more": "Meer laden",
 
@@ -54,8 +52,6 @@
   "Last forged": "Laatst Geforged",
   "Status": "Status",
   "Percentage of the total supply": "Percentage van de totale voorraad",
-  "Delegates": "Afgevaardigden",
-  "Delegate": "Afgevaardigde",
   "Forged block recently": "Recentelijk block geforged",
   "Missed block": "Block gemist",
   "Never Forged": "Nooit geforged",
@@ -124,14 +120,12 @@
   "Type": "Type",
   "Transaction type": "Transactie Type",
   "2nd Signature Registration": "Registratie 2e Handtekening",
-  "Delegate Registration": "Registratie Afgevaardigde",
   "Vote": "Stem",
   "Unvote": "Stem weggehaald",
   "Multisignature Registration": "Registratie Multisignature",
   "IPFS": "IPFS",
   "Timelock Transfer": "Timelock Transfer",
   "Multipayment": "Multipayment",
-  "Delegate Resignation": "Aftreden Afgevaardigde",
   "Second Signature": "Tweede Handtekening",
   "Transfer": "Transfer"
 }
