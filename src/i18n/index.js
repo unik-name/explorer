@@ -17,5 +17,6 @@ const messages = {
 
 export default new VueI18n({
   locale: store.getters['ui/language'],
+  fallbackLocale: 'en',
   messages
 })
