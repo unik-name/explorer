@@ -14,7 +14,7 @@
       </div>
 
       <div
-        v-if="isNFTTransaction(transaction.type)"
+        v-if="transaction.asset.nft"
         class="list-row-border-b-no-wrap"
       >
         <div class="mr-4">
