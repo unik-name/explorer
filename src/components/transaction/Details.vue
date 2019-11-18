@@ -14,7 +14,7 @@
       </div>
 
       <div
-        v-if="transaction.asset.nft"
+        v-if="transaction.asset && transaction.asset.nft"
         class="list-row-border-b-no-wrap"
       >
         <div class="mr-4">
