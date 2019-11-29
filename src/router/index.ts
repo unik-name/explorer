@@ -23,6 +23,7 @@ const TransactionsComponent = () => import(/* webpackChunkName: "transactions" *
 const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-monitor" */ "@/pages/DelegateMonitor.vue");
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
+const UnikComponent = () => import("@/pages/Unik.vue");
 
 Vue.use(Router);
 
@@ -197,6 +198,12 @@ const router = new Router({
       path: "/topAccounts",
       redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Wallets") },
+    },
+    {
+      path: "/uniks/:id",
+      name: "unik",
+      component: UnikComponent,
+      meta: { title: (route: Route) => getTitle("UNIK " + route.params.id.substr(0, 5)) },
     },
   ],
   scrollBehavior(

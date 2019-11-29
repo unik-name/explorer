@@ -17,7 +17,14 @@
 import { Component, Vue } from "vue-property-decorator";
 import AppHeader from "@/components/header/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
-import { BlockchainService, CryptoCompareService, DelegateService, MigrationService, NodeService } from "@/services";
+import {
+  BlockchainService,
+  CryptoCompareService,
+  DelegateService,
+  MigrationService,
+  NodeService,
+  UnikService,
+} from "@/services";
 import { mapGetters } from "vuex";
 import moment from "moment";
 
@@ -95,6 +102,7 @@ export default class App extends Vue {
     this.updateLocale();
     this.updateCurrencyRate();
     this.updateSupply();
+    this.updateUnikSupply();
     this.updateHeight();
     this.updateDelegates();
   }
@@ -121,6 +129,11 @@ export default class App extends Vue {
   public async updateSupply() {
     const supply = await BlockchainService.supply();
     this.$store.dispatch("network/setSupply", supply);
+  }
+
+  public async updateUnikSupply() {
+    const unikSupply = await UnikService.supply();
+    this.$store.dispatch("network/setUnikSupply", unikSupply);
   }
 
   public async updateHeight() {
@@ -164,6 +177,7 @@ export default class App extends Vue {
 
     this.networkTimer = setInterval(() => {
       this.updateSupply();
+      this.updateUnikSupply();
       this.updateHeight();
       this.updateDelegates();
     }, 8 * 1000);

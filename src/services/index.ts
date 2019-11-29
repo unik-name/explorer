@@ -10,6 +10,7 @@ import SearchService from "./search";
 import RoundService from "./round";
 import TransactionService from "./transaction";
 import WalletService from "./wallet";
+import UnikService from "./unik";
 
 export {
   ApiService,
@@ -24,4 +25,5 @@ export {
   RoundService,
   TransactionService,
   WalletService,
+  UnikService,
 };

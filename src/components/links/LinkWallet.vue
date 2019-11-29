@@ -95,6 +95,32 @@
         $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE")
       }}</span>
     </template>
+    <template v-else-if="typeGroup === typeGroupTransaction.NFT">
+      <span v-if="type === nftTransaction.NFT_TRANSFER">
+        <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+          >{{ $t("UNIK.TRANSFER") }}
+        </RouterLink>
+      </span>
+      <span v-else-if="type === nftTransaction.NFT_UPDATE">
+        <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+          >{{ $t("UNIK.UPDATE") }}
+        </RouterLink>
+      </span>
+      <span v-else-if="type === nftTransaction.NFT_MINT">
+        <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+          >{{ $t("UNIK.CREATION") }}
+        </RouterLink>
+      </span>
+    </template>
+    <template v-else-if="typeGroup === typeGroupTransaction.UNS">
+      <span v-if="type === unsTransaction.DISCLOSE_EXPLICIT">
+        <RouterLink
+          v-tooltip="asset['disclose-demand'].payload.sub"
+          :to="{ name: 'unik', params: { id: asset['disclose-demand'].payload.sub } }"
+          >{{ $t("UNIK.DISCLOSE") }}
+        </RouterLink>
+      </span>
+    </template>
   </span>
 </template>
 
@@ -102,7 +128,7 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate } from "@/interfaces";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, UNSTransaction, NftTransaction } from "@/enums";
 
 @Component({
   computed: {
@@ -170,6 +196,14 @@ export default class LinkWallet extends Vue {
 
   get magistrateTransaction() {
     return MagistrateTransaction;
+  }
+
+  get nftTransaction() {
+    return NftTransaction;
+  }
+
+  get unsTransaction() {
+    return UNSTransaction;
   }
 
   get typeGroupTransaction() {
