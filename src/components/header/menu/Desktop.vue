@@ -1,7 +1,7 @@
 <template>
   <div class="HeaderMenuDesktop md:px-8 sm:flex xl:rounded-r-md">
     <button
-      class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-theme-accents text-theme-text-secondary"
+      class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-orange text-theme-text-secondary"
       @click="closeMenu"
     >
       <SvgIcon class="flex-none" name="menu" view-box="0 0 15 13" />
@@ -43,6 +43,29 @@
     >
       {{ $t("PAGES.BUSINESSES.TITLE") }}
     </RouterLink>
+    <button
+    class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-orange text-theme-text-secondary"
+    @click="closeMenu">
+      <a href="https://uns.network" target="_blank" style="color: inherit">
+        {{ $t("UNIK.MENU_ITEM.NETWORK") }}
+      </a>
+    </button>
+
+    <button
+    class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-orange text-theme-text-secondary"
+    @click="closeMenu">
+      <a href="https://forum.unik-name.com" target="_blank" style="color: inherit">
+        {{ $t("UNIK.MENU_ITEM.FORUM") }}
+      </a>
+    </button>
+
+    <button
+    class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-orange text-theme-text-secondary"
+    @click="closeMenu">
+      <a href="https://docs.uns.network" target="_blank" style="color: inherit">
+        {{ $t("UNIK.MENU_ITEM.DOCS") }}
+      </a>
+    </button>
 
     <RouterLink
       :to="{ name: 'advanced-search', params: { page: 1 } }"

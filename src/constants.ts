@@ -1,5 +1,5 @@
 import { ITransactionType } from "@/interfaces";
-import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, NftTransaction, UNSTransaction } from "@/enums";
 
 export const transactionTypes: ITransactionType[] = [
   { key: "ALL", type: -1 },
@@ -39,5 +39,25 @@ export const transactionTypes: ITransactionType[] = [
     key: "BRIDGECHAIN_UPDATE",
     type: MagistrateTransaction.BRIDGECHAIN_UPDATE,
     typeGroup: TypeGroupTransaction.MAGISTRATE,
+  },
+  {
+    key: "UNIK_CREATION",
+    type: NftTransaction.NFT_MINT,
+    typeGroup: TypeGroupTransaction.NFT,
+  },
+  {
+    key: "UNIK_UPDATE",
+    type: NftTransaction.NFT_UPDATE,
+    typeGroup: TypeGroupTransaction.NFT,
+  },
+  {
+    key: "UNIK_TRANSFER",
+    type: NftTransaction.NFT_TRANSFER,
+    typeGroup: TypeGroupTransaction.NFT,
+  },
+  {
+    key: "UNS_DISCLOSE",
+    type: UNSTransaction.DISCLOSE_EXPLICIT,
+    typeGroup: TypeGroupTransaction.UNS,
   },
 ];

@@ -50,6 +50,19 @@
       >
         {{ $t("PAGES.BUSINESSES.TITLE") }}
       </RouterLink>
+        <a class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border" @click="closeMenu" href="https://uns.network" target="_blank" style="color:inherit">
+          {{ $t("UNIK.MENU_ITEM.NETWORK") }}
+        </a>
+    </li>
+    <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+        <a class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border" @click="closeMenu" href="https://forum.unik-name.com" target="_blank" style="color:inherit">
+          {{ $t("UNIK.MENU_ITEM.FORUM") }}
+        </a>
+    </li>
+    <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+        <a class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border" @click="closeMenu" href="https://docs.uns.network" target="_blank" style="color:inherit">
+          {{ $t("UNIK.MENU_ITEM.DOCS") }}
+        </a>
     </li>
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
       <RouterLink
@@ -75,6 +88,9 @@ import { mapGetters } from "vuex";
 })
 export default class HeaderMenuMobile extends Vue {
   private nightMode: boolean;
+  private closeMenu(): void {
+    this.$store.dispatch("ui/setMenuVisible", false);
+  }
 }
 </script>
 
