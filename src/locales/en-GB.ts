@@ -310,6 +310,7 @@ export default {
     CATEGORY: "Category",
     PROPERTIES: "Properties",
     NO_PROPERTIES: "No properties",
+    TYPE: "Type",
     INDIVIDUAL: "Individual",
     ORGANIZATION: "Organization",
     NETWORK: "Network",
