@@ -27,7 +27,7 @@ const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" *
 const AdvancedSearchComponent = () => import(/* webpackChunkName: "search" */ "@/pages/AdvancedSearch.vue");
 const DelegateComponent = () => import(/* webpackChunkName: "delegates" */ "@/pages/Delegates.vue");
 const NotFoundComponent = () => import(/* webpackChunkName: "404" */ "@/pages/404.vue");
-const UnikComponent = () => import("@/pages/Unik.vue");
+const UnikComponent = () => import(/* webpackChunkName: "unik" */ "@/pages/Unik.vue");
 
 Vue.use(Router);
 
