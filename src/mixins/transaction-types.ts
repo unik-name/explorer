@@ -101,5 +101,14 @@ export default {
     isUnsDiscloseExplicit(type: number, typeGroup: number): boolean {
       return isUNSTypeGroup(typeGroup) && type === UNSTransaction.DISCLOSE_EXPLICIT;
     },
+    isUnsDelegateRegistration(type: number, typeGroup: number): boolean {
+      return isUNSTypeGroup(typeGroup) && type === UNSTransaction.DELEGATE_REGISTRATION;
+    },
+    isUnsDelegateResignation(type: number, typeGroup: number): boolean {
+      return isUNSTypeGroup(typeGroup) && type === UNSTransaction.DELEGATE_RESIGNATION;
+    },
+    isUnsCertifiedNftMint(type: number, typeGroup: number): boolean {
+      return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_MINT;
+    },
   },
 };

@@ -99,6 +99,13 @@
         >{{ $t("UNIK.DISCLOSE") }}
       </RouterLink>
     </span>
+    <span v-else-if="isUnsDelegateRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.UNS_DELEGATE_REGISTRATION") }}</span>
+    <span v-else-if="isUnsDelegateResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION") }}</span>
+    <span v-else-if="isUnsCertifiedNftMint(type, typeGroup)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT") }}
+      </RouterLink>
+    </span>
   </span>
 </template>
 

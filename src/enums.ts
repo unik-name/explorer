@@ -29,6 +29,9 @@ export enum NftTransaction {
 
 export enum UNSTransaction {
   DISCLOSE_EXPLICIT = 0,
+  DELEGATE_REGISTRATION = 1,
+  DELEGATE_RESIGNATION = 2,
+  CERTIFIED_NFT_MINT = 3,
 }
 
 export enum TypeGroupTransaction {
