@@ -60,4 +60,19 @@ export const transactionTypes: ITransactionType[] = [
     type: UNSTransaction.DISCLOSE_EXPLICIT,
     typeGroup: TypeGroupTransaction.UNS,
   },
+  {
+    key: "UNS_DELEGATE_REGISTER",
+    type: UNSTransaction.DELEGATE_REGISTRATION,
+    typeGroup: TypeGroupTransaction.UNS,
+  },
+  {
+    key: "UNS_DELEGATE_RESIGN",
+    type: UNSTransaction.DELEGATE_RESIGNATION,
+    typeGroup: TypeGroupTransaction.UNS,
+  },
+  {
+    key: "UNS_CERTIFIED_NFT_MINT",
+    type: UNSTransaction.CERTIFIED_NFT_MINT,
+    typeGroup: TypeGroupTransaction.UNS,
+  },
 ];

@@ -15,7 +15,7 @@
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
           <div class="relative mr-6 flex-none">
             <SvgIcon
-              v-if="isNftMint(transaction.type, transaction.typeGroup)"
+              v-if="isNftMint(transaction.type, transaction.typeGroup) || isUnsCertifiedNftMint(transaction.type, transaction.typeGroup)"
               class="block"
               name="transaction-unik"
               view-box="0 0 43 39"
