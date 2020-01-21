@@ -9,9 +9,14 @@
     >
       <template slot-scope="data">
         <div v-if="data.column.field === 'username'" class="flex items-center">
-          <LinkWallet :address="data.row.address">
-            {{ data.row.username }}
-          </LinkWallet>
+          <div v-if="data.row.unikname">
+            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname"/>
+          </div>
+          <div v-else>
+            <LinkWallet :address="data.row.address">
+              {{ data.row.username }}
+            </LinkWallet>
+          </div>
           <span
             v-if="isActiveTab && data.row.isResigned"
             class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1"

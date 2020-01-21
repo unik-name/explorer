@@ -31,7 +31,7 @@
         <span v-if="hasDefaultSlot">
           <slot />
         </span>
-        <span v-else-if="delegate">{{ delegate.username }}</span>
+        <span v-else-if="delegate">{{ delegate.unikname ? delegate.unikname : delegate.username }}</span>
         <span v-else-if="address">
           <span class="hidden md:inline-block">{{ trunc ? truncate(address) : address }}</span>
           <span class="md:hidden">{{ truncate(address) }}</span>
