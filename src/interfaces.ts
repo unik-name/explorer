@@ -31,6 +31,7 @@ export interface IBlock {
 export interface IDelegate {
   address: string;
   username: string;
+  unikname?: string;
   publicKey: string;
   blocks: {
     produced: number;

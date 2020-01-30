@@ -48,7 +48,7 @@
           content: votedDelegateAddress,
           placement: tooltipPlacement,
         }"
-        :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
+        :to="{ name: linkType, params: linkParameters }"
       >
         <span :class="getVoteColor"
           >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
@@ -167,11 +167,11 @@ export default class LinkWallet extends Vue {
   }
 
   get votedDelegateAddress(): string {
-    return this.votedDelegate ? this.votedDelegate.address : "";
+    return this.votedDelegate ? (this.votedDelegate.unikname ? this.votedDelegate.username : this.votedDelegate.address) : "";
   }
 
   get votedDelegateUsername(): string {
-    return this.votedDelegate ? this.votedDelegate.username : "";
+    return this.votedDelegate ? (this.votedDelegate.unikname ? `@${this.votedDelegate.unikname}` : this.votedDelegate.username) : "";
   }
 
   get multiPaymentRecipientsCount() {
@@ -179,6 +179,23 @@ export default class LinkWallet extends Vue {
       return this.asset.payments.length;
     }
     return 0;
+  }
+
+  get linkType() {
+    return this.votedDelegate.unikname ? 'unik' : 'wallet';
+  }
+
+  get linkParameters() {
+    if (this.votedDelegate.unikname) {
+      return {
+        id: this.votedDelegate.username,
+        unikname: this.votedDelegate.unikname
+      }
+    } else {
+      return {
+        address: this.votedDelegateAddress
+      }
+    }
   }
 
   @Watch("delegates")
