@@ -47,6 +47,7 @@ export interface IDelegate {
     total: BigNumber;
   };
   forgingStatus: ForgingStatus;
+  isResigned?: true;
 }
 
 export interface IRoundDelegate {

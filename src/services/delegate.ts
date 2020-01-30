@@ -98,7 +98,7 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    return response.data;
+    return response.data.filter(delegate => !delegate.isResigned);
   }
 
   public async resigned(): Promise<IDelegate[]> {
