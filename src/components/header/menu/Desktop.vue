@@ -24,25 +24,6 @@
       {{ $t("PAGES.DELEGATE_MONITOR.TITLE") }}
     </RouterLink>
 
-    <RouterLink
-      v-if="hasMagistrateEnabled"
-      :to="{ name: 'bridgechains', params: { page: 1 } }"
-      tag="button"
-      class="menu-button"
-      @click.native="closeMenu"
-    >
-      {{ $t("PAGES.BRIDGECHAINS.TITLE") }}
-    </RouterLink>
-
-    <RouterLink
-      v-if="hasMagistrateEnabled"
-      :to="{ name: 'businesses', params: { page: 1 } }"
-      tag="button"
-      class="menu-button"
-      @click.native="closeMenu"
-    >
-      {{ $t("PAGES.BUSINESSES.TITLE") }}
-    </RouterLink>
     <button
     class="px-4 py-3 md:py-6 flex-none flex items-center border-b-2 mt-2px mr-3 border-transparent hover:border-orange text-theme-text-secondary"
     @click="closeMenu">
