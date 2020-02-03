@@ -51,15 +51,6 @@
         {{ $t("PAGES.BUSINESSES.TITLE") }}
       </RouterLink>
     </li>
-    <li>
-      <RouterLink
-        :to="{ name: 'advanced-search', params: { page: 1 }   }"
-        tag="div"
-        class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
-      >
-        {{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}
-      </RouterLink>
-    </li>
     <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
         <a class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border" @click="closeMenu" href="https://uns.network" target="_blank" style="color:inherit">
           {{ $t("UNIK.MENU_ITEM.NETWORK") }}
@@ -74,6 +65,15 @@
         <a class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border" @click="closeMenu" href="https://docs.uns.network" target="_blank" style="color:inherit">
           {{ $t("UNIK.MENU_ITEM.DOCS") }}
         </a>
+    </li>
+    <li :class="[nightMode ? 'hover:bg-grey-dark' : 'hover:bg-grey-light', 'flex justify-center']">
+      <RouterLink
+        :to="{ name: 'advanced-search', params: { page: 1 }   }"
+        tag="div"
+        class="cursor-pointer py-5 w-64 flex-none border-b border-theme-nav-border"
+      >
+        {{ $t("PAGES.ADVANCED_SEARCH.TITLE") }}
+      </RouterLink>
     </li>
   </ul>
 </template>
