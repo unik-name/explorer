@@ -23,6 +23,7 @@ export class UnikService {
     const response = await ApiService.get(`uniks/${id}`);
     const unik = response.data;
     unik.properties = await this.findUnikProperties(id).then(this.formatProperties);
+    unik.defaultExplicitValue = this.getDefaultExplicitValue(unik.properties);
     unik.type = await this.findUnikProperty(unik.id, "type").then(type => DIDTypes[type]);
     unik.creation = await this.extractUnikCreationUnixTimestamp(unik);
     return unik;
@@ -51,6 +52,16 @@ export class UnikService {
         };
       })
       .filter(property => property.key !== "type");
+  }
+
+  private getDefaultExplicitValue(properties: {key, value}[]): string {
+    if (properties.length) {
+      const explicitValuesProperty = properties.find(property => property.key === "explicitValues");
+      if (explicitValuesProperty) {
+        return explicitValuesProperty.value;
+      }
+    }
+    return undefined;
   }
 }
 
