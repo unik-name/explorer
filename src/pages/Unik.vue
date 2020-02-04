@@ -18,14 +18,17 @@
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center">
           <div class="mr-6 flex-none">
-            <SvgIcon class="icon" name="unik" view-box="0 0 64 64" />
+            <SvgIcon v-if="unik.type" class="icon unik-icon" :name="`unik-${unik.type.toLowerCase()}`" view-box="0 0 64 64" />
+            <SvgIcon v-else class="icon" name="unik" view-box="0 0 64 64" />
           </div>
           <div class="flex-auto min-w-0">
-            <div class="text-grey mb-2">
-              {{ $t("UNIK.ID") }}
+            <div :class="`${unik.defaultExplicitValue ? 'text-2xl text-white semibold' : 'text-grey'} mb-2`">
+              <span>
+                {{ unik.defaultExplicitValue ? `@${unik.defaultExplicitValue}` : $t("UNIK.ID") }}
+              </span>
             </div>
             <div class="flex">
-              <div class="text-xl text-white semibold truncate">
+              <div :class="`${unik.defaultExplicitValue ? 'text-grey' : 'text-xl text-white semibold'} truncate`">
                 <span class="mr-2">{{ unik.id }}</span>
               </div>
               <Clipboard v-if="unik.id" :value="unik.id" />
@@ -107,3 +110,12 @@ export default class Unik extends Vue {
   }
 }
 </script>
+
+
+<style>
+
+.unik-icon {
+    background-color: #47A09F;
+    border-radius: 50%;
+}
+</style>
