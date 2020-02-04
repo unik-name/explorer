@@ -87,8 +87,8 @@ export default {
       TRANSFER: "Transfer",
       SECOND_SIGNATURE: "2nd Signature Registration",
       DELEGATE_REGISTRATION: "**Network player Registration**",
-      VOTE: "Vote",
-      UNVOTE: "Unvote",
+      VOTE: "Vote for",
+      UNVOTE: "Unvote for",
       MULTI_SIGNATURE: "Multisignature Registration",
       IPFS: "IPFS",
       LOCKS: "Locks",
@@ -325,8 +325,8 @@ export default {
     MENU_ITEM: {
       NETWORK: "uns.network",
       FORUM: "Forum",
-      DOCS: "Docs"
-    }
+      DOCS: "Docs",
+    },
   },
 
   UNS: {

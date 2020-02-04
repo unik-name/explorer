@@ -52,7 +52,7 @@
       >
         <span :class="getVoteColor"
           >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
-          <span class="italic">({{ votedDelegateUsername }})</span></span
+          {{ votedDelegateUsername }}</span
         >
       </RouterLink>
     </span>
@@ -182,7 +182,7 @@ export default class LinkWallet extends Vue {
   }
 
   get linkType() {
-    return this.votedDelegate.unikname ? 'unik' : 'wallet';
+    return this.votedDelegate.unikname ? "unik" : "wallet";
   }
 
   get linkParameters() {
