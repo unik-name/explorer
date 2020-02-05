@@ -69,6 +69,7 @@ export default {
       RECEIVED: "Reçu",
     },
     SENDER: "Envoyeur",
+    FROM: "De",
     RECIPIENT: "Bénéficiaire",
     RECIPIENT_OR_TYPE: "Bénéficiaire ou type",
     SMARTBRIDGE: "Smartbridge",

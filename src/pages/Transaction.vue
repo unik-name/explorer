@@ -13,20 +13,12 @@
     <template v-else>
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-          <div class="relative mr-6 flex-none">
+          <div v-if="isNftMint(transaction.type, transaction.typeGroup) || isUnsCertifiedNftMint(transaction.type, transaction.typeGroup)" class="relative mr-6 flex-none">
             <SvgIcon
-              v-if="isNftMint(transaction.type, transaction.typeGroup) || isUnsCertifiedNftMint(transaction.type, transaction.typeGroup)"
-              class="block"
+              class="block fill-white"
               name="transaction-unik"
               view-box="0 0 43 39"
             />
-            <SvgIcon v-else class="block" name="transaction" view-box="0 0 43 39" />
-            <div
-              class="absolute text-theme-transaction-icon text-2xl"
-              style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
-            >
-              {{ networkSymbol }}
-            </div>
           </div>
           <div class="flex-auto min-w-0">
             <div class="text-grey mb-2">
@@ -181,3 +173,9 @@ export default class TransactionPage extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.fill-white {
+  fill: white;
+}
+</style>

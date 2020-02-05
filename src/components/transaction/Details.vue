@@ -3,7 +3,7 @@
     <section class="page-section py-5 md:py-10 mb-5">
       <div class="px-5 sm:px-10">
         <div class="list-row-border-b">
-          <div class="mr-4">{{ $t("TRANSACTION.SENDER") }}</div>
+          <div class="mr-4">{{ $t("TRANSACTION.FROM") }}</div>
           <div class="truncate">
             <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left" />
           </div>
