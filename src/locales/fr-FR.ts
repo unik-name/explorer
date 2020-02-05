@@ -91,6 +91,7 @@ export default {
       RANK: "Rang",
       RANK_NOT_AVAILABLE: "Pas encore disponible",
       USERNAME: "Nom d'utilisateur",
+      DELEGATE: "Délégué",
       VOTES: "Votes",
       VOTERS: "Votants pour",
       VOTER_THRESHOLD: "Seulement pour les votants avec plus de 0.1 {token}",

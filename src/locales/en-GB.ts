@@ -157,6 +157,7 @@ export default {
         RESIGNED: "Resigned",
       },
       USERNAME: "Username",
+      DELEGATE: "Delegate",
       VOTES: "Votes",
       VOTERS: "Voters for",
       VOTERS_CRYPTO_ACCOUNT: "Voters crypto account",
