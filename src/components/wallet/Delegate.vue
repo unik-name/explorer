@@ -1,7 +1,7 @@
 <template>
   <div v-if="delegate" class="WalletDelegate">
     <div class="list-row-border-b">
-      <div>{{ $t("WALLET.DELEGATE.USERNAME") }}</div>
+      <div>{{ $t("WALLET.DELEGATE.DELEGATE") }}</div>
       <div>{{ delegate.username }}</div>
     </div>
 
