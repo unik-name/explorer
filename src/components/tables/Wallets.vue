@@ -35,6 +35,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { ISortParameters, IWallet } from "@/interfaces";
 import { mapGetters } from "vuex";
 import { BigNumber } from "@/utils";
+import WalletVoters from '@/pages/Wallet/Voters.vue';
 
 @Component({
   computed: {
@@ -56,7 +57,7 @@ export default class TableWalletsDesktop extends Vue {
         tdClass: "start-cell w-32",
       },
       {
-        label: this.$t("WALLET.ADDRESS"),
+        label: this.getAddressColumnName(),
         field: "address",
       },
       {
@@ -117,6 +118,10 @@ export default class TableWalletsDesktop extends Vue {
 
   private emitSortChange(params: ISortParameters[]) {
     this.$emit("on-sort-change", params[0]);
+  }
+
+  private getAddressColumnName() {
+    return this.$router.currentRoute.name === WalletVoters.pageName ? this.$t("WALLET.DELEGATE.VOTERS_CRYPTO_ACCOUNT") : this.$t("WALLET.ADDRESS");
   }
 }
 </script>

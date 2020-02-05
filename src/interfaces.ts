@@ -1,5 +1,6 @@
 import { ForgingStatus } from "./enums";
 import { BigNumber } from "@/utils";
+import { DIDType } from '@uns/ts-sdk';
 
 export interface IBlock {
   id: string;
@@ -32,6 +33,7 @@ export interface IDelegate {
   address: string;
   username: string;
   unikname?: string;
+  unikType?: DIDType;
   publicKey: string;
   blocks: {
     produced: number;

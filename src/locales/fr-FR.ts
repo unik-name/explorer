@@ -92,7 +92,7 @@ export default {
       RANK_NOT_AVAILABLE: "Pas encore disponible",
       USERNAME: "Nom d'utilisateur",
       VOTES: "Votes",
-      VOTERS: "Votants",
+      VOTERS: "Votants pour",
       VOTER_THRESHOLD: "Seulement pour les votants avec plus de 0.1 {token}",
     },
   },

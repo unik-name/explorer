@@ -1,7 +1,14 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader
-      >{{ $t("WALLET.DELEGATE.VOTERS") }} <span v-if="delegate">- {{ delegate.username }}</span></ContentHeader
+      >{{ $t("WALLET.DELEGATE.VOTERS") }}
+        <span v-if="delegate">
+          <UnikDisplay v-if="delegate.unikname" :unikname="delegate.unikname" :type="delegate.unikType" />
+          <span v-else>
+          {{ delegate.username }}
+          </span>
+        </span>
+        </ContentHeader
     >
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
@@ -28,12 +35,18 @@ import DelegateService from "@/services/delegate";
 
 Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 
-@Component
+import UnikDisplay from "@/components/unik/UnikDisplay.vue";
+
+@Component({
+  components: { UnikDisplay },
+})
 export default class WalletVoters extends Vue {
   private delegate: IDelegate | null = null;
   private wallets: IWallet[] | null = null;
   private meta: any | null = null;
   private currentPage: number = 0;
+
+  public static pageName: string = "wallet-voters"
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -61,7 +74,7 @@ export default class WalletVoters extends Vue {
 
   public async beforeRouteEnter(to: Route, from: Route, next: (vm: any) => void) {
     try {
-      const delegate = await DelegateService.find(to.params.address);
+      const delegate = await DelegateService.find(to.params.address, true);
       const { meta, data } = await DelegateService.voters(to.params.address, Number(to.params.page));
 
       next((vm: WalletVoters) => {
@@ -81,7 +94,7 @@ export default class WalletVoters extends Vue {
     this.meta = null;
 
     try {
-      const delegate = await DelegateService.find(to.params.address);
+      const delegate = await DelegateService.find(to.params.address, true);
       const { meta, data } = await DelegateService.voters(to.params.address, Number(to.params.page));
 
       this.currentPage = Number(to.params.page);
@@ -115,7 +128,7 @@ export default class WalletVoters extends Vue {
     if (this.currentPage !== Number(this.$route.params.page) || this.address !== this.$route.params.address) {
       // @ts-ignore
       this.$router.push({
-        name: "wallet-voters",
+        name: WalletVoters.pageName,
         params: {
           address: this.address,
           page: this.currentPage,
