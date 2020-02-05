@@ -4,7 +4,7 @@ button:disabled {
 }
 
 .hover-button-shadow-definition {
-  box-shadow: 0 5px 15px rgba(228, 151, 9, 0.34);
+  box-shadow: 0 5px 15px rgba(49, 58, 129, 0.5);
 }
 
 .hover-button-shadow:hover {
@@ -37,7 +37,8 @@ button:disabled {
 .button-lg:enabled:hover,
 .pager-button:enabled:hover,
 .block-pager-button:enabled:hover {
-  @apply .bg-orange .text-white .hover-button-shadow-definition .cursor-pointer;
+  @apply .text-white .hover-button-shadow-definition .cursor-pointer;
+  background-color: #313A81;
 }
 
 
