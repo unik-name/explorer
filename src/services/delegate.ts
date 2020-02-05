@@ -1,7 +1,9 @@
-import { ApiService, ForgingService, WalletService, RoundService } from "@/services";
+import { ApiService, ForgingService, WalletService, RoundService, UnikService } from "@/services";
 import { roundFromHeight } from "@/utils";
 import store from "@/store";
-import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate } from "../interfaces";
+import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate, IUnik } from "../interfaces";
+import { isUnikId, getPropertyValueFromUnik } from '@/utils/unik-utils';
+import { DIDType } from '@uns/ts-sdk';
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -65,9 +67,16 @@ class DelegateService {
     return response.meta.totalCount;
   }
 
-  public async find(query: string): Promise<IDelegate> {
+  public async find(query: string, fetchUnik: boolean = false): Promise<IDelegate> {
     const response = (await ApiService.get(`delegates/${query}`)) as IApiDelegateWrapper;
-    return response.data;
+    const delegate = response.data;
+    if (fetchUnik && isUnikId(delegate.username)) {
+      const unik: IUnik = await UnikService.find(delegate.username);
+      delegate.unikname = getPropertyValueFromUnik(unik, "explicitValues");
+      delegate.unikType = unik.type as DIDType;
+    }
+
+    return delegate;
   }
 
   public async active(): Promise<IDelegate[]> {
