@@ -242,10 +242,11 @@ button[class*="Pagination__Button--"] {
 }
 
 .Pagination__Button:not(:disabled):hover {
-  @apply .bg-blue .text-white .rounded;
+  @apply .text-white .rounded;
   box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+  background-color: #313A81;
 }
 
 .Pagination__Button:disabled {

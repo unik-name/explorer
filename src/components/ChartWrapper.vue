@@ -183,7 +183,7 @@ export default class ChartWrapper extends Vue {
           type: "line",
           pointHoverBackgroundColor: "#fff",
           borderColor: "#535972",
-          pointHoverBorderColor: "#ffa407",
+          pointHoverBorderColor: "#ff5733",
           pointBackgroundColor: "rgba(0,0,0,0)",
           pointBorderColor: "rgba(0,0,0,0)",
           pointHoverRadius: 7,

@@ -261,11 +261,11 @@ export default class WalletDetails extends Vue {
 }
 
 .address-button {
-  background-color: #0964e4;
+  background-color: #313A81;
 }
 
 .address-button:hover {
-  background-color: #0964e4;
+  background-color: #313A81;
   transform: scale(1.1);
 }
 </style>
