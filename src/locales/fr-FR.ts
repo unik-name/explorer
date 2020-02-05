@@ -83,7 +83,7 @@ export default {
     VOTING_FOR: "Votes pour",
     BALANCE: "Solde ({token})",
     SECOND_PASSPHRASE_ENABLED: "Seconde signature activée",
-    SUMMARY: "Résumé du portefeuille",
+    SUMMARY: "Résumé du Crypto Account",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scanner une adresse",
     DELEGATE: {
@@ -151,7 +151,7 @@ export default {
       TOOLTIP: "Dernier bloc @ {height}",
     },
     TOP_WALLETS: {
-      TITLE: "Top des Portefeuilles",
+      TITLE: "Top des Crypto Accounts",
     },
     NOT_FOUND: {
       TITLE: "Ooops!",
