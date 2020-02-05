@@ -125,6 +125,7 @@ export default {
       WEBSITE: "Website",
     },
     SENDER: "Sender",
+    FROM: "From",
     RECIPIENT: "Recipient",
     RECIPIENT_OR_TYPE: "Recipient or type",
     RECIPIENTS: "Recipients",
