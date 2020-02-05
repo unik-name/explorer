@@ -142,7 +142,7 @@ export default {
     LOCKED_BALANCE: "Locked Balance",
     SECOND_PASSPHRASE_ENABLED: "Second signature enabled",
     MULTI_SIGNATURE_WALLET: "Multi signature wallet",
-    SUMMARY: "Wallet summary",
+    SUMMARY: "Crypto Account summary",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scan for address",
     DELEGATE: {
@@ -236,7 +236,7 @@ export default {
       TOOLTIP: "Last block @ {height} on",
     },
     TOP_WALLETS: {
-      TITLE: "Top Wallets",
+      TITLE: "Top Crypto Accounts",
     },
     ADVANCED_SEARCH: {
       TITLE: "Advanced Search",

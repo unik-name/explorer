@@ -48,7 +48,7 @@ const router = new Router({
       path: "/wallets/:address",
       name: "wallet",
       component: WalletComponent,
-      meta: { title: (route: Route) => getTitle("Wallet " + route.params.address) },
+      meta: { title: (route: Route) => getTitle("Crypto Account " + route.params.address) },
     },
     {
       path: "/wallets/:address/voters",
@@ -70,13 +70,13 @@ const router = new Router({
         name: "wallet-blocks",
         params: { address: to.params.address, page: 1 },
       }),
-      meta: { title: (route: Route) => getTitle("Wallet Blocks") },
+      meta: { title: (route: Route) => getTitle("Crypto Account Blocks") },
     },
     {
       path: "/wallets/:address/blocks/:page(\\d+)",
       name: "wallet-blocks",
       component: WalletBlocksComponent,
-      meta: { title: (route: Route) => getTitle("Wallet Blocks") },
+      meta: { title: (route: Route) => getTitle("Crypto Account Blocks") },
     },
     {
       path: "/wallets/:address/transactions",
@@ -84,7 +84,7 @@ const router = new Router({
         name: "wallet-transactions",
         params: { address: to.params.address, type: "all", page: 1 },
       }),
-      meta: { title: (route: Route) => getTitle("Wallet Transactions") },
+      meta: { title: (route: Route) => getTitle("Crypto Account Transactions") },
     },
     {
       path: "/wallets/:address/transactions/:type",
@@ -92,13 +92,13 @@ const router = new Router({
         name: "wallet-transactions",
         params: { address: to.params.address, type: to.params.type, page: 1 },
       }),
-      meta: { title: (route: Route) => getTitle("Wallet Transactions") },
+      meta: { title: (route: Route) => getTitle("Crypto Account Transactions") },
     },
     {
       path: "/wallets/:address/transactions/:type/:page(\\d+)",
       name: "wallet-transactions",
       component: WalletTransactionsComponent,
-      meta: { title: (route: Route) => getTitle("Wallet Transactions") },
+      meta: { title: (route: Route) => getTitle("Crypto Account Transactions") },
     },
     {
       path: "/block/:id",
@@ -157,13 +157,13 @@ const router = new Router({
     {
       path: "/top-wallets",
       redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
-      meta: { title: (route: Route) => getTitle("Top Wallets") },
+      meta: { title: (route: Route) => getTitle("Top Crypto Account") },
     },
     {
       path: "/top-wallets/:page(\\d+)",
       name: "top-wallets",
       component: TopWalletsComponent,
-      meta: { title: (route: Route) => getTitle("Top Wallets") },
+      meta: { title: (route: Route) => getTitle("Top Crypto Account") },
     },
     {
       path: "/businesses",
@@ -238,7 +238,7 @@ const router = new Router({
         name: "wallet",
         params: { address: to.params.address },
       }),
-      meta: { title: (route: Route) => getTitle("Wallet") },
+      meta: { title: (route: Route) => getTitle("Crypto Account") },
     },
     {
       path: "/tx/:id",
@@ -256,7 +256,7 @@ const router = new Router({
     {
       path: "/topAccounts",
       redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
-      meta: { title: (route: Route) => getTitle("Top Wallets") },
+      meta: { title: (route: Route) => getTitle("Top Crypto Account") },
     },
     {
       path: "/uniks/:id",
