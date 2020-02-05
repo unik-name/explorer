@@ -1,6 +1,16 @@
 <template>
   <span class="block md:inline-block">
-    <template v-if="isTransfer(type, typeGroup)">
+    <RouterLink
+        v-if="simple"
+        v-tooltip="{
+          content: address,
+          placement: tooltipPlacement,
+        }"
+        :to="{ name: 'wallet', params: { address } }"
+      >
+      {{ address }}
+    </RouterLink>
+    <template v-else-if="isTransfer(type, typeGroup)">
       <RouterLink v-if="isKnown" :to="{ name: 'wallet', params: { address: walletAddress } }" class="flex items-center">
         <span
           v-tooltip="{
@@ -128,6 +138,7 @@ export default class LinkWallet extends Vue {
   @Prop({ required: false, default: 1 }) public typeGroup: number;
   @Prop({ required: false, default: true }) public trunc: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
+  @Prop({ required: false, default: false }) public simple: boolean;
 
   private delegate: IDelegate | null | undefined = null;
   private votedDelegate: IDelegate | null | undefined = null;
