@@ -6,7 +6,7 @@
           {{ $t("UNIK.OWNER") }}
         </div>
         <div class="truncate">
-          <LinkWallet :address="unik.ownerId" :trunc="false" />
+          <LinkWallet :address="unik.ownerId" :trunc="false" :simple="true" />
         </div>
       </div>
 
