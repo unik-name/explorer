@@ -31,7 +31,7 @@
 # To remove when Livenet will be live
 [[redirects]]
   from = "https://explorer.uns.network/*"
-  to = "https://devnet.explorer.uns.network/"
+  to = "https://sandbox.explorer.uns.network/"
   status = 302
   force = true
 
