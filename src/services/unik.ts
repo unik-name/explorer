@@ -1,11 +1,22 @@
-import { DIDTypes } from "@uns/ts-sdk/dist";
+import { DIDTypes, UNSClient } from "@uns/ts-sdk";
 import { ApiService, TransactionService } from "@/services";
 import { IUnik } from "@/interfaces";
-import { getPropertyValueFromUnik } from '@/utils/unik-utils';
+import { getPropertyValueFromUnik } from "@/utils/unik-utils";
 
 export class UnikService {
+
+  public unsClient: UNSClient;
+
+  constructor() {
+    this.unsClient = new UNSClient();
+    const network = require(`../../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
+    this.unsClient.init({
+          network: network.alias.toLowerCase(),
+      });
+  }
+
   public async findUnikProperties(unikId) {
-    const response = await ApiService.get(`uniks/${unikId}/properties`);
+    const response = await this.unsClient.unik.properties(unikId);
     return response.data;
   }
 
