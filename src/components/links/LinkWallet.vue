@@ -116,6 +116,11 @@
         >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT") }}
       </RouterLink>
     </span>
+    <span v-else-if="isUnsCertifiedNftUpdate(type, typeGroup)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_UPDATE") }}
+      </RouterLink>
+    </span>
   </span>
 </template>
 
