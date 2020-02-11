@@ -32,6 +32,7 @@ export enum UNSTransaction {
   DELEGATE_REGISTRATION = 1,
   DELEGATE_RESIGNATION = 2,
   CERTIFIED_NFT_MINT = 3,
+  CERTIFIED_NFT_UPDATE = 4,
 }
 
 export enum TypeGroupTransaction {

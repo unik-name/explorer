@@ -110,5 +110,8 @@ export default {
     isUnsCertifiedNftMint(type: number, typeGroup: number): boolean {
       return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_MINT;
     },
+    isUnsCertifiedNftUpdate(type: number, typeGroup: number): boolean {
+      return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_UPDATE;
+    },
   },
 };

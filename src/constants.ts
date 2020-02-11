@@ -75,4 +75,9 @@ export const transactionTypes: ITransactionType[] = [
     type: UNSTransaction.CERTIFIED_NFT_MINT,
     typeGroup: TypeGroupTransaction.UNS,
   },
+  {
+    key: "UNS_CERTIFIED_NFT_UPDATE",
+    type: UNSTransaction.CERTIFIED_NFT_UPDATE,
+    typeGroup: TypeGroupTransaction.UNS,
+  },
 ];
