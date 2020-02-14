@@ -1,3 +1,5 @@
+name: Mirror 'develop' and 'dalinet' branches (develop -> dalinet)
+
 on: push
 jobs:
   repo-sync:
