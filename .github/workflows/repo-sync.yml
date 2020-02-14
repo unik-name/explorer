@@ -1,6 +1,9 @@
 name: Mirror 'develop' and 'dalinet' branches (develop -> dalinet)
 
-on: push
+on:
+  push:
+    branches:
+      - develop
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
