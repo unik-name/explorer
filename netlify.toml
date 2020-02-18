@@ -8,7 +8,7 @@
   command = "yarn build:dalinet --verbose"
 
 [[redirects]]
-  from = "https://explorer.uns.network/*"
-  to = "https://devnet.explorer.uns.network/"
-  status = 302
+  from = "https://devnet.explorer.uns.network/*"
+  to = "https://explorer.uns.network/"
+  status = 301
   force = true
