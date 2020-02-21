@@ -300,6 +300,8 @@ export interface IUnik {
   transactions?: IUnikTransactions;
   properties?: IUnikProperties[];
   type?: string;
+  defaultExplicitValue?: string;
+  explicitValues?: string;
   creation?: number;
 }
 

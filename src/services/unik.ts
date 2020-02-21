@@ -1,7 +1,6 @@
-import { DIDTypes, UNSClient } from "@uns/ts-sdk";
-import { ApiService, TransactionService } from "@/services";
-import { IUnik } from "@/interfaces";
-import { getPropertyValueFromUnik } from "@/utils/unik-utils";
+import { DIDTypes, UNSClient, Unik } from "@uns/ts-sdk";
+import { TransactionService } from "@/services";
+import { IUnik, IUnikProperties } from "@/interfaces";
 
 export class UnikService {
 
@@ -20,30 +19,24 @@ export class UnikService {
     return response.data;
   }
 
-  /*
-      Get property value of a UNIK token
-      If property does not exist, returns undefined
-  */
-  public async findUnikProperty(unikId, unikProperty) {
-    let ret;
-    const response = await ApiService.get(`uniks/${unikId}/properties/${unikProperty}`);
-    ret = response.data;
-    return ret;
+  public async find(id): Promise<IUnik> {
+    const response = await this.unsClient.unik.get(id);
+    const unik: Unik = response.data;
+
+    return {
+      ...unik,
+      properties: (await this.findUnikProperties(id).then(this.formatProperties)) as IUnikProperties[],
+      type: DIDTypes[unik.type],
+      creation: await this.extractUnikCreationUnixTimestamp(unik),
+    }
   }
 
-  public async find(id): Promise<IUnik> {
-    const response = await ApiService.get(`uniks/${id}`);
-    const unik = response.data;
-    unik.properties = await this.findUnikProperties(id).then(this.formatProperties);
-    unik.defaultExplicitValue = getPropertyValueFromUnik(unik, "explicitValues");
-    unik.type = await this.findUnikProperty(unik.id, "type").then(type => DIDTypes[type]);
-    unik.creation = await this.extractUnikCreationUnixTimestamp(unik);
-    return unik;
+  public async getUniks(unikIds: string[]): Promise<Unik[]> {
+    return (await this.unsClient.unik.getUniks(unikIds)).data;
   }
 
   public async supply(): Promise<number> {
-    const response = await ApiService.get("uniks?limit=1");
-    return response.meta.totalCount;
+    return await this.unsClient.unik.totalCount();
   }
 
   public async extractUnikCreationUnixTimestamp(unik: IUnik): Promise<number> {
