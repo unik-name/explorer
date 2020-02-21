@@ -2,8 +2,7 @@ import { ApiService, ForgingService, WalletService, RoundService, UnikService } 
 import { roundFromHeight } from "@/utils";
 import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate, IUnik } from "../interfaces";
-import { isUnikId, getPropertyValueFromUnik } from '@/utils/unik-utils';
-import { DIDType } from '@uns/ts-sdk';
+import { isUnikId } from "@/utils/unik-utils";
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -27,7 +26,9 @@ class DelegateService {
 
     const results = await Promise.all(requests);
 
-    return response.data.concat([].concat(...results.map(result => result.data)));
+    const delegates = response.data.concat([].concat(...results.map(result => result.data)));
+
+    return this.getDelegatesWithUnikAttributes(delegates);
   }
 
   public async all(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
@@ -38,7 +39,10 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    return response;
+    return {
+      meta: response.meta,
+      data: await this.getDelegatesWithUnikAttributes(response.data),
+    };
   }
 
   public async voters(query: string, page: number, limit = 25): Promise<IApiWalletsWrapper> {
@@ -69,11 +73,9 @@ class DelegateService {
 
   public async find(query: string, fetchUnik: boolean = false): Promise<IDelegate> {
     const response = (await ApiService.get(`delegates/${query}`)) as IApiDelegateWrapper;
-    const delegate = response.data;
+    let delegate = response.data;
     if (fetchUnik && isUnikId(delegate.username)) {
-      const unik: IUnik = await UnikService.find(delegate.username);
-      delegate.unikname = getPropertyValueFromUnik(unik, "explicitValues");
-      delegate.unikType = unik.type as DIDType;
+      delegate = this.getDelegatesWithUnikAttributes([delegate])[0];
     }
 
     return delegate;
@@ -90,11 +92,12 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    return response.data.map(delegate => {
+    const delegates: IDelegate[] = response.data.map(delegate => {
       delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
-
       return delegate;
     });
+
+    return this.getDelegatesWithUnikAttributes(delegates);
   }
 
   public async standby(): Promise<IDelegate[]> {
@@ -107,7 +110,8 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    return response.data.filter(delegate => !delegate.isResigned);
+    const delegates: IDelegate[] = response.data.filter(delegate => !delegate.isResigned);
+    return this.getDelegatesWithUnikAttributes(delegates);
   }
 
   public async resigned(): Promise<IDelegate[]> {
@@ -151,6 +155,28 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
     return response.meta.totalCount;
+  }
+
+  private async getDelegatesWithUnikAttributes(delegates: IDelegate[]): Promise<IDelegate[]> {
+    if (delegates.length) {
+      const unikIds = delegates.filter(delegate => isUnikId(delegate.username)).map(delegate => delegate.username);
+      if (unikIds.length) {
+        const uniks = (await UnikService.getUniks(unikIds)).reduce((unikMap, unik) => {
+          unikMap[unik.id] = { unikType: unik.type, unikname: unik.defaultExplicitValue };
+          return unikMap;
+        }, {});
+
+        const results = delegates.map(delegate => {
+          if (isUnikId(delegate.username)) {
+            Object.assign(delegate, uniks[delegate.username]);
+          }
+          return delegate;
+        });
+        return results;
+      }
+    }
+
+    return delegates;
   }
 }
 
