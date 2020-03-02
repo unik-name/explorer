@@ -22,6 +22,7 @@ const state: INetworkState = {
   epoch: null,
   blocktime: 0,
   hasMagistrateEnabled: false,
+  technicName: null
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -127,6 +128,12 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setTechnicName: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_TECHNIC_NAME,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -181,6 +188,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_HAS_MAGISTRATE_ENABLED](state, payload: IStorePayload) {
     state.hasMagistrateEnabled = payload.value;
   },
+  [types.SET_NETWORK_TECHNIC_NAME](state, payload: IStorePayload) {
+    state.technicName = payload.value;
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
@@ -201,6 +211,7 @@ const getters: GetterTree<INetworkState, {}> = {
   epoch: state => state.epoch,
   blocktime: state => state.blocktime,
   hasMagistrateEnabled: state => state.hasMagistrateEnabled,
+  technicName: state => state.technicName,
 };
 
 export const network: Module<INetworkState, {}> = {
