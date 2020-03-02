@@ -37,6 +37,7 @@ import { mapGetters } from "vuex";
 import SearchService from "@/services/search";
 import { IDelegate } from "@/interfaces";
 import { LocaleMessage } from "vue-i18n";
+import { didResolve, DidResolution , ResolutionResult} from "@uns/ts-sdk";
 
 @Component({
   computed: {
@@ -78,6 +79,35 @@ export default class HeaderSearch extends Vue {
     this.nothingFound = false;
     this.searchCount = 0;
     this.query = this.query.trim();
+
+    if (this.query.startsWith("@")) {
+      // resolve DID
+      try {
+        const resolutionResponse:DidResolution<string | ResolutionResult> = await didResolve(this.query, this.$store.state.network.technicName);
+
+        const resolutionResult: string | ResolutionResult = resolutionResponse.data;
+        const didQuery = this.query.split("?")[1];
+
+        if (resolutionResult) {
+          if (didQuery) {
+            if (didQuery === "*") {
+              // Resolved owner Id
+              this.changePage("wallet", { address: resolutionResult as string });
+              return;
+            } else {
+              // Resolved Property
+              this.query = resolutionResult[didQuery];
+            }
+          } else {
+            // Resolved UNIK
+            this.changePage("unik", { id: (resolutionResult as ResolutionResult).unikid});
+            return;
+          }
+        }
+      } catch (e) {
+        this.updateSearchCount(e);
+      }
+    }
 
     const address = this.findByNameInKnownWallets(this.query);
     if (address) {
