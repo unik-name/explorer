@@ -115,7 +115,7 @@ export default class TableTransactionsDesktop extends Vue {
         tdClass: "text-left hidden md:table-cell wrap-timestamp",
       },
       {
-        label: this.$t("TRANSACTION.SENDER"),
+        label: this.$t("TRANSACTION.FROM"),
         field: "sender",
         tdClass: "break-all",
       },

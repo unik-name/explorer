@@ -75,9 +75,8 @@ class DelegateService {
     const response = (await ApiService.get(`delegates/${query}`)) as IApiDelegateWrapper;
     let delegate = response.data;
     if (fetchUnik && isUnikId(delegate.username)) {
-      delegate = this.getDelegatesWithUnikAttributes([delegate])[0];
+      delegate = (await this.getDelegatesWithUnikAttributes([delegate]))[0];
     }
-
     return delegate;
   }
 
@@ -161,14 +160,15 @@ class DelegateService {
     if (delegates.length) {
       const unikIds = delegates.filter(delegate => isUnikId(delegate.username)).map(delegate => delegate.username);
       if (unikIds.length) {
-        const uniks = (await UnikService.getUniks(unikIds)).reduce((unikMap, unik) => {
+        const uniks = await UnikService.getUniks(unikIds);
+        const uniksInfoMap = uniks.reduce((unikMap, unik) => {
           unikMap[unik.id] = { unikType: unik.type, unikname: unik.defaultExplicitValue };
           return unikMap;
         }, {});
 
         const results = delegates.map(delegate => {
           if (isUnikId(delegate.username)) {
-            Object.assign(delegate, uniks[delegate.username]);
+            Object.assign(delegate, uniksInfoMap[delegate.username]);
           }
           return delegate;
         });

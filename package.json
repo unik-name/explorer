@@ -28,6 +28,9 @@
     "test:unit": "vue-cli-service test:unit --maxWorkers=2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/vue-fontawesome": "^0.1.9",
     "@types/nprogress": "^0.2.0",
     "@uns/ts-sdk": "^2.3.0-dev",
     "animate.css": "^3.7.2",

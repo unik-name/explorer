@@ -32,7 +32,8 @@ export class UnikService {
   }
 
   public async getUniks(unikIds: string[]): Promise<Unik[]> {
-    return (await this.unsClient.unik.getUniks(unikIds)).data;
+    const uniksResponse = await this.unsClient.unik.getUniks(unikIds);
+    return uniksResponse.data;
   }
 
   public async supply(): Promise<number> {
