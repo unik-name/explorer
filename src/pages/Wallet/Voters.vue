@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-2xl mx-auto md:pt-5">
+  <div class="max-w-2xl mx-auto md:pt-5 header-container">
     <ContentHeader
       >{{ $t("WALLET.DELEGATE.VOTERS") }}
         <span v-if="delegate">
@@ -142,3 +142,17 @@ export default class WalletVoters extends Vue {
   }
 }
 </script>
+
+<style>
+.header-container h1 {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-container h1 .unik svg {
+  font-size: 1.1em;
+  margin-left: 0.25em;
+  border-radius: 4px;
+}
+
+</style>

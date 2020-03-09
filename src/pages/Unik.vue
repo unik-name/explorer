@@ -17,19 +17,21 @@
     <template v-else>
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center">
-          <div class="mr-6 flex-none">
-            <SvgIcon v-if="unik.type" class="icon unik-icon" :name="`unik-${unik.type.toLowerCase()}`" view-box="0 0 64 64" />
+          <div :class="`mr-6 flex-none${unik.type ? ` unik-icon-container unik-icon-container-${unikClass(unik.type)}` : ''}`">
+            <font-awesome-icon class="unik-view-logo" v-if="unik.type" :icon="unikLogo(unik.type)" />
             <SvgIcon v-else class="icon" name="unik" view-box="0 0 64 64" />
           </div>
           <div class="flex-auto min-w-0">
             <div :class="`${unik.defaultExplicitValue ? 'text-2xl text-white semibold' : 'text-grey'} mb-2`">
-              <span>
-                {{ unik.defaultExplicitValue ? `@${unik.defaultExplicitValue}` : $t("UNIK.ID") }}
+              <UnikDisplay v-if="unik.defaultExplicitValue" :unikname="unik.defaultExplicitValue"/>
+              <span v-else>
+                {{ $t("UNIK.ID") }}
               </span>
             </div>
             <div class="flex">
-              <div :class="`${unik.defaultExplicitValue ? 'text-grey' : 'text-xl text-white semibold'} truncate`">
-                <span class="mr-2">{{ unik.id }}</span>
+              <div :class="`${unik.defaultExplicitValue ? 'text-grey' : 'text-xl text-white semibold'} truncate unik-badge-container`">
+                <UnikTypeBadge :type="unik.type" />
+                <span class="mr-2">{{ truncate(unik.id, 16, "right") }}</span>
               </div>
               <Clipboard v-if="unik.id" :value="unik.id" />
             </div>
@@ -47,6 +49,8 @@
 import { Vue, Prop, Component } from "vue-property-decorator";
 import NotFound from "@/components/utils/NotFound.vue";
 import UnikDetails from "@/components/unik/Details.vue";
+import UnikDisplay from "@/components/unik/UnikDisplay.vue";
+import UnikTypeBadge from "@/components/unik/UnikTypeBadge.vue";
 import UnikService from "@/services/unik";
 import { IUnik } from "../interfaces";
 
@@ -56,6 +60,8 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
   components: {
     NotFound,
     UnikDetails,
+    UnikDisplay,
+    UnikTypeBadge
   },
 })
 export default class Unik extends Vue {
@@ -114,8 +120,33 @@ export default class Unik extends Vue {
 
 <style>
 
-.unik-icon {
-    background-color: #47A09F;
-    border-radius: 50%;
+.unik-icon-container {
+  padding: 8px 10px;
+  border-radius: 1px;
 }
+
+.unik-icon-container.unik-icon-container-individual {
+  background-color: #C6C6FF;
+}
+
+.unik-icon-container.unik-icon-container-organization {
+  background-color: #6263B1;
+}
+
+.unik-icon-container.unik-icon-container-network {
+  background-color: #47A09F;
+}
+
+.unik-icon-container .unik-view-logo {
+  font-size: 2.5em;
+  padding: 0.05em;
+  color: #FFF;
+}
+
+.unik-badge-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 </style>

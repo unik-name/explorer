@@ -2,7 +2,10 @@
   <div v-if="delegate" class="WalletDelegate">
     <div class="list-row-border-b">
       <div>{{ $t("WALLET.DELEGATE.DELEGATE") }}</div>
-      <div>{{ delegate.username }}</div>
+      <div v-if="delegate.unikname">
+        <UnikDisplay style="color: inherit" :unikname="delegate.unikname" :type="delegate.unikType" />
+      </div>
+      <div v-else>{{ delegate.username }}</div>
     </div>
 
     <div class="list-row-border-b">
@@ -77,10 +80,12 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { IWallet } from "@/interfaces";
 import WalletVoters from "@/components/wallet/Voters.vue";
+import UnikDisplay from "@/components/unik/UnikDisplay.vue";
 
 @Component({
   components: {
     WalletVoters,
+    UnikDisplay
   },
 })
 export default class WalletDelegate extends Vue {

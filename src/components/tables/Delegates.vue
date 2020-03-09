@@ -16,7 +16,7 @@
 
         <div v-else-if="data.column.field === 'username'" class="flex items-center">
           <div v-if="data.row.unikname">
-            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname"></LinkUNIK>
+            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType"></LinkUNIK>
           </div>
           <div v-else>
             <LinkWallet :address="data.row.address">

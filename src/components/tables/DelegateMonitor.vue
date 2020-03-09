@@ -10,7 +10,7 @@
       <template slot-scope="data">
         <div v-if="data.column.field === 'username'" class="flex items-center">
           <div v-if="data.row.unikname">
-            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname"/>
+            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType"/>
           </div>
           <div v-else>
             <LinkWallet :address="data.row.address">

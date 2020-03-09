@@ -41,7 +41,12 @@
         <span v-if="hasDefaultSlot">
           <slot />
         </span>
-        <span v-else-if="delegate">{{ delegate.unikname ? delegate.unikname : delegate.username }}</span>
+        <span v-else-if="delegate">
+          <UnikDisplay style="color: inherit" v-if="delegate.unikname" :unikname="delegate.unikname" :type="delegate.unikType" :truncate-unikname="truncateUnik" />
+          <span v-else>
+            {{ delegate.username }}
+          </span>
+          </span>
         <span v-else-if="address">
           <span class="hidden md:inline-block">{{ trunc ? truncate(address) : address }}</span>
           <span class="md:hidden">{{ truncate(address) }}</span>
@@ -60,10 +65,14 @@
         }"
         :to="{ name: linkType, params: linkParameters }"
       >
-        <span :class="getVoteColor"
+        <span :class="`${getVoteColor} vote-label`"
           >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
-          {{ votedDelegateUsername }}</span
-        >
+          <UnikDisplay v-if="votedDelegate.unikname" :unikname="votedDelegate.unikname" :type="votedDelegate.unikType" :truncate-unikname="true" />
+          <span v-else>
+
+          {{ votedDelegateUsername }}
+          </span>
+        </span>
       </RouterLink>
     </span>
     <span v-else-if="isMultiSignature(type, typeGroup)">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
@@ -128,8 +137,11 @@
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate } from "@/interfaces";
+import UnikDisplay from "@/components/unik/UnikDisplay.vue";
+import WalletVoters from "@/pages/Wallet/Voters.vue";
 
 @Component({
+  components: { UnikDisplay },
   computed: {
     ...mapGetters("delegates", ["delegates"]),
     ...mapGetters("network", ["knownWallets"]),
@@ -214,6 +226,10 @@ export default class LinkWallet extends Vue {
     }
   }
 
+  get truncateUnik(): boolean {
+    return this.$router.currentRoute.name !== WalletVoters.pageName
+  }
+
   @Watch("delegates")
   public onDelegateChanged() {
     this.determine();
@@ -264,3 +280,16 @@ export default class LinkWallet extends Vue {
   }
 }
 </script>
+
+<style>
+.vote-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.vote-label .unik svg {
+  margin-left: 6px;
+  margin-right: 2px;
+}
+
+</style>

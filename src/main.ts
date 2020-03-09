@@ -19,8 +19,12 @@ import VueGoodTablePlugin from "vue-good-table";
 import PortalVue from "portal-vue";
 import i18n from "./i18n";
 
-import VueMatomo from "vue-matomo"
-import MatomoConfig, { setupMatomoConfig } from "./config/matomo"
+import VueMatomo from "vue-matomo";
+import MatomoConfig, { setupMatomoConfig } from "./config/matomo";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faNetworkWired, faUser, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // tslint:disable-next-line:no-var-requires
 require("./components");
@@ -43,6 +47,9 @@ if(process.env.VUE_APP_EXPLORER_CONFIG === "sandbox" || process.env.VUE_APP_EXPL
 }
 
 Vue.mixin(mixins);
+
+library.add(faNetworkWired, faUser, faGlobe);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 new Vue({
   router,
