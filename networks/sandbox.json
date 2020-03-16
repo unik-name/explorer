@@ -1,6 +1,6 @@
 {
   "title": "uns.network SANDBOX Explorer",
-  "server": "https://forger1.sandbox.uns.network/api/v2",
+  "server": "https://relay1.sandbox.uns.network/api/v2",
   "alias": "Sandbox",
   "activeDelegates": 23,
   "rewardOffset": 1,
