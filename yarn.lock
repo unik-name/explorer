@@ -732,6 +732,13 @@
     js-levenshtein "^1.1.3"
     semver "^5.5.0"
 
+"@babel/runtime@^7.3.1":
+  version "7.9.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
+  integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.7.4":
   version "7.7.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.6.tgz#d18c511121aff1b4f2cd1d452f1bac9601dd830f"
@@ -1146,6 +1153,11 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@stablelib/utf8@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@stablelib/utf8/-/utf8-0.10.1.tgz#eecf54884da7b2bee235e3c70efb8cd5c07ba5bd"
+  integrity sha512-+uM1YZ4MhBC82vt99prF7DXNGqhYmJ9cQ3p5qNowMNkkzn9OWEkqBvguBW3ChAt7JvqZ3SD5HJOfc6YgnfMTHw==
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -1368,10 +1380,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@uns/ark-crypto@^4.3.0-dev", "@uns/ark-crypto@^4.3.0-dev.20200311133244":
-  version "4.3.0-dev.20200311133244"
-  resolved "https://registry.yarnpkg.com/@uns/ark-crypto/-/ark-crypto-4.3.0-dev.20200311133244.tgz#0ffa8f9cd433765e9b118803db2bcc4f27ab0920"
-  integrity sha512-pIC4XpfxmQdJbW5a1Shton4pKjeq+u+EbkK7OSVwSu/dMq2I9/SPI01ebwUdIVpqSgU4i85qBvaTcucExv/F9Q==
+"@uns/ark-crypto@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@uns/ark-crypto/-/ark-crypto-5.0.1.tgz#e55ec78924bfb93ee395f3661287320c00d8433d"
+  integrity sha512-tFdh2DIQwztIQ6i1Es8bJ4Ku3xJKTlpDhypE3ZXTCQV0wcmPEJCS4taIPVBwVKP8vpDSIzPB/WAvPtUuv3uGgA==
   dependencies:
     "@arkecosystem/utils" "0.8.3"
     ajv "^6.10.2"
@@ -1394,33 +1406,36 @@
     tiny-glob "^0.2.6"
     wif "^2.0.6"
 
-"@uns/core-nft-crypto@^4.3.0-dev", "@uns/core-nft-crypto@^4.3.0-dev.20200311133244":
-  version "4.3.0-dev.20200311133244"
-  resolved "https://registry.yarnpkg.com/@uns/core-nft-crypto/-/core-nft-crypto-4.3.0-dev.20200311133244.tgz#e6bfdd7b53f50a9dbefd5fa691814862dceb71c8"
-  integrity sha512-C8uO8g0TjF2MFTWFRdaYfNEkubVlYBBDHbdM8myfKmrhXfIDkHnNdALixBGu/YPgNEw35/pEFyP5QLNGDLohBQ==
+"@uns/core-nft-crypto@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@uns/core-nft-crypto/-/core-nft-crypto-5.0.1.tgz#4bafb32e56ca7c265620cebf6c648dca31177533"
+  integrity sha512-1tDq0mOUC7a8hTe8xGz3g3trJCzFjcrEq1+Z/LNrB0uVoq+qmO04obTPtt1RqBdjY1H15EIQhvVJzUGAnh+xCQ==
   dependencies:
-    "@uns/ark-crypto" "^4.3.0-dev.20200311133244"
+    "@uns/ark-crypto" "^5.0.1"
 
-"@uns/crypto@^4.3.0-dev":
-  version "4.3.0-dev.20200311133244"
-  resolved "https://registry.yarnpkg.com/@uns/crypto/-/crypto-4.3.0-dev.20200311133244.tgz#fc8980313fd0b0ef75d7ffd2f6326bf3a26d8e52"
-  integrity sha512-DW10mplQEO/NgZWEi7y/hTpG/0OZGub6R4bKxh03m/5DSy3tqVKvNax1n18wzvE4W67uwVh50qgwVfdqN3RFeg==
+"@uns/crypto@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@uns/crypto/-/crypto-5.0.1.tgz#fcc77c9f203a9d53a7db7a8b806e91e9f25f8872"
+  integrity sha512-hTyAAiag/3BpSzdmPlLZYbTpbTU7eor54Y7zi4hC4ViAI3EUIS/I4q7ahzNN9EiGjR7Z4UCp0vQQ2hPN3t0jjw==
   dependencies:
-    "@uns/ark-crypto" "^4.3.0-dev.20200311133244"
-    "@uns/core-nft-crypto" "^4.3.0-dev.20200311133244"
+    "@uns/ark-crypto" "^5.0.1"
+    "@uns/core-nft-crypto" "^5.0.1"
 
-"@uns/ts-sdk@^2.3.0-dev":
-  version "2.3.0-dev.20200311151854"
-  resolved "https://registry.yarnpkg.com/@uns/ts-sdk/-/ts-sdk-2.3.0-dev.20200311151854.tgz#bc3e4f5e7e96597bde9d188f336afb54b8a36497"
-  integrity sha512-A4e3YgjEBLcfP7ao4zUq/OKnXWjotCu9fNU8LgbtledwiPPx4C1HN+BPZnacmh45nStnMIGxCv3nHQ7kJpJEVw==
+"@uns/ts-sdk@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@uns/ts-sdk/-/ts-sdk-2.3.0.tgz#1e126c24a6c1349edd8db9154b62c15bb4c06272"
+  integrity sha512-dOT+5x0dyuDipB+7kX/Hf9QKli1Fj4Erx8BKQ5UcQoiGEJrVM3aX3L5beJh9SKjjEtjJJmTOfGcmJb/TQGuuKw==
   dependencies:
-    "@uns/ark-crypto" "^4.3.0-dev"
-    "@uns/core-nft-crypto" "^4.3.0-dev"
-    "@uns/crypto" "^4.3.0-dev"
+    "@uns/ark-crypto" "^5.0.1"
+    "@uns/core-nft-crypto" "^5.0.1"
+    "@uns/crypto" "^5.0.1"
     deepmerge "^4.0.0"
+    did-jwt "^4.0.0"
+    elliptic "^6.5.2"
     is-url-superb "^3.0.0"
     ky "^0.13.0"
     ky-universal "^0.3.0"
+    nanoid "^2.1.11"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -2768,6 +2783,14 @@ buffer@^4.3.0:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
+buffer@^5.2.1:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.5.0.tgz#9c3caa3d623c33dd1c7ef584b89b88bf9c9bc1ce"
+  integrity sha512-9FTEDjLjwoAkEwyMGDjYJQN2gfRgOKBKRfiglhvibGbpeeU/pQn1bJxQqm32OD/AIeEuHxU9roxXxg34Byp/Ww==
+  dependencies:
+    base64-js "^1.0.2"
+    ieee754 "^1.1.4"
+
 buffer@^5.4.3:
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.4.3.tgz#3fbc9c69eb713d323e3fc1a895eee0710c072115"
@@ -3898,9 +3921,9 @@ date-now@^0.1.4:
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
 
 dayjs@^1.8.15:
-  version "1.8.22"
-  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.22.tgz#5e835d776b373e216678be8d12c336da71a25a9c"
-  integrity sha512-N8IXfxBD62Y9cKTuuuSoOlCXRnnzaTj1vu91r855iq6FbY5cZqOZnW/95nUn6kJiR+W9PHHrLykEoQOe6fUKxQ==
+  version "1.8.23"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.23.tgz#07b5a8e759c4d75ae07bdd0ad6977f851c01e510"
+  integrity sha512-NmYHMFONftoZbeOhVz6jfiXI4zSiPN6NoVWJgC0aZQfYVwzy/ZpESPHuCcI0B8BUMpSJQ08zenHDbofOLKq8hQ==
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -4117,6 +4140,26 @@ diacriticless@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/diacriticless/-/diacriticless-1.0.1.tgz#e7dda978c2919609bb48aee1efc5de6a337bd4c3"
   integrity sha1-592peMKRlgm7SK7h78XeajN71MM=
+
+did-jwt@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/did-jwt/-/did-jwt-4.0.0.tgz#243bf1da82d5a67ce4d742afb10f5f63169f5b4e"
+  integrity sha512-esCR3mVngXQhV2Q1NjdVdkzirgxHpuzqnn4Ga4mNwXFbvYNj9fHD2/oTJXaLZeXxImJmHJQwFEr0TPMoQAlcwg==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    "@stablelib/utf8" "^0.10.1"
+    buffer "^5.2.1"
+    did-resolver "^1.0.0"
+    elliptic "^6.4.0"
+    js-sha256 "^0.9.0"
+    js-sha3 "^0.8.0"
+    tweetnacl "^1.0.1"
+    uport-base64url "3.0.2-alpha.0"
+
+did-resolver@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/did-resolver/-/did-resolver-1.1.0.tgz#27a63b6f2aa8dee3d622cd8b8b47360661e24f1e"
+  integrity sha512-Q02Sc5VuQnJzzR8fQ/DzyCHiYb31WpQdocOsxppI66wwT4XalYRDeCr3a48mL6sYPQo76AkBh0mxte9ZBuQzxA==
 
 diff-sequences@^24.9.0:
   version "24.9.0"
@@ -4356,7 +4399,7 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-elliptic@^6.4.0, elliptic@^6.4.1:
+elliptic@^6.4.0, elliptic@^6.4.1, elliptic@^6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.2.tgz#05c5678d7173c049d8ca433552224a495d0e3762"
   integrity sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==
@@ -6733,6 +6776,16 @@ js-queue@2.0.0:
   dependencies:
     easy-stack "^1.0.0"
 
+js-sha256@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
+  integrity sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==
+
+js-sha3@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"
+  integrity sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -7752,6 +7805,11 @@ nan@^2.12.1, nan@^2.13.1, nan@^2.13.2, nan@^2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
   integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
+
+nanoid@^2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-2.1.11.tgz#ec24b8a758d591561531b4176a01e3ab4f0f0280"
+  integrity sha512-s/snB+WGm6uwi0WjsZdaVcuf3KJXlfGl2LcxgwkEwJF0D/BWzVWAZW/XY4bFaiR7s0Jk3FPvlnepg1H1b1UwlA==
 
 nanomatch@^1.2.1, nanomatch@^1.2.9:
   version "1.2.13"
@@ -9441,6 +9499,11 @@ regenerator-runtime@^0.13.2:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
   integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
 
+regenerator-runtime@^0.13.4:
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
+  integrity sha512-ZS5w8CpKFinUzOwW3c83oPeVXoNsrLsaCoLtJvAClH135j/R77RuymhiSErhm2lKcwSCIpmvIWSbDkIfAqKQlA==
+
 regenerator-transform@^0.14.0:
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.14.1.tgz#3b2fce4e1ab7732c08f665dfdb314749c7ddd2fb"
@@ -10997,6 +11060,11 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
+tweetnacl@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-1.0.3.tgz#ac0af71680458d8a6378d0d0d050ab1407d35596"
+  integrity sha512-6rt+RN7aOi1nGMyC4Xa5DdYiukl2UWCbcJft7YhxReBGQD7OAM8Pbxw6YMo4r2diNEA8FEmu32YOn9rhaiE5yw==
+
 type-check@~0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.3.2.tgz#5884cab512cf1d355e3fb784f30804b2b520db72"
@@ -11152,6 +11220,13 @@ upath@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
+
+uport-base64url@3.0.2-alpha.0:
+  version "3.0.2-alpha.0"
+  resolved "https://registry.yarnpkg.com/uport-base64url/-/uport-base64url-3.0.2-alpha.0.tgz#8d921eb512af1e8dc97ac2fd0d37863df6549843"
+  integrity sha512-pRu0xm1K39IUzuMQEmFWdqP+H8jOzblwTXf0r9wFBCa6ZLLQsNuDeUwB2Ld+9zlBSvQQv+XEzG7cQukSCueZqw==
+  dependencies:
+    buffer "^5.2.1"
 
 upper-case@^1.1.1:
   version "1.1.3"
