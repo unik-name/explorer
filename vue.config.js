@@ -1,6 +1,8 @@
 const gitRevision = require("./build/git-revision")();
 const path = require("path");
 const minimist = require("minimist");
+const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin")
 
 let publicPath = "/";
 
@@ -77,5 +79,28 @@ module.exports = {
       .rule("svg-sprite")
       .use("svgo-loader")
       .loader("svgo-loader");
+
+    config.plugin("replace bn.js")
+      .use(
+        new webpack.NormalModuleReplacementPlugin(
+          /node_modules\/bcrypto\/lib\/node\/bn\.js/,
+          "../js/bn.js"
+        )
+      )
+    config.plugin("copy big-integer")
+      .use(CopyPlugin,[
+        [
+          {from:"./node_modules/big-integer/BigInteger.js"}
+        ]
+      ])
+
+    config.plugin("rename BigInt to bigint")
+      .use(
+        new webpack.DefinePlugin({
+          BigInt: "bigInt",
+        })
+      )
+
+  
   },
 };
