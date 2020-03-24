@@ -79,6 +79,8 @@
     "@vue/cli-service": "^4.1.1",
     "@vue/test-utils": "^1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
+    "big-integer": "^1.6.48",
+    "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^6.0.3",
     "es6-promise": "^4.2.8",
     "es6-promise-promise": "^1.0.0",
