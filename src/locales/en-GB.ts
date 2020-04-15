@@ -296,6 +296,7 @@ export default {
     DEVELOPMENT: "Development",
     DALINET: "Dalinet",
     SANDBOX: "Sandbox",
+    LIVENET: "Livenet",
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
     TESTNET: "Testnet",
