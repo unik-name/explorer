@@ -1,0 +1,17 @@
+{
+  "title": "uns.network Explorer",
+  "server": "https://api.uns.network/api/v2",
+  "alias": "Livenet",
+  "activeDelegates": 23,
+  "rewardOffset": 1,
+  "currencies": [],
+  "knownWallets": {},
+  "defaults": {
+    "token": "UNS",
+    "symbol": "UNS",
+    "currency": null,
+    "priceChartOptions": {
+      "enabled": false
+    }
+  }
+}
