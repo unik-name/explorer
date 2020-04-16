@@ -67,7 +67,7 @@
       >
         <span :class="`${getVoteColor} vote-label`"
           >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
-          <UnikDisplay v-if="votedDelegate.unikname" :unikname="votedDelegate.unikname" :type="votedDelegate.unikType" :truncate-unikname="true" />
+          <UnikDisplay class="ml-1" v-if="votedDelegate.unikname" :unikname="votedDelegate.unikname" :type="votedDelegate.unikType" :truncate-unikname="true" />
           <span v-else>
 
           {{ votedDelegateUsername }}

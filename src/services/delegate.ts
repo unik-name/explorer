@@ -3,6 +3,7 @@ import { roundFromHeight } from "@/utils";
 import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate, IUnik } from "../interfaces";
 import { isUnikId } from "@/utils/unik-utils";
+import { DIDType, DIDHelpers } from '@uns/ts-sdk';
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -80,7 +81,7 @@ class DelegateService {
     return delegate;
   }
 
-  public async active(): Promise<IDelegate[]> {
+  public async active(delegateType?: DIDType): Promise<IDelegate[]> {
     const activeDelegates = store.getters["network/activeDelegates"];
     const height = store.getters["network/height"];
     const previousDelegates = await RoundService.delegates(roundFromHeight(height) - 1);
@@ -91,15 +92,17 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    const delegates: IDelegate[] = response.data.map(delegate => {
+    let delegates: IDelegate[] = response.data.map(delegate => {
       delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
       return delegate;
     });
 
-    return this.getDelegatesWithUnikAttributes(delegates);
+    delegates = await this.getDelegatesWithUnikAttributes(delegates);
+
+    return this.filterDelegatesByType(delegates, delegateType);
   }
 
-  public async standby(): Promise<IDelegate[]> {
+  public async standby(delegateType?: DIDType): Promise<IDelegate[]> {
     const activeDelegates = store.getters["network/activeDelegates"];
 
     const response = (await ApiService.get("delegates", {
@@ -109,8 +112,26 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    const delegates: IDelegate[] = response.data.filter(delegate => !delegate.isResigned);
-    return this.getDelegatesWithUnikAttributes(delegates);
+    let delegates: IDelegate[] = response.data.filter(delegate => !delegate.isResigned);
+
+    delegates = await this.getDelegatesWithUnikAttributes(delegates);
+
+    return this.filterDelegatesByType(delegates, delegateType);
+  }
+
+  private filterDelegatesByType(delegates: IDelegate[], delegateType?: DIDType): IDelegate[] {
+    if (delegates.length && delegateType) {
+      const delegateTypeCode: number = DIDHelpers.fromLabel(delegateType);
+      let newRank = 1;
+      delegates = delegates
+      .filter(delegate => delegate.unikType ? parseInt(delegate.unikType) === delegateTypeCode : delegateTypeCode === 1)
+      .map(delegate => {
+        delegate.rank = newRank;
+        newRank++;
+        return delegate;
+      })
+    }
+    return delegates;
   }
 
   public async resigned(): Promise<IDelegate[]> {
