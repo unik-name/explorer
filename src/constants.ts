@@ -61,12 +61,12 @@ export const transactionTypes: ITransactionType[] = [
     typeGroup: TypeGroupTransaction.UNS,
   },
   {
-    key: "UNS_DELEGATE_REGISTER",
+    key: "UNS_DELEGATE_REGISTRATION",
     type: UNSTransaction.DELEGATE_REGISTRATION,
     typeGroup: TypeGroupTransaction.UNS,
   },
   {
-    key: "UNS_DELEGATE_RESIGN",
+    key: "UNS_DELEGATE_RESIGNATION",
     type: UNSTransaction.DELEGATE_RESIGNATION,
     typeGroup: TypeGroupTransaction.UNS,
   },

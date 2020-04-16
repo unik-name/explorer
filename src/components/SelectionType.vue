@@ -67,7 +67,7 @@ import { transactionTypes } from "@/constants";
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: ITransactionType[] = transactionTypes;
+  private types: ITransactionType[] = this.getDisplayableFilters();
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen: boolean = false;
 
@@ -113,6 +113,32 @@ export default class SelectionType extends Vue {
 
   private toggleDropdown() {
     this.selectOpen = !this.selectOpen;
+  }
+
+  private getDisplayableFilters() {
+    return transactionTypes.filter(trxType => !this.getDisabledFilters().includes(trxType.key));
+  }
+
+  private getDisabledFilters() {
+    return [
+      "DELEGATE_REGISTRATION",
+      "MULTI_SIGNATURE",
+      "IPFS",
+      "MULTI_PAYMENT",
+      "DELEGATE_RESIGNATION",
+      "TIMELOCK",
+      "TIMELOCK_CLAIM",
+      "TIMELOCK_REFUND",
+      "BUSINESS_REGISTRATION",
+      "BUSINESS_RESIGNATION",
+      "BUSINESS_UPDATE",
+      "BRIDGECHAIN_REGISTRATION",
+      "BRIDGECHAIN_RESIGNATION",
+      "BRIDGECHAIN_UPDATE",
+      "UNIK_CREATION",
+      "UNIK_UPDATE",
+      "UNIK_TRANSFER"
+      ];
   }
 }
 </script>
