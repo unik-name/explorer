@@ -206,7 +206,7 @@ export default {
       TITLE: "Delegates",
     },
     DELEGATE_MONITOR: {
-      TITLE: "Network player Monitor",
+      TITLE: "Delegate Monitor",
       HEADER: {
         LAST_BLOCK: "Last block",
         FORGED: "Forged",

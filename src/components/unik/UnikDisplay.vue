@@ -1,6 +1,6 @@
 <template>
-  <span :class="`unik unik-${unikClass(type)}`">
-      <font-awesome-icon v-if="type" :icon="`${unikLogo(type)}`" />
+  <span class="unik-display">
+      <UnikTypeLogo v-if="type" :type="unikClass(type).toUpperCase()" />
       <span v-else>
         @
       </span>
@@ -14,11 +14,13 @@
 import { Vue, Prop, Component } from "vue-property-decorator";
 import { DIDType, DIDHelpers, DIDTypes } from '@uns/ts-sdk';
 import { truncate } from "../../utils/strings";
-import { getUnikLogoName } from "../../utils/unik-utils";
+import UnikTypeLogo from "@/components/unik/UnikTypeLogo.vue";
 
 const UNIKNAME_LENTH_TRUNCATE: number = 16;
 
-@Component
+@Component( {
+  components: { UnikTypeLogo }
+})
 export default class UnikDisplay extends Vue {
   @Prop({ required: true }) public unikname: string;
   @Prop({ required: false }) public type: DIDType;
@@ -40,35 +42,9 @@ export default class UnikDisplay extends Vue {
 </script>
 
 <style scoped>
-.unik-logo {
-    display: inline-block;
-    margin-right: -0.4em;
-}
-
-.unik {
+.unik-display {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
-.unik > svg {
-  color: #FFFFFF;
-  padding: 3px;
-  font-size: 1.4em;
-  margin-right: 0.1em;
-  border-radius: 2px;
-}
-
-.unik-individual > svg {
-  background-color: #C6C6FF;
-}
-
-.unik-organization > svg {
-  background-color: #6263B1;
-}
-
-.unik-network > svg {
-  background-color: #16C8C0;
-}
-
-</style>>
+</style>

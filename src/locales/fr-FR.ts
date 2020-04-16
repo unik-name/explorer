@@ -121,7 +121,7 @@ export default {
       LATEST_BLOCKS: "Derniers blocs",
     },
     DELEGATE_MONITOR: {
-      TITLE: "Moniteur des Network players",
+      TITLE: "Moniteur des Délégués",
       HEADER: {
         LAST_BLOCK: "Dernier bloc",
         FORGED: "Forgé",
