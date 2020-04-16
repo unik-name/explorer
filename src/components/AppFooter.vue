@@ -9,8 +9,11 @@
         <span class="hidden md:inline-block">&nbsp;|&nbsp;</span>
         <span
           >{{ $t("FOOTER.VERSION") }}: <a :href="versionLink" target="_blank">{{ version }}</a> |
-          {{ $t("FOOTER.DATE") }}: {{ date }}</span
+          {{ $t("FOOTER.DATE") }}: {{ date }}&nbsp;|&nbsp;</span
         >
+        <RouterLink :to="{ name: 'network-monitor' }">
+          {{ $t("FOOTER.NETWORK_MONITOR_TITLE") }}
+        </RouterLink>
       </div>
     </div>
     <div class="text-center">

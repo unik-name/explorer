@@ -72,21 +72,29 @@ export default class TableDelegates extends Vue {
   })
   public delegates: IDelegate[] | null;
   @Prop({ required: false, default: "active" }) public activeTab: string;
+  @Prop({ required: false, default: false }) public disableRanking: boolean;
 
   get columns() {
-    let columns = [
-      {
+
+    let columns = [];
+
+    if (!this.disableRanking) {
+      columns.push({
         label: this.$t("COMMON.RANK"),
         field: "rank",
         type: "number",
         thClass: "start-cell w-32",
         tdClass: "start-cell w-32",
-      },
+      });
+    }
+
+    columns = [
+      ...columns,
       {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `text-left ${this.isActiveTab ? "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
-        tdClass: `text-left ${this.isActiveTab ? "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        thClass: `text-left ${this.isActiveTab ? this.disableRanking ? "start-cell" : "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        tdClass: `text-left ${this.isActiveTab ? this.disableRanking ? "start-cell" : "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
       },
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),
@@ -110,14 +118,17 @@ export default class TableDelegates extends Vue {
         thClass: "end-cell md:base-cell text-center",
         tdClass: "end-cell md:base-cell text-center",
       },
-      {
+    ];
+
+    if (!this.disableRanking) {
+      columns.push({
         label: this.$t("PAGES.DELEGATE_MONITOR.VOTES"),
         field: "votes",
         type: "number",
         thClass: `end-cell hidden ${this.isActiveTab ? "md" : "sm"}:table-cell`,
         tdClass: `end-cell hidden ${this.isActiveTab ? "md" : "sm"}:table-cell`,
-      },
-    ];
+      });
+    }
 
     if (this.activeTab !== "active") {
       // remove the columns for blocks, last forged and status
