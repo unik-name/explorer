@@ -236,6 +236,9 @@ export default {
       VOTES: "Votes",
       TOOLTIP: "Last block @ {height} on",
     },
+    NETWORK_MONITOR: {
+      TITLE: "Network Monitor",
+    },
     TOP_WALLETS: {
       TITLE: "Top Crypto Accounts",
     },
@@ -306,6 +309,7 @@ export default {
     ALL_RIGHTS_RESERVED: "All rights reserved",
     VERSION: "Version",
     DATE: "Date",
+    NETWORK_MONITOR_TITLE: "Status"
   },
 
   UNIK: {

@@ -21,6 +21,7 @@ const WalletTransactionsComponent = () =>
 const TransactionComponent = () => import(/* webpackChunkName: "transaction" */ "@/pages/Transaction.vue");
 const TransactionsComponent = () => import(/* webpackChunkName: "transactions" */ "@/pages/Transactions.vue");
 const DelegateMonitorComponent = () => import(/* webpackChunkName: "delegate-monitor" */ "@/pages/DelegateMonitor.vue");
+const NetworkMonitorComponent = () => import(/* webpackChunkName: "network-monitor" */ "@/pages/NetworkMonitor.vue");
 const TopWalletsComponent = () => import(/* webpackChunkName: "top-wallets" */ "@/pages/TopWallets.vue");
 const BusinessesComponent = () => import(/* webpackChunkName: "businesses" */ "@/pages/Businesses.vue");
 const BridgechainsComponent = () => import(/* webpackChunkName: "bridgechains" */ "@/pages/Bridgechains.vue");
@@ -153,6 +154,12 @@ const router = new Router({
       name: "delegate-monitor",
       component: DelegateMonitorComponent,
       meta: { title: (route: Route) => getTitle("Delegate Monitor") },
+    },
+    {
+      path: "/network-monitor",
+      name: "network-monitor",
+      component: NetworkMonitorComponent,
+      meta: { title: (route: Route) => getTitle("Network Monitor") },
     },
     {
       path: "/top-wallets",
