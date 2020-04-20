@@ -21,7 +21,7 @@
 
 @screen sm {
   .active-tab {
-    @apply .text-2xl;
+    font-weight: bolder;
   }
 
   .inactive-tab {
