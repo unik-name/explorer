@@ -28,18 +28,13 @@
 [context."master".environment]
   CURRENT_NETWORK = "livenet"
 
-# To remove when Livenet will be live
-[[redirects]]
-  from = "https://explorer.uns.network/*"
-  to = "https://sandbox.explorer.uns.network/"
-  status = 302
-  force = true
-
+# SPA explorer application
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
+# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
