@@ -24,6 +24,25 @@
           >
         </div>
 
+        <div v-else-if="data.column.field === 'blocks.produced'">
+          {{ readableNumber(data.row.blocks.produced) }}
+        </div>
+
+        <div v-else-if="data.column.field === 'lastBlockHeight'">
+          {{ lastForgingTime(data.row) }}
+        </div>
+
+        <div v-else-if="data.column.field === 'forgingStatus'" class="text-0">
+          <button v-tooltip="statusTooltip(data.row)" role="img" :aria-label="tooltipContent(data.row)">
+            <SvgIcon
+              :class="`text-status-${status(data.row)}`"
+              class="mx-auto"
+              :name="status(data.row)"
+              view-box="0 0 19 17"
+            />
+          </button>
+        </div>
+
         <div v-else-if="data.column.field === 'votes'">
           <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
             {{ percentageString(data.row.production.approval) }}
@@ -44,7 +63,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { IDelegate, ISortParameters } from "@/interfaces";
 
 @Component
-export default class TableDelegates extends Vue {
+export default class TableNetworkMonitor extends Vue {
   @Prop({
     required: true,
     validator: (value) => {
@@ -57,24 +76,32 @@ export default class TableDelegates extends Vue {
   get columns() {
     let columns = [
       {
-        label: this.$t("COMMON.RANK"),
-        field: "rank",
-        type: "number",
-        thClass: "start-cell w-32",
-        tdClass: "start-cell w-32",
-      },
-      {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `text-left ${this.isActiveTab ? "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
-        tdClass: `text-left ${this.isActiveTab ? "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        thClass: `text-left ${this.isActiveTab ? "start-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        tdClass: `text-left ${this.isActiveTab ? "start-cell" : this.isResignedTab ? "start-cell" : ""}`,
       },
       {
-        label: this.$t("PAGES.DELEGATE_MONITOR.VOTES"),
-        field: "votes",
+        label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),
+        field: "blocks.produced",
         type: "number",
-        thClass: `end-cell hidden ${this.isActiveTab ? "md" : "sm"}:table-cell`,
-        tdClass: `end-cell hidden ${this.isActiveTab ? "md" : "sm"}:table-cell`,
+        thClass: "text-left hidden xl:table-cell",
+        tdClass: "text-left hidden xl:table-cell",
+      },
+      {
+        label: this.$t("PAGES.DELEGATE_MONITOR.LAST_FORGED"),
+        field: "lastBlockHeight",
+        type: "number",
+        sortFn: this.sortByLastBlockHeight,
+        thClass: "text-left hidden sm:table-cell",
+        tdClass: "text-left hidden sm:table-cell",
+      },
+      {
+        label: this.$t("PAGES.DELEGATE_MONITOR.STATUS.TITLE"),
+        field: "forgingStatus",
+        type: "number",
+        thClass: "end-cell md:base-cell text-center",
+        tdClass: "end-cell md:base-cell text-center",
       },
     ];
 

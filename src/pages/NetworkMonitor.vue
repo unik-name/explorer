@@ -7,7 +7,7 @@
     <section class="page-section py-5 md:py-10">
       <ForgingStats :delegates="delegates || []" />
 
-      <TableDelegates :delegates="delegates" :disable-ranking="true" @on-sort-change="() => {}" />
+      <TableNetworkMonitor :delegates="delegates" @on-sort-change="() => {}" />
     </section>
   </div>
 </template>
@@ -18,11 +18,13 @@ import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters } from "@/interfaces";
 import DelegateService from "@/services/delegate";
 import { MonitorHeader, ForgingStats } from "@/components/monitor";
+import TableNetworkMonitor from "@/components/tables/NetworkMonitor.vue";
 
 @Component({
   components: {
     MonitorHeader,
     ForgingStats,
+    TableNetworkMonitor,
   },
   computed: {
     ...mapGetters("network", ["height"]),
