@@ -44,6 +44,16 @@
           <UnikTypeLogo :type="ORG_TYPE" />
           {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
         </div>
+        <div
+          :class="activeTab === 'active' && activeType === NETWORK_TYPE ? 'active-tab' : 'inactive-tab'"
+          @click="
+            activeTab = 'active';
+            activeType = NETWORK_TYPE;
+          "
+        >
+          <UnikTypeLogo :type="NETWORK_TYPE" />
+          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
+        </div>
         <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
           {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
         </div>
@@ -92,6 +102,7 @@ export default class DelegateMonitor extends Vue {
   private activeTab = "active";
   private INDIV_TYPE: DIDType = "INDIVIDUAL";
   private ORG_TYPE: DIDType = "ORGANIZATION";
+  private NETWORK_TYPE: DIDType = "NETWORK";
   private activeType: DIDType = this.INDIV_TYPE;
   private height: number;
 
