@@ -56,7 +56,12 @@ import {
     ...mapGetters("network", ["hasMagistrateEnabled"]),
 
     menuEntries() {
-      const entries = [{ name: "home" }, { name: "top-wallets", params: { page: 1 } }, { name: "delegate-monitor" }];
+      const entries = [
+        { name: "home" },
+        { name: "top-wallets", params: { page: 1 } },
+        { name: "delegate-monitor" },
+        { name: "network-monitor" },
+      ];
 
       entries.push({ name: "advanced-search", params: { page: 1 } });
 

@@ -325,7 +325,9 @@ export default {
     ALL_RIGHTS_RESERVED: "All rights reserved",
     VERSION: "Version",
     DATE: "Date",
-    NETWORK_MONITOR_TITLE: "Status",
+    NETWORK: "uns.network",
+    FORUM: "Forum",
+    DOCS: "Docs",
   },
 
   UNIK: {
@@ -348,11 +350,6 @@ export default {
     NETWORK: "Network",
     KEY: "Key",
     VALUE: "Value",
-    MENU_ITEM: {
-      NETWORK: "uns.network",
-      FORUM: "Forum",
-      DOCS: "Docs",
-    },
   },
 
   UNS: {

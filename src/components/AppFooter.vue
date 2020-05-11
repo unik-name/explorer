@@ -11,9 +11,15 @@
           >{{ $t("FOOTER.VERSION") }}: <a :href="versionLink" target="_blank">{{ version }}</a> |
           {{ $t("FOOTER.DATE") }}: {{ date }}&nbsp;|&nbsp;</span
         >
-        <RouterLink :to="{ name: 'network-monitor' }">
-          {{ $t("FOOTER.NETWORK_MONITOR_TITLE") }}
-        </RouterLink>
+        <span
+          ><a href="https://uns.network" target="_blank">{{ $t("FOOTER.NETWORK") }}</a
+          >&nbsp;|&nbsp;</span
+        >
+        <span
+          ><a href="https://forum.unik-name.com" target="_blank">{{ $t("FOOTER.FORUM") }}</a
+          >&nbsp;|&nbsp;</span
+        >
+        <a href="https://docs.uns.network" target="_blank">{{ $t("FOOTER.DOCS") }}</a>
       </div>
     </div>
     <div class="text-center">
