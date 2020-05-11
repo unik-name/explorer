@@ -221,7 +221,7 @@ export default {
       TITLE: "Delegates",
     },
     DELEGATE_MONITOR: {
-      TITLE: "Delegate Monitor",
+      TITLE: "Delegate Status",
       HEADER: {
         LAST_BLOCK: "Last block",
         FORGED: "Forged",
