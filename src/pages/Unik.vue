@@ -17,19 +17,29 @@
     <template v-else>
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center">
-          <div :class="`mr-6 flex-none${unik.type ? ` unik-icon-container unik-icon-container-${unikClass(unik.type)}` : ''}`">
-            <font-awesome-icon class="unik-view-logo" v-if="unik.type" :icon="unikLogo(unik.type)" />
+          <div
+            :class="
+              `mr-6 flex-none${unik.type ? ` unik-icon-container unik-icon-container-${unikClass(unik.type)}` : ''}`
+            "
+          >
+            <font-awesome-icon v-if="unik.type" class="unik-view-logo" :icon="unikLogo(unik.type)" />
             <SvgIcon v-else class="icon" name="unik" view-box="0 0 64 64" />
           </div>
           <div class="flex-auto min-w-0">
             <div :class="`${unik.defaultExplicitValue ? 'text-2xl text-white semibold' : 'text-grey'} mb-2`">
-              <UnikDisplay v-if="unik.defaultExplicitValue" :unikname="unik.defaultExplicitValue"/>
+              <UnikDisplay v-if="unik.defaultExplicitValue" :unikname="unik.defaultExplicitValue" />
               <span v-else>
                 {{ $t("UNIK.ID") }}
               </span>
             </div>
             <div class="flex">
-              <div :class="`${unik.defaultExplicitValue ? 'text-grey' : 'text-xl text-white semibold'} truncate unik-badge-container`">
+              <div
+                :class="
+                  `${
+                    unik.defaultExplicitValue ? 'text-grey' : 'text-xl text-white semibold'
+                  } truncate unik-badge-container`
+                "
+              >
                 <UnikTypeBadge :type="unik.type" />
                 <span class="mr-2">{{ truncate(unik.id, 16, "right") }}</span>
               </div>
@@ -61,22 +71,22 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
     NotFound,
     UnikDetails,
     UnikDisplay,
-    UnikTypeBadge
+    UnikTypeBadge,
   },
 })
 export default class Unik extends Vue {
   private unik: IUnik | null = null;
-  private unikNotFound: boolean = false;
-  private isFetching: boolean = false;
+  private unikNotFound = false;
+  private isFetching = false;
 
   public async beforeRouteEnter(to, from, next) {
     try {
       const unik: IUnik = await UnikService.find(to.params.id);
-      next(vm => {
+      next((vm) => {
         vm.setUnik(unik);
       });
     } catch (e) {
-      next(vm => {
+      next((vm) => {
         console.log(e.message || e.data.error);
         vm.unikNotFound = true;
         vm.unik = { id: to.params.id };
@@ -117,30 +127,28 @@ export default class Unik extends Vue {
 }
 </script>
 
-
 <style>
-
 .unik-icon-container {
   padding: 8px 10px;
   border-radius: 1px;
 }
 
 .unik-icon-container.unik-icon-container-individual {
-  background-color: #C6C6FF;
+  background-color: #c6c6ff;
 }
 
 .unik-icon-container.unik-icon-container-organization {
-  background-color: #6263B1;
+  background-color: #6263b1;
 }
 
 .unik-icon-container.unik-icon-container-network {
-  background-color: #47A09F;
+  background-color: #47a09f;
 }
 
 .unik-icon-container .unik-view-logo {
   font-size: 2.5em;
   padding: 0.05em;
-  color: #FFF;
+  color: #fff;
 }
 
 .unik-badge-container {
@@ -148,5 +156,4 @@ export default class Unik extends Vue {
   flex-direction: row;
   align-items: center;
 }
-
 </style>

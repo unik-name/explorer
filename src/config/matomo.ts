@@ -1,15 +1,17 @@
-import router from "../router"
+import router from "../router";
 
 export default {
-    host: "https://kpi.unik-name.com",
-    siteId: 8,
-    enableLinkTracking: true,
-    trackInitialView: true,
-    router
-}
+  host: "https://kpi.unik-name.com",
+  siteId: 8,
+  enableLinkTracking: true,
+  trackInitialView: true,
+  router,
+};
 
 declare global {
-  interface Window { _paq: any; }
+  interface Window {
+    _paq: any;
+  }
 }
 
 export function setupMatomoConfig() {

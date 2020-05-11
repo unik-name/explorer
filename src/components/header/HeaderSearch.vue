@@ -37,7 +37,7 @@ import { mapGetters } from "vuex";
 import SearchService from "@/services/search";
 import { IDelegate } from "@/interfaces";
 import { LocaleMessage } from "vue-i18n";
-import { didResolve, DidResolution , ResolutionResult} from "@uns/ts-sdk";
+import { didResolve, DidResolution, ResolutionResult } from "@uns/ts-sdk";
 
 @Component({
   computed: {
@@ -83,7 +83,10 @@ export default class HeaderSearch extends Vue {
     if (this.query.startsWith("@")) {
       // resolve DID
       try {
-        const resolutionResponse:DidResolution<string | ResolutionResult> = await didResolve(this.query, this.$store.state.network.technicName);
+        const resolutionResponse: DidResolution<string | ResolutionResult> = await didResolve(
+          this.query,
+          this.$store.state.network.technicName,
+        );
 
         const resolutionResult: string | ResolutionResult = resolutionResponse.data;
         const didQuery = this.query.split("?")[1];
@@ -100,7 +103,7 @@ export default class HeaderSearch extends Vue {
             }
           } else {
             // Resolved UNIK
-            this.changePage("unik", { id: (resolutionResult as ResolutionResult).unikid});
+            this.changePage("unik", { id: (resolutionResult as ResolutionResult).unikid });
             return;
           }
         }

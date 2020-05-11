@@ -325,7 +325,7 @@ export default {
     ALL_RIGHTS_RESERVED: "All rights reserved",
     VERSION: "Version",
     DATE: "Date",
-    NETWORK_MONITOR_TITLE: "Status"
+    NETWORK_MONITOR_TITLE: "Status",
   },
 
   UNIK: {

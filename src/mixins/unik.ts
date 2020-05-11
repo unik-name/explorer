@@ -1,5 +1,5 @@
-import { DIDType } from '@uns/ts-sdk';
-import { getUnikLogoName, getUnikClass, getUnikTypeReadableLabelTranslationKey } from '@/utils/unik-utils';
+import { DIDType } from "@uns/ts-sdk";
+import { getUnikLogoName, getUnikClass, getUnikTypeReadableLabelTranslationKey } from "@/utils/unik-utils";
 
 export default {
   methods: {
@@ -11,6 +11,6 @@ export default {
     },
     unikTypeReadableLabelTranslationKey(type: DIDType): string {
       return getUnikTypeReadableLabelTranslationKey(type);
-    }
+    },
   },
 };

@@ -5,14 +5,9 @@
     <MonitorHeader />
 
     <section class="page-section py-5 md:py-10">
-
       <ForgingStats :delegates="delegates || []" />
 
-      <TableDelegates
-        :delegates="delegates"
-        @on-sort-change="() => {}"
-        :disable-ranking="true"
-      />
+      <TableDelegates :delegates="delegates" :disable-ranking="true" @on-sort-change="() => {}" />
     </section>
   </div>
 </template>
@@ -35,7 +30,7 @@ import { MonitorHeader, ForgingStats } from "@/components/monitor";
 })
 export default class NetworkMonitor extends Vue {
   private delegates: IDelegate[] | null = null;
-  private activeTab: string = "active";
+  private activeTab = "active";
   private height: number;
 
   @Watch("height")

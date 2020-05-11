@@ -119,7 +119,7 @@ export default class SelectionType extends Vue {
   }
 
   private getDisplayableFilters() {
-    return this.transactionTypes().filter(trxType => !this.getDisabledFilters().includes(trxType.key));
+    return this.transactionTypes().filter((trxType) => !this.getDisabledFilters().includes(trxType.key));
   }
 
   private getDisabledFilters() {
@@ -140,8 +140,8 @@ export default class SelectionType extends Vue {
       "BRIDGECHAIN_UPDATE",
       "UNIK_CREATION",
       "UNIK_UPDATE",
-      "UNIK_TRANSFER"
-      ];
+      "UNIK_TRANSFER",
+    ];
   }
 }
 </script>

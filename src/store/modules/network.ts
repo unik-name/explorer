@@ -111,7 +111,7 @@ const actions: ActionTree<INetworkState, {}> = {
   setUnikSupply: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_UNIK_SUPPLY,
-    })
+    });
   },
   setInitialSupply: ({ commit }, value) => {
     localStorage.setItem("initialSupply", value);
@@ -148,7 +148,7 @@ const actions: ActionTree<INetworkState, {}> = {
   setTechnicName: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_TECHNIC_NAME,
-    })
+    });
   },
   setHasHtlcEnabled: ({ commit }, value: boolean) => {
     commit({
@@ -234,26 +234,26 @@ const mutations: MutationTree<INetworkState> = {
 };
 
 const getters: GetterTree<INetworkState, {}> = {
-  defaults: state => state.defaults,
-  server: state => state.server,
-  nethash: state => state.nethash,
-  alias: state => state.alias,
-  addressPrefix: state => state.addressPrefix,
-  activeDelegates: state => state.activeDelegates,
-  rewardOffset: state => state.rewardOffset,
-  token: state => state.token,
-  symbol: state => state.symbol,
-  currencies: state => state.currencies,
-  knownWallets: state => state.knownWallets,
-  supply: state => state.supply,
-  unikSupply: state => state.unikSupply,
-  height: state => state.height,
-  epoch: state => state.epoch,
-  blocktime: state => state.blocktime,
-  hasMagistrateEnabled: state => state.hasMagistrateEnabled,
+  defaults: (state) => state.defaults,
+  server: (state) => state.server,
+  nethash: (state) => state.nethash,
+  alias: (state) => state.alias,
+  addressPrefix: (state) => state.addressPrefix,
+  activeDelegates: (state) => state.activeDelegates,
+  rewardOffset: (state) => state.rewardOffset,
+  token: (state) => state.token,
+  symbol: (state) => state.symbol,
+  currencies: (state) => state.currencies,
+  knownWallets: (state) => state.knownWallets,
+  supply: (state) => state.supply,
+  unikSupply: (state) => state.unikSupply,
+  height: (state) => state.height,
+  epoch: (state) => state.epoch,
+  blocktime: (state) => state.blocktime,
+  hasMagistrateEnabled: (state) => state.hasMagistrateEnabled,
   hasHtlcEnabled: (state) => state.hasHtlcEnabled,
   enabledTransactionTypes: (state) => state.enabledTransactionTypes,
-  technicName: state => state.technicName,
+  technicName: (state) => state.technicName,
 };
 
 export const network: Module<INetworkState, {}> = {

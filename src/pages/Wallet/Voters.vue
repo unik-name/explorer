@@ -2,14 +2,13 @@
   <div class="max-w-2xl mx-auto md:pt-5 header-container">
     <ContentHeader
       >{{ $t("WALLET.DELEGATE.VOTERS") }}
-        <span v-if="delegate">
-          <UnikDisplay v-if="delegate.unikname" :unikname="delegate.unikname" :type="delegate.unikType" />
-          <span v-else>
+      <span v-if="delegate">
+        <UnikDisplay v-if="delegate.unikname" :unikname="delegate.unikname" :type="delegate.unikType" />
+        <span v-else>
           {{ delegate.username }}
-          </span>
         </span>
-        </ContentHeader
-    >
+      </span>
+    </ContentHeader>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
         <TableWalletsDesktop
@@ -46,7 +45,7 @@ export default class WalletVoters extends Vue {
   private meta: any | null = null;
   private currentPage = 0;
 
-  public static pageName: string = "wallet-voters"
+  public static pageName = "wallet-voters";
 
   get showPagination() {
     return this.meta && this.meta.pageCount > 1;
@@ -154,5 +153,4 @@ export default class WalletVoters extends Vue {
   margin-left: 0.25em;
   border-radius: 4px;
 }
-
 </style>

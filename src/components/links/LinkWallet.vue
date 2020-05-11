@@ -39,10 +39,15 @@
       >
         <span :class="`${getVoteColor} vote-label`"
           >{{ isUnvote ? $t("TRANSACTION.TYPES.UNVOTE") : $t("TRANSACTION.TYPES.VOTE") }}
-          <UnikDisplay class="ml-1" v-if="votedDelegate.unikname" :unikname="votedDelegate.unikname" :type="votedDelegate.unikType" :truncate-unikname="true" />
+          <UnikDisplay
+            v-if="votedDelegate.unikname"
+            class="ml-1"
+            :unikname="votedDelegate.unikname"
+            :type="votedDelegate.unikType"
+            :truncate-unikname="true"
+          />
           <span v-else>
-
-          {{ votedDelegateUsername }}
+            {{ votedDelegateUsername }}
           </span>
         </span>
       </RouterLink>
@@ -88,8 +93,12 @@
         >{{ $t("UNIK.DISCLOSE") }}
       </RouterLink>
     </span>
-    <span v-else-if="isUnsDelegateRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.UNS_DELEGATE_REGISTRATION") }}</span>
-    <span v-else-if="isUnsDelegateResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION") }}</span>
+    <span v-else-if="isUnsDelegateRegistration(type, typeGroup)">{{
+      $t("TRANSACTION.TYPES.UNS_DELEGATE_REGISTRATION")
+    }}</span>
+    <span v-else-if="isUnsDelegateResignation(type, typeGroup)">{{
+      $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION")
+    }}</span>
     <span v-else-if="isUnsCertifiedNftMint(type, typeGroup)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
         >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT") }}
@@ -125,7 +134,7 @@ import LinkAddress from "./LinkAddress.vue";
 @Component({
   components: {
     UnikDisplay,
-    LinkAddress
+    LinkAddress,
   },
   computed: {
     ...mapGetters("delegates", ["delegates"]),
@@ -170,11 +179,19 @@ export default class LinkWallet extends Vue {
   }
 
   get votedDelegateAddress(): string {
-    return this.votedDelegate ? (this.votedDelegate.unikname ? this.votedDelegate.username : this.votedDelegate.address) : "";
+    return this.votedDelegate
+      ? this.votedDelegate.unikname
+        ? this.votedDelegate.username
+        : this.votedDelegate.address
+      : "";
   }
 
   get votedDelegateUsername(): string {
-    return this.votedDelegate ? (this.votedDelegate.unikname ? `@${this.votedDelegate.unikname}` : this.votedDelegate.username) : "";
+    return this.votedDelegate
+      ? this.votedDelegate.unikname
+        ? `@${this.votedDelegate.unikname}`
+        : this.votedDelegate.username
+      : "";
   }
 
   get multiPaymentRecipientsCount(): number {
@@ -196,5 +213,4 @@ export default class LinkWallet extends Vue {
   margin-left: 6px;
   margin-right: 2px;
 }
-
 </style>

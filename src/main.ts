@@ -41,15 +41,15 @@ Vue.use(VTooltip, {
 Vue.use(VueGoodTablePlugin);
 Vue.use(PortalVue);
 
-if(process.env.VUE_APP_EXPLORER_CONFIG === "sandbox" || process.env.VUE_APP_EXPLORER_CONFIG === "livenet") {
+if (process.env.VUE_APP_EXPLORER_CONFIG === "sandbox" || process.env.VUE_APP_EXPLORER_CONFIG === "livenet") {
   setupMatomoConfig();
-  Vue.use(VueMatomo, MatomoConfig)
+  Vue.use(VueMatomo, MatomoConfig);
 }
 
 Vue.mixin(mixins);
 
 library.add(faNetworkWired, faUser, faGlobe);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 new Vue({
   router,

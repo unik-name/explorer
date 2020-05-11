@@ -13,12 +13,14 @@
     <template v-else>
       <section class="mb-5">
         <div class="px-5 sm:px-10 py-8 bg-theme-feature-background flex xl:rounded-lg items-center justify-between">
-          <div v-if="isNftMint(transaction.type, transaction.typeGroup) || isUnsCertifiedNftMint(transaction.type, transaction.typeGroup)" class="relative mr-6 flex-none">
-            <SvgIcon
-              class="block fill-white"
-              name="transaction-unik"
-              view-box="0 0 43 39"
-            />
+          <div
+            v-if="
+              isNftMint(transaction.type, transaction.typeGroup) ||
+                isUnsCertifiedNftMint(transaction.type, transaction.typeGroup)
+            "
+            class="relative mr-6 flex-none"
+          >
+            <SvgIcon class="block fill-white" name="transaction-unik" view-box="0 0 43 39" />
           </div>
           <div class="flex-auto min-w-0">
             <div class="text-grey mb-2">

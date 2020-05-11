@@ -31,7 +31,13 @@
         <slot />
       </span>
       <span v-else-if="delegate">
-        <UnikDisplay style="color: inherit" v-if="delegate.unikname" :unikname="delegate.unikname" :type="delegate.unikType" :truncate-unikname="truncateUnik" />
+        <UnikDisplay
+          v-if="delegate.unikname"
+          style="color: inherit"
+          :unikname="delegate.unikname"
+          :type="delegate.unikType"
+          :truncate-unikname="truncateUnik"
+        />
         <span v-else>
           {{ delegate.username }}
         </span>

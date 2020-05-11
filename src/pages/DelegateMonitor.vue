@@ -4,19 +4,43 @@
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
-        <div :class="(activeTab === 'active' && activeType === INDIV_TYPE) ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'; activeType = INDIV_TYPE">
+        <div
+          :class="activeTab === 'active' && activeType === INDIV_TYPE ? 'active-tab' : 'inactive-tab'"
+          @click="
+            activeTab = 'active';
+            activeType = INDIV_TYPE;
+          "
+        >
           <UnikTypeLogo :type="INDIV_TYPE" />
           {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
-        <div :class="(activeTab === 'standby' && activeType === INDIV_TYPE) ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'; activeType = INDIV_TYPE">
+        <div
+          :class="activeTab === 'standby' && activeType === INDIV_TYPE ? 'active-tab' : 'inactive-tab'"
+          @click="
+            activeTab = 'standby';
+            activeType = INDIV_TYPE;
+          "
+        >
           <UnikTypeLogo :type="INDIV_TYPE" />
           {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
         </div>
-        <div :class="(activeTab === 'active' && activeType === ORG_TYPE) ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'active'; activeType = ORG_TYPE">
+        <div
+          :class="activeTab === 'active' && activeType === ORG_TYPE ? 'active-tab' : 'inactive-tab'"
+          @click="
+            activeTab = 'active';
+            activeType = ORG_TYPE;
+          "
+        >
           <UnikTypeLogo :type="ORG_TYPE" />
           {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
         </div>
-        <div :class="(activeTab === 'standby' && activeType === ORG_TYPE) ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'standby'; activeType = ORG_TYPE">
+        <div
+          :class="activeTab === 'standby' && activeType === ORG_TYPE ? 'active-tab' : 'inactive-tab'"
+          @click="
+            activeTab = 'standby';
+            activeType = ORG_TYPE;
+          "
+        >
           <UnikTypeLogo :type="ORG_TYPE" />
           {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
         </div>
@@ -55,7 +79,7 @@ import { IDelegate, ISortParameters } from "@/interfaces";
 import { MonitorHeader, ForgingStats } from "@/components/monitor";
 import UnikTypeLogo from "@/components/unik/UnikTypeLogo.vue";
 import DelegateService from "@/services/delegate";
-import { DIDType } from '@uns/ts-sdk';
+import { DIDType } from "@uns/ts-sdk";
 
 @Component({
   components: { UnikTypeLogo },
@@ -65,7 +89,7 @@ import { DIDType } from '@uns/ts-sdk';
 })
 export default class DelegateMonitor extends Vue {
   private delegates: IDelegate[] | null = null;
-  private activeTab: string = "active";
+  private activeTab = "active";
   private INDIV_TYPE: DIDType = "INDIVIDUAL";
   private ORG_TYPE: DIDType = "ORGANIZATION";
   private activeType: DIDType = this.INDIV_TYPE;
@@ -115,7 +139,8 @@ export default class DelegateMonitor extends Vue {
 </script>
 
 <style scoped>
-.inactive-tab, .active-tab {
+.inactive-tab,
+.active-tab {
   display: flex;
   flex-direction: row;
   align-items: center;

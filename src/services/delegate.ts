@@ -3,7 +3,7 @@ import { roundFromHeight } from "@/utils";
 import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate, IUnik } from "../interfaces";
 import { isUnikId } from "@/utils/unik-utils";
-import { DIDType, DIDHelpers } from '@uns/ts-sdk';
+import { DIDType, DIDHelpers } from "@uns/ts-sdk";
 import { apiLimit, paginationLimit } from "@/constants";
 
 class DelegateService {
@@ -28,7 +28,7 @@ class DelegateService {
 
     const results = await Promise.all(requests);
 
-    const delegates = response.data.concat([].concat(...results.map(result => result.data)));
+    const delegates = response.data.concat([].concat(...results.map((result) => result.data)));
 
     return this.getDelegatesWithUnikAttributes(delegates);
   }
@@ -73,7 +73,7 @@ class DelegateService {
     return response.meta.totalCount;
   }
 
-  public async find(query: string, fetchUnik: boolean = false): Promise<IDelegate> {
+  public async find(query: string, fetchUnik = false): Promise<IDelegate> {
     const response = (await ApiService.get(`delegates/${query}`)) as IApiDelegateWrapper;
     let delegate = response.data;
     if (fetchUnik && isUnikId(delegate.username)) {
@@ -93,7 +93,7 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    let delegates: IDelegate[] = response.data.map(delegate => {
+    let delegates: IDelegate[] = response.data.map((delegate) => {
       delegate.forgingStatus = ForgingService.status(delegate, height, previousDelegates);
       return delegate;
     });
@@ -116,7 +116,7 @@ class DelegateService {
       },
     })) as IApiDelegatesWrapper;
 
-    let delegates: IDelegate[] = response.data.filter(delegate => !delegate.isResigned);
+    let delegates: IDelegate[] = response.data.filter((delegate) => !delegate.isResigned);
 
     delegates = await this.getDelegatesWithUnikAttributes(delegates);
 
@@ -128,12 +128,14 @@ class DelegateService {
       const delegateTypeCode: number = DIDHelpers.fromLabel(delegateType);
       let newRank = 1;
       delegates = delegates
-      .filter(delegate => delegate.unikType ? parseInt(delegate.unikType) === delegateTypeCode : delegateTypeCode === 1)
-      .map(delegate => {
-        delegate.rank = newRank;
-        newRank++;
-        return delegate;
-      })
+        .filter((delegate) =>
+          delegate.unikType ? parseInt(delegate.unikType) === delegateTypeCode : delegateTypeCode === 1,
+        )
+        .map((delegate) => {
+          delegate.rank = newRank;
+          newRank++;
+          return delegate;
+        });
     }
     return delegates;
   }
@@ -183,7 +185,7 @@ class DelegateService {
 
   private async getDelegatesWithUnikAttributes(delegates: IDelegate[]): Promise<IDelegate[]> {
     if (delegates.length) {
-      const unikIds = delegates.filter(delegate => isUnikId(delegate.username)).map(delegate => delegate.username);
+      const unikIds = delegates.filter((delegate) => isUnikId(delegate.username)).map((delegate) => delegate.username);
       if (unikIds.length) {
         const uniks = await UnikService.getUniks(unikIds);
         const uniksInfoMap = uniks.reduce((unikMap, unik) => {
@@ -191,7 +193,7 @@ class DelegateService {
           return unikMap;
         }, {});
 
-        const results = delegates.map(delegate => {
+        const results = delegates.map((delegate) => {
           if (isUnikId(delegate.username)) {
             Object.assign(delegate, uniksInfoMap[delegate.username]);
           }

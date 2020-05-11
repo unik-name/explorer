@@ -10,7 +10,7 @@
       <template slot-scope="data">
         <div v-if="data.column.field === 'username'" class="flex items-center">
           <div v-if="data.row.unikname">
-            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType"/>
+            <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType" />
           </div>
           <div v-else>
             <LinkWallet :address="data.row.address">
@@ -75,7 +75,6 @@ export default class TableDelegates extends Vue {
   @Prop({ required: false, default: false }) public disableRanking: boolean;
 
   get columns() {
-
     let columns = [];
 
     if (!this.disableRanking) {
@@ -93,8 +92,24 @@ export default class TableDelegates extends Vue {
       {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `text-left ${this.isActiveTab ? this.disableRanking ? "start-cell" : "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
-        tdClass: `text-left ${this.isActiveTab ? this.disableRanking ? "start-cell" : "end-cell sm:base-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        thClass: `text-left ${
+          this.isActiveTab
+            ? this.disableRanking
+              ? "start-cell"
+              : "end-cell sm:base-cell"
+            : this.isResignedTab
+            ? "start-cell"
+            : ""
+        }`,
+        tdClass: `text-left ${
+          this.isActiveTab
+            ? this.disableRanking
+              ? "start-cell"
+              : "end-cell sm:base-cell"
+            : this.isResignedTab
+            ? "start-cell"
+            : ""
+        }`,
       },
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),

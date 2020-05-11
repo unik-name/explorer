@@ -1,34 +1,32 @@
 <template>
   <span class="unik-display">
-      <UnikTypeLogo v-if="type" :type="unikClass(type).toUpperCase()" />
-      <span v-else>
-        @
-      </span>
-      <span>
-        {{ uniknameLabel }}
-      </span>
+    <UnikTypeLogo v-if="type" :type="unikClass(type).toUpperCase()" />
+    <span v-else>
+      @
+    </span>
+    <span>
+      {{ uniknameLabel }}
+    </span>
   </span>
 </template>
 
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
-import { DIDType, DIDHelpers, DIDTypes } from '@uns/ts-sdk';
+import { DIDType, DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 import { truncate } from "../../utils/strings";
 import UnikTypeLogo from "@/components/unik/UnikTypeLogo.vue";
 
-const UNIKNAME_LENTH_TRUNCATE: number = 16;
+const UNIKNAME_LENTH_TRUNCATE = 16;
 
-@Component( {
-  components: { UnikTypeLogo }
+@Component({
+  components: { UnikTypeLogo },
 })
 export default class UnikDisplay extends Vue {
   @Prop({ required: true }) public unikname: string;
   @Prop({ required: false }) public type: DIDType;
-  @Prop({ required: false, default: 28}) public iconWidth: number;
-  @Prop({ required: false, default: 28}) public iconheight: number;
-  @Prop({ required: false, default: false}) public truncateUnikname: boolean;
-
-
+  @Prop({ required: false, default: 28 }) public iconWidth: number;
+  @Prop({ required: false, default: 28 }) public iconheight: number;
+  @Prop({ required: false, default: false }) public truncateUnikname: boolean;
 
   get uniknameLabel(): string {
     let uniknameLabel = this.unikname;
@@ -38,7 +36,6 @@ export default class UnikDisplay extends Vue {
     return uniknameLabel;
   }
 }
-
 </script>
 
 <style scoped>

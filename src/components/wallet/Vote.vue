@@ -3,7 +3,12 @@
     <div class="list-row-border-t">
       <div>{{ $t("WALLET.VOTING_FOR") }}</div>
       <div>
-        <LinkUNIK v-if="votedDelegate.unikname" :id="votedDelegate.username" :unikname="votedDelegate.unikname" :type="votedDelegate.unikType"></LinkUNIK>
+        <LinkUNIK
+          v-if="votedDelegate.unikname"
+          :id="votedDelegate.username"
+          :unikname="votedDelegate.unikname"
+          :type="votedDelegate.unikType"
+        ></LinkUNIK>
         <LinkWallet v-else-if="votedDelegate.address" :address="votedDelegate.address">
           <span class="truncate">{{ votedDelegate.username }}</span>
         </LinkWallet>

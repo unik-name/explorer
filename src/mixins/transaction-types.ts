@@ -31,7 +31,10 @@ export default {
     },
 
     isVote(type: number, typeGroup: number): boolean {
-      return (isCoreTypeGroup(typeGroup) && type === CoreTransaction.VOTE) || (isUNSTypeGroup(typeGroup) && type === UNSTransaction.VOTE);
+      return (
+        (isCoreTypeGroup(typeGroup) && type === CoreTransaction.VOTE) ||
+        (isUNSTypeGroup(typeGroup) && type === UNSTransaction.VOTE)
+      );
     },
 
     isMultiSignature(type: number, typeGroup: number): boolean {

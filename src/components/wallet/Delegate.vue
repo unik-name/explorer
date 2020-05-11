@@ -85,7 +85,7 @@ import UnikDisplay from "@/components/unik/UnikDisplay.vue";
 @Component({
   components: {
     WalletVoters,
-    UnikDisplay
+    UnikDisplay,
   },
 })
 export default class WalletDelegate extends Vue {

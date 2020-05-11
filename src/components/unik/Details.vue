@@ -38,7 +38,7 @@
       </div>
       <div class="py-2">
         <UnikProperties v-if="unik.properties && unik.properties.length > 0" :properties="unik.properties" />
-        <div class="text-center semibold" v-else>{{ $t('UNIK.NO_PROPERTIES') }}</div>
+        <div v-else class="text-center semibold">{{ $t("UNIK.NO_PROPERTIES") }}</div>
       </div>
     </div>
   </section>

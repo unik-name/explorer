@@ -7,7 +7,7 @@ export function isUnikId(username: string): boolean {
 
 export function getPropertyValueFromUnik(unik: IUnik, propertyName: string): string {
   if (unik.properties.length) {
-    const explicitValuesProperty = unik.properties.find(property => property.key === propertyName);
+    const explicitValuesProperty = unik.properties.find((property) => property.key === propertyName);
     if (explicitValuesProperty) {
       return explicitValuesProperty.value;
     }

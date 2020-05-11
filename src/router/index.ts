@@ -163,7 +163,7 @@ const router = new Router({
     },
     {
       path: "/top-wallets",
-      redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
+      redirect: (to) => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Crypto Account") },
     },
     {
@@ -262,7 +262,7 @@ const router = new Router({
     },
     {
       path: "/topAccounts",
-      redirect: to => ({ name: "top-wallets", params: { page: 1 } }),
+      redirect: (to) => ({ name: "top-wallets", params: { page: 1 } }),
       meta: { title: (route: Route) => getTitle("Top Crypto Account") },
     },
     {

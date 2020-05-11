@@ -1,17 +1,24 @@
 <template>
   <span>
     <RouterLink :to="{ name: 'unik', params: { id, unikname: truncate(unikname, 13, 'right') } }">
-      <UnikDisplay style="color: inherit" v-tooltip="unikname" v-if="unikname" :unikname="unikname" :type="type" :truncate-unikname="truncateUnikname"/>
-      <span v-tooltip="id" v-else>
+      <UnikDisplay
+        v-if="unikname"
+        v-tooltip="unikname"
+        style="color: inherit"
+        :unikname="unikname"
+        :type="type"
+        :truncate-unikname="truncateUnikname"
+      />
+      <span v-else v-tooltip="id">
         {{ truncate(id) }}
-        </span>
+      </span>
     </RouterLink>
   </span>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import { DIDType } from '@uns/ts-sdk';
+import { DIDType } from "@uns/ts-sdk";
 import UnikDisplay from "@/components/unik/UnikDisplay.vue";
 
 @Component({

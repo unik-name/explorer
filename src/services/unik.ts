@@ -3,15 +3,14 @@ import { TransactionService } from "@/services";
 import { IUnik, IUnikProperties } from "@/interfaces";
 
 export class UnikService {
-
   public unsClient: UNSClient;
 
   constructor() {
     this.unsClient = new UNSClient();
     const network = require(`../../networks/${process.env.VUE_APP_EXPLORER_CONFIG}`);
     this.unsClient.init({
-          network: network.alias.toLowerCase(),
-      });
+      network: network.alias.toLowerCase(),
+    });
   }
 
   public async findUnikProperties(unikId) {
@@ -28,7 +27,7 @@ export class UnikService {
       properties: (await this.findUnikProperties(id).then(this.formatProperties)) as IUnikProperties[],
       type: DIDTypes[unik.type],
       creation: await this.extractUnikCreationUnixTimestamp(unik),
-    }
+    };
   }
 
   public async getUniks(unikIds: string[]): Promise<Unik[]> {
@@ -50,16 +49,15 @@ export class UnikService {
   */
   public formatProperties(properties): void {
     return properties
-      .map(property => {
+      .map((property) => {
         const entry = Object.entries(property)[0];
         return {
           key: entry[0],
           value: entry[1],
         };
       })
-      .filter(property => property.key !== "type");
+      .filter((property) => property.key !== "type");
   }
-
 }
 
 export default new UnikService();

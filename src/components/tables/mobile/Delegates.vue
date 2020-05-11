@@ -15,13 +15,13 @@
           </div>
           <div class="flex items-center">
             <div v-if="data.row.unikname">
-              <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType"/>
+              <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType" />
             </div>
             <div v-else>
               <LinkWallet :address="delegate.address">
                 {{ delegate.username }}
               </LinkWallet>
-           </div>
+            </div>
             <span v-if="delegate.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
               $t("WALLET.DELEGATE.STATUS.RESIGNED")
             }}</span>

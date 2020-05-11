@@ -35,7 +35,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { ISortParameters, IWallet } from "@/interfaces";
 import { mapGetters } from "vuex";
 import { BigNumber } from "@/utils";
-import WalletVoters from '@/pages/Wallet/Voters.vue';
+import WalletVoters from "@/pages/Wallet/Voters.vue";
 import { paginationLimit } from "@/constants";
 
 @Component({
@@ -122,7 +122,9 @@ export default class TableWalletsDesktop extends Vue {
   }
 
   private getAddressColumnName() {
-    return this.$router.currentRoute.name === WalletVoters.pageName ? this.$t("WALLET.DELEGATE.VOTERS_CRYPTO_ACCOUNT") : this.$t("WALLET.ADDRESS");
+    return this.$router.currentRoute.name === WalletVoters.pageName
+      ? this.$t("WALLET.DELEGATE.VOTERS_CRYPTO_ACCOUNT")
+      : this.$t("WALLET.ADDRESS");
   }
 }
 </script>
