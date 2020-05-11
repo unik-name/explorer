@@ -1,4 +1,4 @@
-export function truncate(value: string, length: number = 13, truncateWhere: string = "middle"): string {
+export function truncate(value: string, length = 13, truncateWhere = "middle"): string {
   switch (truncateWhere) {
     case "left":
       return value.length > length ? `...${value.slice(value.length - length + 3)}` : value;

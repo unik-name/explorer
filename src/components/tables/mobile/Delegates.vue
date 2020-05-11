@@ -51,7 +51,7 @@
             {{ $t("PAGES.DELEGATE_MONITOR.VOTES") }}
           </div>
           <div>
-            <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-2xs mr-1">
+            <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
               {{ percentageString(delegate.production.approval) }}
             </span>
             {{ readableCrypto(delegate.votes, true, 2) }}
@@ -73,7 +73,7 @@ import { IDelegate } from "@/interfaces";
 export default class TableDelegatesMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

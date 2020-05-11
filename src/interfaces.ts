@@ -69,6 +69,19 @@ export interface IMeta {
   last: string;
 }
 
+export interface ILock {
+  lockId: string;
+  amount: BigNumber;
+  secretHash: string;
+  senderPublicKey: string;
+  recipientId: string;
+  timestamp: ITimestamp;
+  expirationType: number;
+  expirationValue: number;
+  isExpired: boolean;
+  vendorField?: string;
+}
+
 export interface ITransaction {
   id: string;
   blockId: string;
@@ -158,6 +171,15 @@ export interface IApiWalletsWrapper {
   meta: IMeta;
 }
 
+export interface IApiLockWrapper {
+  data: ILock;
+}
+
+export interface IApiLocksWrapper {
+  data: ILock[];
+  meta: IMeta;
+}
+
 export interface IApiTransactionWrapper {
   data: ITransaction;
 }
@@ -168,6 +190,10 @@ export interface IApiTransactionsWrapper {
 }
 
 export interface IApiNodeConfiguration {
+  [key: string]: any;
+}
+
+export interface IApiNodeConfigurationCrypto {
   [key: string]: any;
 }
 
@@ -203,16 +229,20 @@ export interface INetworkState {
   activeDelegates: number;
   rewardOffset: number;
   token: string | null;
+  isListed: boolean;
   symbol: string | null;
   currencies: any[];
   knownWallets: any[];
   supply: number;
   unikSupply: number;
+  initialSupply: string;
   height: number;
   epoch: string | null;
   blocktime: number;
   hasMagistrateEnabled: boolean;
   technicName: string | null;
+  hasHtlcEnabled: boolean;
+  enabledTransactionTypes: ITransactionType[];
 }
 
 export interface IUiState {

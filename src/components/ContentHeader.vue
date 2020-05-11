@@ -5,23 +5,23 @@
         <slot />
       </h1>
       <div
-        class="hidden sm:flex items-center text-theme-text-tertiary text-2xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md"
+        class="hidden sm:flex items-center text-theme-text-tertiary text-xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md"
       >
         <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height) }}</div>
         <div class="pr-6" :class="{ 'text-red font-black': !isMainWithCurrency }">
-          {{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}
+          {{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.replace(" ", "_").toUpperCase()}`) }}
         </div>
         <div :class="{ 'pr-6': isMainWithCurrency }">
           {{ $t("HEADER.SUPPLY") }}:
           <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIK</span>
         </div>
-        <div v-if="isMainWithCurrency">
+        <div v-if="showMarketCap">
           {{ $t("HEADER.MARKET_CAP") }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
         </div>
       </div>
     </div>
     <div
-      class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-2xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background"
+      class="sm:hidden flex items-center justify-between text-theme-text-tertiary text-xs px-5 sm:px-8 xl:px-6 py-3 bg-stat-background"
     >
       <div class="mr-2">
         <span>{{ $t("COMMON.HEIGHT") }}:</span>
@@ -47,7 +47,7 @@ import { mapGetters } from "vuex";
 
 @Component({
   computed: {
-    ...mapGetters("network", ["alias", "supply", "height", "unikSupply"]),
+    ...mapGetters("network", ["alias", "supply", "height", "unikSupply", "isListed", "token"]),
     ...mapGetters("currency", ["name", "rate", "symbol"]),
   },
 })
@@ -58,9 +58,15 @@ export default class ContentHeader extends Vue {
   private name: string;
   private rate: number;
   private symbol: string;
+  private isListed: boolean;
+  private token: string;
 
   get isMainWithCurrency() {
     return this.alias === "Main" && this.name && this.name !== "UNS";
+  }
+
+  get showMarketCap() {
+    return this.isListed && this.token !== this.name;
   }
 }
 </script>

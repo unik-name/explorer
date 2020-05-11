@@ -4,7 +4,7 @@
     <div class="WalletHeaderDesktop hidden md:flex xl:rounded-lg">
       <button
         class="address-button ml-10 mr-6 p-3 rounded flex-none hover-button-shadow transition"
-        @click="toggleModal()"
+        @click="toggleModal"
       >
         <SvgIcon class="block" name="qr" view-box="0 0 29 29" />
       </button>
@@ -61,7 +61,7 @@
           {{ $t("WALLET.BALANCE", { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
-          <span v-tooltip="readableCurrency(wallet.balance)">
+          <span v-tooltip="showBalanceTooltip ? readableCurrency(wallet.balance) : ''">
             {{ readableCrypto(wallet.balance, false) }}
           </span>
         </div>
@@ -73,10 +73,14 @@
           <SvgIcon class="ml-2" name="locked-balance" view-box="0 0 16 17" />
         </div>
         <span
-          v-tooltip="{
-            trigger: 'hover click',
-            content: readableCurrency(wallet.lockedBalance || 0),
-          }"
+          v-tooltip="
+            showBalanceTooltip
+              ? {
+                  trigger: 'hover click',
+                  content: readableCurrency(wallet.lockedBalance || 0),
+                }
+              : ''
+          "
           class="text-lg text-white semibold"
         >
           {{ readableCrypto(wallet.lockedBalance, false) }}
@@ -189,18 +193,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
-    <Modal v-if="showModal" @close="toggleModal()">
-      <div class="text-center px-10 py-2">
-        <p class="semibold text-3xl mb-4">
-          {{ $t("WALLET.QR_CODE") }}
-        </p>
-        <p class="mb-10">
-          {{ $t("WALLET.SCAN_FOR_ADDRESS") }}
-        </p>
-        <QrCode :value="wallet.address" :options="{ size: 160 }" />
-      </div>
-    </Modal>
+    <QrModal v-if="showModal" :address="wallet.address" @close="toggleModal" />
   </section>
 </template>
 
@@ -209,21 +202,27 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IWallet } from "@/interfaces";
 import WalletVoters from "@/components/wallet/Voters.vue";
+import { QrModal } from "@/components/modals";
 
 @Component({
   components: {
     WalletVoters,
+    QrModal,
   },
   computed: {
-    ...mapGetters("network", ["knownWallets"]),
+    ...mapGetters("network", ["isListed", "knownWallets", "token"]),
+    ...mapGetters("currency", { currencyName: "name" }),
   },
 })
 export default class WalletDetails extends Vue {
   @Prop({ required: true }) public wallet: IWallet;
 
-  private view: string = "public";
-  private showModal: boolean = false;
+  private view = "public";
+  private showModal = false;
   private knownWallets: { [key: string]: string };
+  private isListed: boolean;
+  private token: string;
+  private currencyName: string;
 
   get name() {
     return this.knownWallets[this.wallet.address];
@@ -245,11 +244,15 @@ export default class WalletDetails extends Vue {
     return !!this.wallet.lockedBalance;
   }
 
+  get showBalanceTooltip() {
+    return this.isListed && this.token !== this.currencyName;
+  }
+
   private setView(view: string) {
     this.view = view;
   }
 
-  private toggleModal() {
+  public toggleModal() {
     this.showModal = !this.showModal;
   }
 }

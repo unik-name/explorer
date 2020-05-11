@@ -68,6 +68,9 @@ module.exports = {
       "theme-accents": "var(--color-theme-accents)",
       "theme-transaction-icon": "var(--color-theme-transaction-icon)",
       "theme-resigned-label": "var(--theme-resigned-label)",
+      "theme-input-field-border": "var(--theme-input-field-border)",
+      "theme-input-field-border-focus": "var(--theme-input-field-border-focus)",
+      "theme-input-field-border-hover": "var(--theme-input-field-border-hover)",
 
       "theme-text-thead": "var(--color-theme-text-thead)",
 
@@ -199,8 +202,7 @@ module.exports = {
 
     fontSize: {
       "0": 0,
-      "2xs": ".75rem", // 12px
-      xs: ".75", // 12px
+      xs: ".75rem", // 12px
       sm: ".8125rem", // 13px
       base: "0.9375rem", // 15px
       lg: "1rem", // 16px

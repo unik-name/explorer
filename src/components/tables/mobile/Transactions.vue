@@ -34,6 +34,7 @@
             :type="transaction.type"
             :asset="transaction.asset"
             :type-group="transaction.typeGroup"
+            :show-timelock-icon="true"
           />
         </div>
 
@@ -42,7 +43,7 @@
             {{ $t("TRANSACTION.SMARTBRIDGE") }}
           </div>
           <div class="text-right truncate">
-            {{ emojify(transaction.vendorField) }}
+            {{ transaction.vendorField }}
           </div>
         </div>
 
@@ -74,7 +75,7 @@
               class="flex items-center justify-end whitespace-no-wrap text-green"
             >
               <span class="inline-block mr-2">{{ readableNumber(transaction.confirmations) }}</span>
-              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
+              <SvgIcon class="flex-none icon" name="became-active" view-box="0 0 16 16" />
             </div>
             <div
               v-else
@@ -109,7 +110,7 @@ import { mapGetters } from "vuex";
 export default class TableTransactionsMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

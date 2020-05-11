@@ -4,6 +4,7 @@ import store from "@/store";
 import { IApiDelegateWrapper, IApiDelegatesWrapper, IApiWalletsWrapper, IDelegate, IUnik } from "../interfaces";
 import { isUnikId } from "@/utils/unik-utils";
 import { DIDType, DIDHelpers } from '@uns/ts-sdk';
+import { apiLimit, paginationLimit } from "@/constants";
 
 class DelegateService {
   public async fetchEveryDelegate(): Promise<IDelegate[]> {
@@ -32,7 +33,7 @@ class DelegateService {
     return this.getDelegatesWithUnikAttributes(delegates);
   }
 
-  public async all(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
+  public async all(page = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         page,
@@ -46,7 +47,7 @@ class DelegateService {
     };
   }
 
-  public async voters(query: string, page: number, limit = 25): Promise<IApiWalletsWrapper> {
+  public async voters(query: string, page: number, limit = paginationLimit): Promise<IApiWalletsWrapper> {
     const response = (await ApiService.get(`delegates/${query}/voters`, {
       params: {
         page,
@@ -57,7 +58,7 @@ class DelegateService {
     return response;
   }
 
-  public async voterCount(publicKey: string, excludeLowBalances: boolean = true): Promise<number> {
+  public async voterCount(publicKey: string, excludeLowBalances = true): Promise<number> {
     const response = (await WalletService.search(
       {
         vote: publicKey,
@@ -108,7 +109,10 @@ class DelegateService {
     const response = (await ApiService.get("delegates", {
       params: {
         offset: activeDelegates,
-        limit: activeDelegates,
+        limit:
+          activeDelegates < paginationLimit
+            ? paginationLimit + (paginationLimit - (activeDelegates % paginationLimit))
+            : paginationLimit - (activeDelegates % paginationLimit),
       },
     })) as IApiDelegatesWrapper;
 
@@ -139,7 +143,7 @@ class DelegateService {
     return response.data;
   }
 
-  public async allResigned(page: number = 1, limit: number = 25): Promise<IApiDelegatesWrapper> {
+  public async allResigned(page = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
     const response = (await ApiService.get("delegates", {
       params: {
         type: "resigned",

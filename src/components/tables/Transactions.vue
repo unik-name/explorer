@@ -32,12 +32,13 @@
             :type="data.row.type"
             :asset="data.row.asset"
             :type-group="data.row.typeGroup"
+            :show-timelock-icon="true"
           />
         </div>
 
         <div v-else-if="data.column.field === 'vendorField'">
           <div class="cell-smartbridge-truncate">
-            {{ emojify(data.row.vendorField) }}
+            {{ data.row.vendorField }}
           </div>
         </div>
 
@@ -56,7 +57,7 @@
               class="flex items-center justify-end whitespace-no-wrap text-green"
             >
               <span class="inline-block mr-2">{{ readableNumber(data.row.confirmations) }}</span>
-              <SvgIcon class="icon flex-none" name="became-active" view-box="0 0 16 16" />
+              <SvgIcon class="flex-none icon" name="became-active" view-box="0 0 16 16" />
             </div>
             <div v-else>
               <div v-tooltip="readableNumber(data.row.confirmations) + ' ' + $t('COMMON.CONFIRMATIONS')">
@@ -78,14 +79,14 @@ import CryptoCompareService from "@/services/crypto-compare";
 
 @Component({
   computed: {
-    ...mapGetters("network", ["activeDelegates"]),
+    ...mapGetters("network", ["activeDelegates", "isListed"]),
     ...mapGetters("currency", { currencySymbol: "symbol" }),
   },
 })
 export default class TableTransactionsDesktop extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -93,6 +94,7 @@ export default class TableTransactionsDesktop extends Vue {
   @Prop({ required: false, default: false }) public showConfirmations: boolean;
 
   private activeDelegates: IDelegate[];
+  private isListed: boolean;
   private currencySymbol: string;
 
   get columns() {
@@ -147,7 +149,7 @@ export default class TableTransactionsDesktop extends Vue {
     ];
 
     if (this.showConfirmations) {
-      columns = columns.filter(column => column.field !== "vendorField");
+      columns = columns.filter((column) => column.field !== "vendorField");
 
       columns.push({
         label: this.$t("COMMON.CONFIRMATIONS"),
@@ -164,7 +166,7 @@ export default class TableTransactionsDesktop extends Vue {
   }
 
   get showSmartBridgeIcon() {
-    return this.transactions!.some(transaction => {
+    return this.transactions!.some((transaction) => {
       return !!transaction.vendorField;
     });
   }
@@ -196,8 +198,10 @@ export default class TableTransactionsDesktop extends Vue {
       return;
     }
 
-    const promises = this.transactions.map(this.fetchPrice);
-    await Promise.all(promises);
+    if (this.isListed) {
+      const promises = this.transactions.map(this.fetchPrice);
+      await Promise.all(promises);
+    }
   }
 
   private emitSortChange(params: ISortParameters[]) {

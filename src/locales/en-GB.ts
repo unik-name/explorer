@@ -29,7 +29,7 @@ export default {
   DISCLAIMER: {
     TITLE: "Disclaimer",
     TEXT1:
-      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
+      "The following page is a directory for informational purposes only. {website} is in no way affiliated with the listed individuals and/or business and bridgechain entities listed herein. All links provided herein are third party websites that have not been verified and are owned by independent parties over which {website} has no control. {website} does not endorse or approve and makes no warranties, representations or undertakings relating to the content of third party websites.",
     TEXT2: "By clicking “Accept” you will be confirming that you have read and are in agreement with all terms herein.",
   },
 
@@ -61,7 +61,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Amount",
-    AMOUNT_TO_SELF: "Excluding {amount} the sender sent to themself",
+    AMOUNT_TO_SELF: "Excluding {amount} sent to itself",
     BLOCK_ID: "Block ID",
     ID: "Transaction ID",
     IPFS: "IPFS Hash",
@@ -69,17 +69,22 @@ export default {
     MULTI_SIGNATURE: {
       ADDRESS: "Generated address",
       MIN: "Minimum participants",
+      LIFETIME: "Lifetime",
       PARTICIPANTS: "Participants",
+      LEGACY_NOTICE: "This transaction is a legacy Multisignature Registration",
     },
     NONCE: "Nonce",
     TIMELOCK: {
       BLOCKHEIGHT: "Expiration blockheight",
       CLAIMED: "Claimed transaction",
       EXPIRATION: "Expiration",
+      EXPIRED: "Expired lock",
       OPEN: "Open lock",
       REFUNDED: "Refunded transaction",
+      SECRET_HASH: "Secret Hash",
       STATUS: "Timelock status",
       UNKNOWN: "Unknown",
+      UNLOCK_SECRET_HEX: "Unlock Secret (hex)",
     },
     TYPE: "Transaction type",
     TYPES: {
@@ -113,8 +118,10 @@ export default {
       UNS_DELEGATE_RESIGNATION: "Network player Resignation",
       UNS_CERTIFIED_NFT_MINT: "UNIK Creation",
       UNS_CERTIFIED_NFT_UPDATE: "UNIK Update",
+      UNKNOWN: "Unknown",
     },
     ASSET: {
+      BRIDGECHAINASSETREPOSITORY: "Bridgechain Asset Repository",
       BRIDGECHAINID: "Bridgechain ID",
       BRIDGECHAINREPOSITORY: "Bridgechain repository",
       GENESISHASH: "Genesis hash",
@@ -146,6 +153,11 @@ export default {
     SUMMARY: "Crypto Account summary",
     QR_CODE: "QR Code",
     SCAN_FOR_ADDRESS: "Scan for address",
+    SCAN_FOR_URI: "Scan for URI",
+    ADVANCED_QR: {
+      EXPAND: "Show options",
+      COLLAPSE: "Hide options",
+    },
     DELEGATE: {
       FORGED_BLOCKS: "Forged blocks",
       TOTAL_FORGED: "Total forged",
@@ -165,6 +177,7 @@ export default {
       VOTERS_CRYPTO_ACCOUNT: "Voters crypto account",
       VOTER_THRESHOLD: "Only voters with more than 0.1 {token}",
     },
+    TIMELOCK_TRANSACTION: "Timelock transaction",
   },
 
   SEARCH: {
@@ -194,6 +207,7 @@ export default {
       CREATOR: "Creator",
       SEED_SERVER: "Seed Server",
       REPOSITORY: "Repository",
+      RESIGNED: "Resigned",
     },
     BUSINESSES: {
       TITLE: "Businesses",
@@ -201,6 +215,7 @@ export default {
       CREATOR: "Creator",
       WEBSITE: "Website",
       REPOSITORY: "Repository",
+      RESIGNED: "Resigned",
     },
     DELEGATES: {
       TITLE: "Delegates",
@@ -303,6 +318,7 @@ export default {
     SUPPLY: "Supply",
     MARKET_CAP: "Market Cap",
     TESTNET: "Testnet",
+    TESTNET_LOCAL: "Testnet Local",
   },
 
   FOOTER: {

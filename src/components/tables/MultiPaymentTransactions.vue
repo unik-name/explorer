@@ -13,7 +13,15 @@
         </div>
 
         <div v-else-if="data.column.field === 'amount'">
-          {{ readableCrypto(data.row.amount) }}
+          <span
+            v-tooltip="{
+              trigger: 'hover click',
+              content: price ? readableCurrency(data.row.amount, price) : '',
+              placement: 'left',
+            }"
+          >
+            {{ readableCrypto(data.row.amount) }}
+          </span>
         </div>
       </template>
     </TableWrapper>
@@ -25,18 +33,22 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters, ITransaction } from "@/interfaces";
 import CryptoCompareService from "@/services/crypto-compare";
+import { paginationLimit } from "@/constants";
 
 @Component({
   computed: {
     ...mapGetters("currency", { currencySymbol: "symbol" }),
+    ...mapGetters("network", ["isListed"]),
   },
 })
 export default class MultiPaymentTransactions extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: 0 }) public page: number;
-  @Prop({ required: false, default: 25 }) public count: number;
+  @Prop({ required: false, default: paginationLimit }) public count: number;
 
+  private price: number | null = 0;
   private currencySymbol: string;
+  private isListed: boolean;
   private transactions: Array<{ recipientId: string; amount: string; price: number | null }> | null = null;
 
   get columns() {
@@ -66,7 +78,7 @@ export default class MultiPaymentTransactions extends Vue {
 
   @Watch("currencySymbol")
   public async onCurrencySymbolChanged() {
-    await this.updatePrices();
+    await this.updatePrice();
   }
 
   @Watch("page")
@@ -83,20 +95,13 @@ export default class MultiPaymentTransactions extends Vue {
       this.page > 0
         ? this.transaction.asset.payments.slice((this.page - 1) * this.count, this.page * this.count)
         : this.transaction.asset.payments;
-    await this.updatePrices();
+    await this.updatePrice();
   }
 
-  private async fetchPrice(transaction: { recipientId: string; amount: string; price: number | null }) {
-    transaction.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix);
-  }
-
-  private async updatePrices() {
-    if (!this.transactions) {
-      return;
+  private async updatePrice() {
+    if (this.transactions && this.transactions.length && this.isListed) {
+      this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix);
     }
-
-    const promises = this.transactions.map(this.fetchPrice);
-    await Promise.all(promises);
   }
 
   private emitSortChange(params: ISortParameters[]) {

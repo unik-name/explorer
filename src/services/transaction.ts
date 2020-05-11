@@ -1,8 +1,25 @@
 import ApiService from "@/services/api";
 import { IApiTransactionWrapper, IApiTransactionsWrapper, ITransaction, ITransactionSearchParams } from "../interfaces";
+import { paginationLimit } from "@/constants";
+import { Sanitizer } from "@/utils/Sanitizer";
+import emoji from "node-emoji";
+
+const sanitizeVendorField = (transaction: ITransaction) => {
+  if (transaction.vendorField) {
+    const sanitizer = new Sanitizer();
+
+    if (sanitizer.isBad(transaction.vendorField)) {
+      delete transaction.vendorField;
+    } else {
+      transaction.vendorField = sanitizer.apply(emoji.emojify(transaction.vendorField));
+    }
+  }
+
+  return transaction;
+};
 
 class TransactionService {
-  public async latest(limit: number = 25): Promise<ITransaction[]> {
+  public async latest(limit: number = paginationLimit): Promise<ITransaction[]> {
     const response = (await ApiService.get("transactions", {
       params: {
         orderBy: "timestamp:desc",
@@ -10,11 +27,16 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response.data;
   }
 
   public async find(id: string): Promise<ITransaction> {
     const response = (await ApiService.get(`transactions/${id}`)) as IApiTransactionWrapper;
+
+    sanitizeVendorField(response.data);
+
     return response.data;
   }
 
@@ -22,7 +44,7 @@ class TransactionService {
     page: number,
     type: number,
     typeGroup?: number,
-    limit: number = 25,
+    limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const params: any = {
       orderBy: "timestamp:desc",
@@ -42,13 +64,15 @@ class TransactionService {
       params,
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
   public async search(
     body: ITransactionSearchParams,
-    page: number = 1,
-    limit: number = 25,
+    page = 1,
+    limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.post("transactions/search", body, {
       params: {
@@ -57,10 +81,12 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
-  public async byBlock(id: string, page: number = 1, limit: number = 25): Promise<IApiTransactionsWrapper> {
+  public async byBlock(id: string, page = 1, limit: number = paginationLimit): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`blocks/${id}/transactions`, {
       params: {
         orderBy: "timestamp:desc",
@@ -69,10 +95,12 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
-  public async allByAddress(address: string, page = 1, limit = 25): Promise<IApiTransactionsWrapper> {
+  public async allByAddress(address: string, page = 1, limit = paginationLimit): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions`, {
       params: {
         orderBy: "timestamp:desc",
@@ -81,10 +109,16 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
-  public async sentByAddress(address: string, page: number = 1, limit: number = 25): Promise<IApiTransactionsWrapper> {
+  public async sentByAddress(
+    address: string,
+    page = 1,
+    limit: number = paginationLimit,
+  ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions/sent`, {
       params: {
         orderBy: "timestamp:desc",
@@ -93,13 +127,15 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
   public async receivedByAddress(
     address: string,
-    page: number = 1,
-    limit: number = 25,
+    page = 1,
+    limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/transactions/received`, {
       params: {
@@ -109,10 +145,16 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
-  public async locksByAddress(address: string, page: number = 1, limit: number = 25): Promise<IApiTransactionsWrapper> {
+  public async locksByAddress(
+    address: string,
+    page = 1,
+    limit: number = paginationLimit,
+  ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.get(`wallets/${address}/locks`, {
       params: {
         orderBy: "timestamp:desc",
@@ -121,17 +163,21 @@ class TransactionService {
       },
     })) as IApiTransactionsWrapper;
 
+    response.data.map(sanitizeVendorField);
+
     return response;
   }
 
   public async findUnlockedForLocks(
     transactionIds: string[],
-    page: number = 1,
-    limit: number = 25,
+    page = 1,
+    limit: number = paginationLimit,
   ): Promise<IApiTransactionsWrapper> {
     const response = (await ApiService.post(`locks/unlocked`, {
       ids: transactionIds,
     })) as IApiTransactionsWrapper;
+
+    response.data.map(sanitizeVendorField);
 
     return response;
   }

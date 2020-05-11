@@ -44,7 +44,7 @@
         </div>
 
         <div v-else-if="data.column.field === 'votes'">
-          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-2xs mr-1">
+          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
             {{ percentageString(data.row.production.approval) }}
           </span>
           {{ readableCrypto(data.row.votes, true, 2) }}
@@ -66,7 +66,7 @@ import { IDelegate, ISortParameters } from "@/interfaces";
 export default class TableDelegates extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })
@@ -132,7 +132,7 @@ export default class TableDelegates extends Vue {
 
     if (this.activeTab !== "active") {
       // remove the columns for blocks, last forged and status
-      const index = columns.findIndex(el => {
+      const index = columns.findIndex((el) => {
         return el.field === "blocks.produced";
       });
       columns.splice(index, 3);

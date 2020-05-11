@@ -41,12 +41,15 @@
               v-show="selectOpen"
               class="absolute right-0 mt-px bg-theme-content-background shadow-theme rounded border overflow-hidden text-sm"
             >
-              <li v-for="txType in ['all', 'sent', 'received', 'locks']" :key="txType">
+              <li v-for="type in availableTransactionTypes" :key="type">
                 <RouterLink
-                  :to="{ name: 'wallet-transactions', params: { address: address, type: txType, page: 1 } }"
+                  :to="{
+                    name: 'wallet-transactions',
+                    params: { address: address, type, page: 1 },
+                  }"
                   class="dropdown-button"
                 >
-                  {{ $t(`TRANSACTION.TYPES.${txType.toUpperCase()}`) }}
+                  {{ $t(`TRANSACTION.TYPES.${type.toUpperCase()}`) }}
                 </RouterLink>
               </li>
             </ul>
@@ -91,13 +94,24 @@ Component.registerHooks(["beforeRouteEnter", "beforeRouteUpdate"]);
 @Component({
   computed: {
     ...mapGetters("network", { networkSymbol: "symbol" }),
+    ...mapGetters("network", ["hasHtlcEnabled"]),
+
+    availableTransactionTypes() {
+      const types = ["all", "sent", "received"];
+
+      if (this.hasHtlcEnabled) {
+        types.push("locks");
+      }
+
+      return types;
+    },
   },
 })
 export default class WalletTransactions extends Vue {
   private transactions: ITransaction[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
-  private selectOpen: boolean = false;
+  private currentPage = 0;
+  private selectOpen = false;
   private networkSymbol: string;
 
   get showPagination() {
@@ -182,7 +196,10 @@ export default class WalletTransactions extends Vue {
       return;
     }
 
-    this.transactions = transactions.map(transaction => ({ ...transaction, price: null }));
+    this.transactions = transactions.map((transaction) => ({
+      ...transaction,
+      price: null,
+    }));
   }
 
   private setMeta(meta: any) {

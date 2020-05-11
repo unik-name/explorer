@@ -49,7 +49,7 @@
             {{ $t("TRANSACTION.SMARTBRIDGE") }}
           </div>
           <div class="text-right truncate">
-            {{ emojify(transaction.vendorField) }}
+            {{ transaction.vendorField }}
           </div>
         </div>
 
@@ -82,7 +82,7 @@ import { mapGetters } from "vuex";
 export default class TableLockTransactionsMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

@@ -6,7 +6,12 @@
           <div class="mr-4">
             {{ $t("PAGES.BUSINESSES.NAME") }}
           </div>
-          <div>{{ business.name }}</div>
+          <div>
+            <span>{{ business.name }}</span>
+            <span v-if="business.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+              $t("PAGES.BUSINESSES.RESIGNED")
+            }}</span>
+          </div>
         </div>
 
         <div class="list-row-border-b">
@@ -51,7 +56,7 @@ import { IBusiness } from "@/interfaces";
 export default class TableBusinessesMobile extends Vue {
   @Prop({
     required: true,
-    validator: value => {
+    validator: (value) => {
       return Array.isArray(value) || value === null;
     },
   })

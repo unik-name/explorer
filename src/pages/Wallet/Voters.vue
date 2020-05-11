@@ -44,7 +44,7 @@ export default class WalletVoters extends Vue {
   private delegate: IDelegate | null = null;
   private wallets: IWallet[] | null = null;
   private meta: any | null = null;
-  private currentPage: number = 0;
+  private currentPage = 0;
 
   public static pageName: string = "wallet-voters"
 
