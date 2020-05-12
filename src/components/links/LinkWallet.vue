@@ -200,6 +200,23 @@ export default class LinkWallet extends Vue {
     }
     return 0;
   }
+
+  get linkType() {
+    return this.votedDelegate.unikname ? "unik" : "wallet";
+  }
+
+  get linkParameters() {
+    if (this.votedDelegate.unikname) {
+      return {
+        id: this.votedDelegate.username,
+        unikname: this.votedDelegate.unikname,
+      };
+    } else {
+      return {
+        address: this.votedDelegateAddress,
+      };
+    }
+  }
 }
 </script>
 
