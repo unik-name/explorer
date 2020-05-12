@@ -6,7 +6,7 @@ export const I18N = {
 export const brand = {
   footer: {
     url: "https://unik-name.com",
-    text: "unik-name.com",
+    text: "Unikname",
   },
 };
 
