@@ -246,6 +246,7 @@ const getters: GetterTree<INetworkState, {}> = {
   currencies: (state) => state.currencies,
   knownWallets: (state) => state.knownWallets,
   supply: (state) => state.supply,
+  initialSupply: (state) => state.initialSupply,
   unikSupply: (state) => state.unikSupply,
   height: (state) => state.height,
   epoch: (state) => state.epoch,
