@@ -3,7 +3,7 @@
     <ContentHeader
       >{{ $t("WALLET.DELEGATE.VOTERS") }}
       <span v-if="delegate">
-        <UnikDisplay v-if="delegate.unikname" :unikname="delegate.unikname" :type="delegate.unikType" />
+        <UnikDisplay v-if="delegate.unikname" class="ml-2" :unikname="delegate.unikname" :type="delegate.unikType" />
         <span v-else>
           {{ delegate.username }}
         </span>

@@ -36,7 +36,7 @@
           style="color: inherit"
           :unikname="delegate.unikname"
           :type="delegate.unikType"
-          :truncate-unikname="truncateUnik"
+          :truncate-unikname="trunc"
         />
         <span v-else>
           {{ delegate.username }}
