@@ -129,7 +129,7 @@ export default {
         TX_COUNT: "de 0 transactions | de 1 transaction | de {count} transactions",
       },
       ACTIVE: "Actif",
-      STANDBY: "En attente",
+      STANDBY: "En\xA0attente",
       NEVER: "Jamais",
       FORGED_BLOCKS: "Blocs forgés",
       LAST_FORGED: "Dernier forgé",

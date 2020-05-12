@@ -38,7 +38,7 @@ export default class UnikTypeBadge extends Vue {
   background-color: #6263b1;
 }
 
-.unik-badge-container .unik-badge.unik-badge-network {
+.unik-badge.unik-badge-network {
   background-color: #16c8c0;
 }</style
 >>

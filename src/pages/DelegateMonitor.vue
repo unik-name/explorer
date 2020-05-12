@@ -4,58 +4,86 @@
 
     <section class="page-section py-5 md:py-10">
       <nav class="mx-5 sm:mx-10 mb-4 border-b flex items-end overflow-x-auto">
-        <div
-          :class="activeTab === 'active' && activeType === INDIV_TYPE ? 'active-tab' : 'inactive-tab'"
-          @click="
-            activeTab = 'active';
-            activeType = INDIV_TYPE;
-          "
-        >
-          <UnikTypeLogo :type="INDIV_TYPE" />
-          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
+        <div class="type-container individual">
+          <div class="type">
+            <UnikTypeBadge :type="INDIV_TYPE" />
+          </div>
+          <div class="type-tab-container">
+            <div
+              :class="activeTab === 'active' && activeType === INDIV_TYPE ? 'active-tab' : 'inactive-tab'"
+              @click="
+                activeTab = 'active';
+                activeType = INDIV_TYPE;
+              "
+            >
+              {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
+            </div>
+            <div
+              :class="activeTab === 'standby' && activeType === INDIV_TYPE ? 'active-tab' : 'inactive-tab'"
+              @click="
+                activeTab = 'standby';
+                activeType = INDIV_TYPE;
+              "
+            >
+              {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
+            </div>
+          </div>
         </div>
-        <div
-          :class="activeTab === 'standby' && activeType === INDIV_TYPE ? 'active-tab' : 'inactive-tab'"
-          @click="
-            activeTab = 'standby';
-            activeType = INDIV_TYPE;
-          "
-        >
-          <UnikTypeLogo :type="INDIV_TYPE" />
-          {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
+
+        <div class="type-container organization">
+          <div class="type">
+            <UnikTypeBadge :type="ORG_TYPE" />
+          </div>
+          <div class="type-tab-container">
+            <div
+              :class="activeTab === 'active' && activeType === ORG_TYPE ? 'active-tab' : 'inactive-tab'"
+              @click="
+                activeTab = 'active';
+                activeType = ORG_TYPE;
+              "
+            >
+              {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
+            </div>
+            <div
+              :class="activeTab === 'standby' && activeType === ORG_TYPE ? 'active-tab' : 'inactive-tab'"
+              @click="
+                activeTab = 'standby';
+                activeType = ORG_TYPE;
+              "
+            >
+              {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
+            </div>
+          </div>
         </div>
-        <div
-          :class="activeTab === 'active' && activeType === ORG_TYPE ? 'active-tab' : 'inactive-tab'"
-          @click="
-            activeTab = 'active';
-            activeType = ORG_TYPE;
-          "
-        >
-          <UnikTypeLogo :type="ORG_TYPE" />
-          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
+
+        <div class="type-container network">
+          <div class="type">
+            <UnikTypeBadge :type="NETWORK_TYPE" />
+          </div>
+          <div class="type-tab-container">
+            <div
+              :class="activeTab === 'active' && activeType === NETWORK_TYPE ? 'active-tab' : 'inactive-tab'"
+              @click="
+                activeTab = 'active';
+                activeType = NETWORK_TYPE;
+              "
+            >
+              {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
+            </div>
+          </div>
         </div>
-        <div
-          :class="activeTab === 'standby' && activeType === ORG_TYPE ? 'active-tab' : 'inactive-tab'"
-          @click="
-            activeTab = 'standby';
-            activeType = ORG_TYPE;
-          "
-        >
-          <UnikTypeLogo :type="ORG_TYPE" />
-          {{ $t("PAGES.DELEGATE_MONITOR.STANDBY") }}
-        </div>
-        <div
-          :class="activeTab === 'active' && activeType === NETWORK_TYPE ? 'active-tab' : 'inactive-tab'"
-          @click="
-            activeTab = 'active';
-            activeType = NETWORK_TYPE;
-          "
-        >
-          <UnikTypeLogo :type="NETWORK_TYPE" />
-          {{ $t("PAGES.DELEGATE_MONITOR.ACTIVE") }}
-        </div>
-        <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
-          {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
+
+        <div class="type-container resigned">
+          <div class="type">
+            <UnikTypeLogo :type="INDIV_TYPE" />
+            <UnikTypeLogo :type="ORG_TYPE" />
+            <UnikTypeLogo :type="NETWORK_TYPE" />
+          </div>
+          <div class="type-tab-container">
+            <div :class="activeTab === 'resigned' ? 'active-tab' : 'inactive-tab'" @click="activeTab = 'resigned'">
+              {{ $t("PAGES.DELEGATE_MONITOR.RESIGNED") }}
+            </div>
+          </div>
         </div>
       </nav>
 
@@ -88,11 +116,12 @@ import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters } from "@/interfaces";
 import { MonitorHeader, ForgingStats } from "@/components/monitor";
 import UnikTypeLogo from "@/components/unik/UnikTypeLogo.vue";
+import UnikTypeBadge from "@/components/unik/UnikTypeBadge.vue";
 import DelegateService from "@/services/delegate";
 import { DIDType } from "@uns/ts-sdk";
 
 @Component({
-  components: { UnikTypeLogo },
+  components: { UnikTypeLogo, UnikTypeBadge },
   computed: {
     ...mapGetters("network", ["height", "activeDelegates"]),
   },
@@ -153,7 +182,62 @@ export default class DelegateMonitor extends Vue {
 .inactive-tab,
 .active-tab {
   display: flex;
+  flex: 1;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  margin-right: 0px;
+}
+
+.type-container {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f3f3f399;
+  border: 1px solid var(--theme-border);
+  border-bottom: none;
+}
+
+.type-container .type-tab-container,
+.type-container .type {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.type-container .type {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 0.5em;
+}
+
+.type-container .type-tab-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.type-container.individual .type {
+  background-color: #c6c6ff;
+}
+
+.type-container.organization .type {
+  background-color: #6163b1;
+}
+
+.type-container.network .type {
+  background-color: #15c8c0;
+}
+
+.type-container.resigned .type {
+  background-color: #f0eeee;
+  font-size: 1.2em;
+}
+
+.unik-badge {
+  margin-right: 0px;
 }
 </style>
