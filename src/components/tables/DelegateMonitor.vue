@@ -13,7 +13,7 @@
             <LinkUNIK :id="data.row.username" :unikname="data.row.unikname" :type="data.row.unikType" />
           </div>
           <div v-else>
-            <LinkWallet :address="data.row.address">
+            <LinkWallet :address="data.row.address" :trunc="false">
               {{ data.row.username }}
             </LinkWallet>
           </div>
