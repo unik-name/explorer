@@ -1,4 +1,5 @@
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, NftTransaction, UNSTransaction } from "@/enums";
+import { ITransaction } from "@/interfaces";
 
 const isCoreTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.CORE;
@@ -112,6 +113,12 @@ export default {
     },
     isUnsCertifiedNftMint(type: number, typeGroup: number): boolean {
       return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_MINT;
+    },
+    isVoucherUnsCertifiedNftMint(transaction: ITransaction): boolean {
+      return (
+        this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) &&
+        transaction.asset.nft.unik.properties.UnikVoucherId
+      );
     },
     isUnsCertifiedNftUpdate(type: number, typeGroup: number): boolean {
       return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_UPDATE;

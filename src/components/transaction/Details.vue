@@ -60,8 +60,47 @@
           </div>
         </div>
 
+        <div v-if="isVoucherUnsCertifiedNftMint(transaction)">
+          <div class="list-row-border-b">
+            <LinkUNIK
+              :id="transaction.asset.nft.unik.tokenId"
+              :unikname="$t('TRANSACTION.REWARDS.SENDER')"
+              :type="getUnikType()"
+            ></LinkUNIK>
+            <div
+              v-tooltip="{
+                trigger: 'hover click',
+                content: price ? readableCurrency(rewards.sender, price) : '',
+                placement: 'left',
+              }"
+            >
+              {{ readableCrypto(rewards.sender) }}
+            </div>
+          </div>
+
+          <div class="list-row-border-b">
+            <LinkUNIK
+              :id="foundationUnikid"
+              :unikname="$t('TRANSACTION.REWARDS.FOUNDATION')"
+              type="ORGANIZATION"
+            ></LinkUNIK>
+            <div
+              v-tooltip="{
+                trigger: 'hover click',
+                content: price ? readableCurrency(rewards.foundation, price) : '',
+                placement: 'left',
+              }"
+            >
+              {{ readableCrypto(rewards.foundation) }}
+            </div>
+          </div>
+        </div>
+
         <div class="list-row-border-b">
-          <div class="mr-4">{{ $t("TRANSACTION.FEE") }}</div>
+          <div v-if="isVoucherUnsCertifiedNftMint(transaction)" class="mr-4">
+            {{ $t("TRANSACTION.REWARDS.FORGER") }}
+          </div>
+          <div v-else class="mr-4">{{ $t("TRANSACTION.FEE") }}</div>
           <div
             v-tooltip="{
               trigger: 'hover click',
@@ -229,12 +268,14 @@ import { TranslateResult } from "vue-i18n";
 import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
-import { CryptoCompareService, LockService, TransactionService } from "@/services";
+import { CryptoCompareService, LockService, TransactionService, WalletService } from "@/services";
+import { DIDType, DIDHelpers } from "@uns/ts-sdk";
+import { Identities, Managers } from "@uns/ark-crypto";
 
 @Component({
   computed: {
     ...mapGetters("currency", { currencySymbol: "symbol" }),
-    ...mapGetters("network", ["height"]),
+    ...mapGetters("network", ["height", "networkConfig"]),
   },
 })
 export default class TransactionDetails extends Vue {
@@ -247,6 +288,9 @@ export default class TransactionDetails extends Vue {
   private multipaymentAmount: BigNumber | null = null;
   private timelockStatus: TranslateResult | null = null;
   private timelockLink: string | null = null;
+  private networkConfig;
+  private initialMilestone = null;
+  private foundationUnikid = "";
 
   get confirmations() {
     return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
@@ -295,12 +339,20 @@ export default class TransactionDetails extends Vue {
     }
   }
 
+  get rewards() {
+    if (!this.initialMilestone) {
+      this.setInitialMilestone();
+    }
+    return this.initialMilestone.voucherRewards[this.getUnikType().toLowerCase()];
+  }
+
   @Watch("transaction")
   public async onTransactionChanged() {
     this.updatePrice();
     this.handleMultipayment();
     this.getTimelockStatus();
     this.setInitialBlockHeight();
+    this.setFoundationInfos();
   }
 
   @Watch("currencySymbol")
@@ -319,6 +371,11 @@ export default class TransactionDetails extends Vue {
     this.updatePrice();
     this.handleMultipayment();
     this.getTimelockStatus();
+    this.setFoundationInfos();
+  }
+
+  private getUnikType(): DIDType {
+    return DIDHelpers.fromCode(parseInt(this.transaction.asset.nft.unik.properties.type));
   }
 
   private async updatePrice() {
@@ -327,6 +384,25 @@ export default class TransactionDetails extends Vue {
 
   private setInitialBlockHeight() {
     this.initialBlockHeight = this.height - this.transaction.confirmations;
+  }
+
+  private setInitialMilestone() {
+    if (!this.initialBlockHeight) {
+      this.setInitialBlockHeight();
+    }
+    this.initialMilestone = this.getMilestone(this.networkConfig, this.initialBlockHeight);
+  }
+
+  private async setFoundationInfos() {
+    const foundationPubKey = this.networkConfig.network.foundation.publicKey;
+    const wallet = await WalletService.find(
+      Identities.Address.fromPublicKey(foundationPubKey, this.networkConfig.network.pubKeyHash),
+    );
+    let unikid: string;
+    if (wallet.attributes.tokens && wallet.attributes.tokens.tokens.length) {
+      unikid = wallet.attributes.tokens.tokens[0];
+    }
+    this.foundationUnikid = unikid;
   }
 
   private handleMultipayment() {
@@ -356,6 +432,22 @@ export default class TransactionDetails extends Vue {
     } else {
       this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.UNKNOWN");
     }
+  }
+
+  public getMilestone(config, height?: number): { [key: string]: any } {
+    if (!height && this.height) {
+      height = this.height;
+    }
+
+    if (!height) {
+      height = 1;
+    }
+    let milestoneIdx = 0;
+    while (milestoneIdx < config.milestones.length - 1 && height >= config.milestones[milestoneIdx + 1].height) {
+      milestoneIdx++;
+    }
+
+    return config.milestones[milestoneIdx];
   }
 }
 </script>

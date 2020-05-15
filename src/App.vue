@@ -92,7 +92,8 @@ export default class App extends Vue {
       this.$store.dispatch("network/setKnownWallets", knownWallets);
     }
 
-    this.fetchInitialSupply();
+    const networkConfig = await this.updateNetworkConfig();
+    this.fetchInitialSupply(networkConfig);
 
     if (network.defaults.currency) {
       this.$store.dispatch("currency/setName", localStorage.getItem("currencyName") || network.defaults.currency.name);
@@ -165,15 +166,18 @@ export default class App extends Vue {
     this.hasBlurFilter = isActive;
   }
 
-  public async fetchInitialSupply() {
+  public fetchInitialSupply(networkConfig) {
     let initialSupply = localStorage.getItem("initialSupply");
-
     if (!initialSupply) {
-      const crypto = await NodeService.crypto();
-      initialSupply = crypto.genesisBlock.totalAmount;
+      initialSupply = networkConfig.genesisBlock.totalAmount;
     }
-
     this.$store.dispatch("network/setInitialSupply", initialSupply);
+  }
+
+  public async updateNetworkConfig() {
+    const crypto = await NodeService.crypto();
+    this.$store.dispatch("network/setNetworkConfig", crypto);
+    return crypto;
   }
 
   public async updateCurrencyRate() {
@@ -261,6 +265,7 @@ export default class App extends Vue {
       this.updateUnikSupply();
       this.updateHeight();
       this.updateDelegates();
+      this.updateNetworkConfig();
     }, 8 * 1000);
   }
 

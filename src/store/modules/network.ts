@@ -27,6 +27,7 @@ const state: INetworkState = {
   technicName: null,
   hasHtlcEnabled: false,
   enabledTransactionTypes: [],
+  networkConfig: null,
 };
 
 const actions: ActionTree<INetworkState, {}> = {
@@ -164,6 +165,12 @@ const actions: ActionTree<INetworkState, {}> = {
       value,
     });
   },
+  setNetworkConfig: ({ commit }, value) => {
+    commit({
+      type: types.SET_NETWORK_CONFIG,
+      value,
+    });
+  },
 };
 
 const mutations: MutationTree<INetworkState> = {
@@ -233,6 +240,9 @@ const mutations: MutationTree<INetworkState> = {
   [types.SET_NETWORK_ENABLED_TRANSACTION_TYPES](state, payload: IStorePayload) {
     state.enabledTransactionTypes = payload.value;
   },
+  [types.SET_NETWORK_CONFIG](state, payload: IStorePayload) {
+    state.networkConfig = payload.value;
+  },
 };
 
 const getters: GetterTree<INetworkState, {}> = {
@@ -258,6 +268,7 @@ const getters: GetterTree<INetworkState, {}> = {
   hasHtlcEnabled: (state) => state.hasHtlcEnabled,
   enabledTransactionTypes: (state) => state.enabledTransactionTypes,
   technicName: (state) => state.technicName,
+  networkConfig: (state) => state.networkConfig,
 };
 
 export const network: Module<INetworkState, {}> = {

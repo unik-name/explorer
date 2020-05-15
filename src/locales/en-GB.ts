@@ -139,6 +139,11 @@ export default {
     RECIPIENTS: "Recipients",
     SMARTBRIDGE: "Smartbridge",
     WELL_CONFIRMED: "Well confirmed",
+    REWARDS: {
+      SENDER: "UNIK owner rewards",
+      FOUNDATION: "UNS Network rewards",
+      FORGER: "Forger rewards",
+    },
   },
 
   WALLET: {
