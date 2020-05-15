@@ -243,6 +243,7 @@ export interface INetworkState {
   technicName: string | null;
   hasHtlcEnabled: boolean;
   enabledTransactionTypes: ITransactionType[];
+  networkConfig: any;
 }
 
 export interface IUiState {
