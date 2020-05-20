@@ -196,7 +196,7 @@ export default class DelegateMonitor extends Vue {
   flex: 1;
   flex-direction: column;
   align-items: center;
-  background-color: #f3f3f399;
+  background-color: #f2f2f224;
   border: 1px solid var(--theme-border);
   border-bottom: none;
 }
