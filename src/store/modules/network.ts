@@ -111,6 +111,7 @@ const actions: ActionTree<INetworkState, {}> = {
   setUnikSupply: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_UNIK_SUPPLY,
+      value,
     });
   },
   setInitialSupply: ({ commit }, value) => {
@@ -242,6 +243,7 @@ const getters: GetterTree<INetworkState, {}> = {
   activeDelegates: (state) => state.activeDelegates,
   rewardOffset: (state) => state.rewardOffset,
   token: (state) => state.token,
+  isListed: (state) => state.isListed,
   symbol: (state) => state.symbol,
   currencies: (state) => state.currencies,
   knownWallets: (state) => state.knownWallets,
