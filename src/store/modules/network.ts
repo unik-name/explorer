@@ -149,6 +149,7 @@ const actions: ActionTree<INetworkState, {}> = {
   setTechnicName: ({ commit }, value) => {
     commit({
       type: types.SET_NETWORK_TECHNIC_NAME,
+      value,
     });
   },
   setHasHtlcEnabled: ({ commit }, value: boolean) => {
