@@ -66,9 +66,13 @@ import { ITransactionType } from "@/interfaces";
 @Component
 export default class SelectionType extends Vue {
   @Prop({ required: false, default: false }) public inBanner: boolean;
-  private types: ITransactionType[] = this.getDisplayableFilters();
   private transactionType: ITransactionType = { key: "ALL", type: -1 };
   private selectOpen = false;
+
+  get types() {
+    const types = this.$store.getters["network/enabledTransactionTypes"];
+    return types.filter((trxType) => !this.getDisabledFilters().includes(trxType.key));
+  }
 
   get isOpen() {
     return this.selectOpen;
@@ -112,14 +116,6 @@ export default class SelectionType extends Vue {
 
   private toggleDropdown() {
     this.selectOpen = !this.selectOpen;
-  }
-
-  private transactionTypes() {
-    return this.$store.getters["network/enabledTransactionTypes"];
-  }
-
-  private getDisplayableFilters() {
-    return this.transactionTypes().filter((trxType) => !this.getDisabledFilters().includes(trxType.key));
   }
 
   private getDisabledFilters() {
