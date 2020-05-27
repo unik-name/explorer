@@ -141,7 +141,7 @@ export default {
     WELL_CONFIRMED: "Well confirmed",
     REWARDS: {
       SENDER: "UNIK owner rewards",
-      FOUNDATION: "UNS Network rewards",
+      FOUNDATION: "UNS organization rewards",
       FORGER: "Forger rewards",
     },
   },
