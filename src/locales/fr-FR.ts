@@ -49,6 +49,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Montant",
+    FLOW: "Montant",
     BLOCK_ID: "Bloc ID",
     ID: "ID de transaction",
     FEE: "Frais",

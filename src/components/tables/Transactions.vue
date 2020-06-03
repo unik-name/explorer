@@ -133,7 +133,7 @@ export default class TableTransactionsDesktop extends Vue {
         tdClass: "text-right cell-smartbridge",
       },
       {
-        label: this.$t("TRANSACTION.AMOUNT"),
+        label: this.$t("TRANSACTION.FLOW"),
         field: "amount",
         type: "number",
         thClass: "end-cell lg:base-cell",

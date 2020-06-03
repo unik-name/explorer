@@ -62,6 +62,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Amount",
+    FLOW: "UNS Flow",
     AMOUNT_TO_SELF: "Excluding {amount} sent to itself",
     BLOCK_ID: "Block ID",
     ID: "Transaction ID",
