@@ -1,7 +1,7 @@
 <template>
   <span
     :class="
-      !isFee
+      !isFee && source > 0
         ? {
             'text-red': isOutgoing,
             'text-green': isIncoming,
@@ -18,6 +18,8 @@
       }"
       class="ml-auto"
     >
+      <span v-if="!isFee && isIncoming">+</span>
+      <span v-else-if="!isFee && isOutgoing && source > 0">-</span>
       {{ readableCrypto(source) }}
     </span>
     <SvgIcon
@@ -34,15 +36,45 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
+import { mapGetters } from "vuex";
+import { getMilestone } from "./utils";
+import { DIDType, DIDHelpers } from "@uns/ts-sdk";
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters("network", ["height", "networkConfig"]),
+  },
+})
 export default class TransactionAmount extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: false }) public isFee: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
+
+  private height: number;
+  private initialBlockHeight = 0;
+  private networkConfig;
+  private initialMilestone = null;
+
+  @Watch("height")
+  public onHeightChanged(newValue: number, oldValue: number) {
+    if (!oldValue) {
+      this.setInitialBlockHeight();
+    }
+  }
+
+  private setInitialBlockHeight() {
+    this.initialBlockHeight = this.height - this.transaction.confirmations;
+  }
+
+  private setInitialMilestone() {
+    if (!this.initialBlockHeight) {
+      this.setInitialBlockHeight();
+    }
+    this.initialMilestone = getMilestone(this.networkConfig, this.initialBlockHeight);
+  }
 
   get transactionTab() {
     return this.$store.getters["ui/walletTransactionTab"];
@@ -69,6 +101,18 @@ export default class TransactionAmount extends Vue {
     if (this.isMultiPayment(this.transaction.type, this.transaction.typeGroup)) {
       // @ts-ignore
       return this.calculateMultipaymentAmount(this.transaction, this.address, this.transactionTab);
+    }
+
+    // @ts-ignore
+    if (this.isVoucherUnsCertifiedNftMint(this.transaction)) {
+      const type: DIDType = DIDHelpers.fromCode(parseInt(this.transaction.asset.nft.unik.properties.type));
+      this.setInitialMilestone();
+      const rewards = this.initialMilestone.voucherRewards[type.toLowerCase()];
+
+      if (this.transaction.recipient === this.$route.params.address) {
+        return rewards.foundation;
+      }
+      return rewards.sender + rewards.forger;
     }
 
     return this.transaction.amount;
@@ -118,6 +162,11 @@ export default class TransactionAmount extends Vue {
         this.transaction.asset.payments.find((payment) => payment.recipientId === this.$route.params.address) &&
         (this.transactionTab === "received" || this.transaction.sender !== this.$route.params.address)
       );
+    }
+
+    // @ts-ignore
+    if (this.isVoucherUnsCertifiedNftMint(this.transaction)) {
+      return true;
     }
 
     return (

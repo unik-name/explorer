@@ -271,6 +271,7 @@ import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/
 import { CryptoCompareService, LockService, TransactionService, WalletService } from "@/services";
 import { DIDType, DIDHelpers } from "@uns/ts-sdk";
 import { Identities, Managers } from "@uns/ark-crypto";
+import { getMilestone } from "../utils/utils";
 
 @Component({
   computed: {
@@ -390,7 +391,7 @@ export default class TransactionDetails extends Vue {
     if (!this.initialBlockHeight) {
       this.setInitialBlockHeight();
     }
-    this.initialMilestone = this.getMilestone(this.networkConfig, this.initialBlockHeight);
+    this.initialMilestone = getMilestone(this.networkConfig, this.initialBlockHeight);
   }
 
   private async setFoundationInfos() {
@@ -432,22 +433,6 @@ export default class TransactionDetails extends Vue {
     } else {
       this.timelockStatus = this.$t("TRANSACTION.TIMELOCK.UNKNOWN");
     }
-  }
-
-  public getMilestone(config, height?: number): { [key: string]: any } {
-    if (!height && this.height) {
-      height = this.height;
-    }
-
-    if (!height) {
-      height = 1;
-    }
-    let milestoneIdx = 0;
-    while (milestoneIdx < config.milestones.length - 1 && height >= config.milestones[milestoneIdx + 1].height) {
-      milestoneIdx++;
-    }
-
-    return config.milestones[milestoneIdx];
   }
 }
 </script>

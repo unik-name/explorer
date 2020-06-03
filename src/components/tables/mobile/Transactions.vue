@@ -49,7 +49,7 @@
 
         <div class="list-row-border-b">
           <div class="mr-4">
-            {{ $t("TRANSACTION.AMOUNT") }}
+            {{ $t("TRANSACTION.FLOW") }}
           </div>
           <div>
             <TransactionAmount :transaction="transaction" tooltip-placement="left" />

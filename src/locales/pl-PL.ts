@@ -47,6 +47,7 @@ export default {
 
   TRANSACTION: {
     AMOUNT: "Ilość",
+    FLOW: "Ilość",
     BLOCK_ID: "ID bloku",
     ID: "ID transakcji",
     FEE: "Opłata",
