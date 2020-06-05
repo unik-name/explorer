@@ -12,6 +12,8 @@ export interface IBlock {
     fee: BigNumber;
     total: BigNumber;
     amount: BigNumber;
+    unikMintRewards?: BigNumber;
+    foundationRewards?: BigNumber;
   };
   payload: {
     hash: string;

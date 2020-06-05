@@ -74,6 +74,22 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
+          {{ $t("BLOCK.TOTAL_REWARDS") }}
+        </div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(totalRewards, price) : '',
+            placement: 'left',
+          }"
+        >
+          {{ readableCrypto(totalRewards) }}
+        </div>
+      </div>
+
+      <div class="list-row-border-b">
+        <div class="mr-4">
           {{ $t("BLOCK.PROCESSED_AMOUNT") }}
         </div>
         <div
@@ -114,6 +130,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import CryptoCompareService from "@/services/crypto-compare";
 import { IBlock } from "../../interfaces";
+import { BigNumber } from "@/utils";
 
 @Component({
   computed: {
@@ -130,6 +147,17 @@ export default class BlockDetails extends Vue {
 
   get confirmations(): number {
     return this.height - this.block.height;
+  }
+
+  get totalRewards(): BigNumber {
+    let total = this.block.forged.reward;
+    if (this.block.forged.unikMintRewards) {
+      total = total.plus(this.block.forged.unikMintRewards);
+    }
+    if (this.block.forged.foundationRewards) {
+      total = total.plus(this.block.forged.foundationRewards);
+    }
+    return total;
   }
 
   @Watch("block")
