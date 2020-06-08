@@ -80,6 +80,7 @@ export default class TableNetworkMonitor extends Vue {
         field: "username",
         thClass: `text-left ${this.isActiveTab ? "start-cell" : this.isResignedTab ? "start-cell" : ""}`,
         tdClass: `text-left ${this.isActiveTab ? "start-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        sortFn: this.sortByExplicitValue,
       },
       {
         label: this.$t("PAGES.DELEGATE_MONITOR.FORGED_BLOCKS"),
@@ -182,6 +183,16 @@ export default class TableNetworkMonitor extends Vue {
     const heightY = rowY.blocks.last ? rowY.blocks.last.height : -1;
 
     return heightX > heightY ? -1 : heightX < heightY ? 1 : 0;
+  }
+
+  private sortByExplicitValue(x: number, y: number, col: number, rowX: any, rowY: any) {
+    // Handle genesis case
+    const nameX: string = rowX.unikname ? rowX.unikname : rowX.username;
+    const nameY: string = rowY.unikname ? rowY.unikname : rowY.username;
+    if (nameX === nameY) {
+      return parseInt(rowX.type) > parseInt(rowY.type) ? 1 : -1;
+    }
+    return nameX.localeCompare(nameY);
   }
 
   private emitSortChange(params: ISortParameters[]) {
