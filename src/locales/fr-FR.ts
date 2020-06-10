@@ -14,7 +14,7 @@ export default {
     RELOAD: "Actualiser cette page",
     SEE_ALL: "Voir tout",
     SUPPLY: "Stock",
-    SUPPLY_PERCENTAGE: "Pourcentage de l'offre totale",
+    SUPPLY_PERCENTAGE: "Pourcentage de votes par type de délégué",
     TIMESTAMP: "Horodatage",
     TRANSACTION: "Transaction",
     TRANSACTIONS: "Transactions",
