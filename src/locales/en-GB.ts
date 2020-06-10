@@ -16,7 +16,7 @@ export default {
     RELOAD: "Reload this page",
     SEE_ALL: "See all",
     SUPPLY: "Supply",
-    SUPPLY_PERCENTAGE: "Percentage of votes by delegate delegate type",
+    SUPPLY_PERCENTAGE: "Percentage of votes by delegate type",
     TIMESTAMP: "Timestamp",
     TRANSACTION: "Transaction",
     TRANSACTIONS: "Transactions",
