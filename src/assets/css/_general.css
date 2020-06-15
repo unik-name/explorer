@@ -11,12 +11,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: #ff5733e6;
+  color: #00a099e6;
   text-decoration: none;
 }
 
 a:hover {
-  color: #ff5733;
+  color: #00A099;
 }
 
 .transition {

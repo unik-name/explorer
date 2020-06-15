@@ -109,6 +109,11 @@ module.exports = {
       "orange-lighter": "#fcd9b6",
       "orange-lightest": "#fff5eb",
 
+      turquoise: "#00A099",
+      "turquoise-lighter": "#00a099e6",
+      "turquoise-darker": "#028c86",
+      "turquoise-dark": "#016f6a",
+
       "yellow-darkest": "#453411",
       "yellow-darker": "#684f1d",
       "yellow-dark": "#f2d024",
