@@ -110,12 +110,14 @@ export default class TableBlocksDesktop extends Vue {
         label: this.$t("COMMON.TRANSACTIONS"),
         field: "transactions",
         type: "number",
+        thClass: "text-center",
+        tdClass: "text-center",
       },
       {
         label: this.$t("BLOCK.GENERATED_BY"),
         field: "generator.username",
-        thClass: "text-right",
-        tdClass: "text-right",
+        thClass: "text-left",
+        tdClass: "text-left",
       },
       {
         label: this.$t("BLOCK.TOTAL_FORGED"),
