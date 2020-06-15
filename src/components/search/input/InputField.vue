@@ -112,9 +112,9 @@ export default class InputField extends Vue {
 .InputField--warning .InputField__label,
 .InputField--warning .InputField__helper,
 .InputField--warning .InputField__label__textarea {
-  @apply .text-orange-dark;
+  @apply .text-turquoise-dark;
 }
 .InputField--warning .InputField__input {
-  @apply .border-orange-dark;
+  @apply .border-turquoise-dark;
 }
 </style>

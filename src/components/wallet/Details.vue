@@ -90,16 +90,16 @@
       <div class="flex-none px-8">
         <button
           :disabled="!wallet.publicKey"
-          :class="view === 'public' ? 'bg-orange-darker' : 'bg-transparent text-orange-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-orange transition"
+          :class="view === 'public' ? 'bg-turquoise-darker' : 'bg-transparent text-turquoise-light'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-turquoise transition"
           @click="setView('public')"
         >
           <SvgIcon class="block" name="globe" view-box="0 0 17 17" />
         </button>
         <button
           v-if="wallet.publicKey"
-          :class="view === 'private' ? 'bg-orange-darker' : 'bg-transparent text-orange-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-orange transition"
+          :class="view === 'private' ? 'bg-turquoise-darker' : 'bg-transparent text-turquoise-light'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-turquoise transition"
           @click="setView('private')"
         >
           <SvgIcon class="block" name="key" view-box="0 0 13 14" />
@@ -264,11 +264,11 @@ export default class WalletDetails extends Vue {
 }
 
 .address-button {
-  background-color: #313a81;
+  background-color: #0F2852;
 }
 
 .address-button:hover {
-  background-color: #313a81;
+  background-color: #0F2852;
   transform: scale(1.1);
 }
 </style>

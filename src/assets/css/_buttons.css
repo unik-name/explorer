@@ -31,7 +31,7 @@ button:disabled {
 }
 
 .block-pager-button {
-  @apply .py-4 .px-5 .bg-transparent .bg-orange-darker .rounded-md .text-white .font-normal .text-xs .transition;
+  @apply .py-4 .px-5 .bg-transparent .bg-turquoise-darker .rounded-md .text-white .font-normal .text-xs .transition;
 }
 
 .button-lg:enabled:hover,
@@ -50,7 +50,7 @@ button:disabled {
 }
 
 .menu-button:hover {
-  @apply .border-orange;
+  @apply .border-turquoise;
 }
 
 /* Dropdown Buttons */
