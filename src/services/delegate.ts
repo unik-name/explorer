@@ -142,7 +142,7 @@ class DelegateService {
 
   public async resigned(): Promise<IDelegate[]> {
     const response = await this.allResigned();
-    return response.data;
+    return await this.getDelegatesWithUnikAttributes(response.data);
   }
 
   public async allResigned(page = 1, limit: number = paginationLimit): Promise<IApiDelegatesWrapper> {
