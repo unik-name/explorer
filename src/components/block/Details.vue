@@ -150,7 +150,8 @@ export default class BlockDetails extends Vue {
   }
 
   get totalRewards(): BigNumber {
-    let total = this.block.forged.reward;
+    let total: BigNumber = new BigNumber(this.block.forged.reward);
+
     if (this.block.forged.unikMintRewards) {
       total = total.plus(this.block.forged.unikMintRewards);
     }
