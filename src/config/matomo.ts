@@ -1,7 +1,7 @@
 import router from "../router";
 
 export default {
-  host: "https://kpi.unik-name.com",
+  host: "https://kpi.unikname.com",
   siteId: 8,
   enableLinkTracking: true,
   trackInitialView: true,
@@ -18,7 +18,7 @@ export function setupMatomoConfig() {
   window._paq = window._paq || [];
 
   window._paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
-  window._paq.push(["setDomains", ["*.uns.network", "*.unik-name.com"]]);
+  window._paq.push(["setDomains", ["*.uns.network", "*.unik-name.com", "*.unikname.com", "*.unikname.app"]]);
   window._paq.push(["enableCrossDomainLinking"]);
   window._paq.push(["setDoNotTrack", true]);
   // window._paq.push(['trackPageView']); => handled by standard Vue-Matomo configuration

@@ -15,7 +15,7 @@
           >&nbsp;|&nbsp;</span
         >
         <span
-          ><a href="https://forum.unik-name.com" target="_blank">{{ $t("FOOTER.FORUM") }}</a
+          ><a href="https://forum.unikname.com" target="_blank">{{ $t("FOOTER.FORUM") }}</a
           >&nbsp;|&nbsp;</span
         >
         <a href="https://docs.uns.network" target="_blank">{{ $t("FOOTER.DOCS") }}</a>
