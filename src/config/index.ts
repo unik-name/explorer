@@ -5,7 +5,7 @@ export const I18N = {
 
 export const brand = {
   footer: {
-    url: "https://unik-name.com",
+    url: "https://unikname.com",
     text: "Unikname",
   },
 };
@@ -33,7 +33,7 @@ export const socialMedia = [
   // },
   {
     name: "email",
-    url: "mailto:contact@unik-name.com",
+    url: "mailto:contact@unikname.com",
     viewBox: "0 0 16 16",
   },
   // {
