@@ -73,7 +73,7 @@ export default {
     FROM: "De",
     RECIPIENT: "Bénéficiaire",
     RECIPIENT_OR_TYPE: "Bénéficiaire ou type",
-    SMARTBRIDGE: "Smartbridge",
+    SMARTBRIDGE: "Text",
     WELL_CONFIRMED: "Bien confirmé",
   },
 
