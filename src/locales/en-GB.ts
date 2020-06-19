@@ -139,7 +139,7 @@ export default {
     RECIPIENT: "Recipient",
     RECIPIENT_OR_TYPE: "Recipient or type",
     RECIPIENTS: "Recipients",
-    SMARTBRIDGE: "Smartbridge",
+    SMARTBRIDGE: "Text",
     WELL_CONFIRMED: "Well confirmed",
     REWARDS: {
       SENDER: "UNIK owner rewards",
