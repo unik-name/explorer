@@ -17,11 +17,9 @@
               {{ data.row.username }}
             </LinkWallet>
           </div>
-          <span
-            v-if="isActiveTab && data.row.isResigned"
-            class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1"
-            >{{ $t("WALLET.DELEGATE.STATUS.RESIGNED") }}</span
-          >
+          <span v-if="data.row.isResigned" class="ml-2 rounded text-sm text-white bg-theme-resigned-label p-1">{{
+            $t("WALLET.DELEGATE.STATUS.RESIGNED")
+          }}</span>
         </div>
 
         <div v-else-if="data.column.field === 'blocks.produced'">
@@ -41,13 +39,6 @@
               view-box="0 0 19 17"
             />
           </button>
-        </div>
-
-        <div v-else-if="data.column.field === 'votes'">
-          <span v-tooltip="$t('COMMON.SUPPLY_PERCENTAGE')" class="text-grey text-xs mr-1">
-            {{ percentageString(data.row.production.approval) }}
-          </span>
-          {{ readableCrypto(data.row.votes, true, 2) }}
         </div>
 
         <span v-else>
@@ -74,12 +65,12 @@ export default class TableNetworkMonitor extends Vue {
   @Prop({ required: false, default: "active" }) public activeTab: string;
 
   get columns() {
-    let columns = [
+    const columns = [
       {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `text-left ${this.isActiveTab ? "start-cell" : this.isResignedTab ? "start-cell" : ""}`,
-        tdClass: `text-left ${this.isActiveTab ? "start-cell" : this.isResignedTab ? "start-cell" : ""}`,
+        thClass: `text-left  "start-cell"}`,
+        tdClass: `text-left  "start-cell"}`,
         sortFn: this.sortByExplicitValue,
       },
       {
@@ -106,27 +97,7 @@ export default class TableNetworkMonitor extends Vue {
       },
     ];
 
-    if (this.activeTab !== "active") {
-      // remove the columns for blocks, last forged and status
-      const index = columns.findIndex((el) => {
-        return el.field === "blocks.produced";
-      });
-      columns.splice(index, 3);
-    }
-
-    if (this.activeTab === "resigned") {
-      // remove the rank column
-      columns = columns.splice(1);
-    }
     return columns;
-  }
-
-  get isActiveTab() {
-    return this.activeTab === "active";
-  }
-
-  get isResignedTab() {
-    return this.activeTab === "resigned";
   }
 
   private lastForgingTime(delegate: IDelegate) {
