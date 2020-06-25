@@ -83,14 +83,6 @@ export default class TableDelegates extends Vue {
       },
     ];
 
-    if (this.activeTab !== "active") {
-      // remove the columns for blocks, last forged and status
-      const index = columns.findIndex((el) => {
-        return el.field === "blocks.produced";
-      });
-      columns.splice(index, 3);
-    }
-
     if (this.activeTab === "resigned") {
       // remove the rank column
       columns = columns.splice(1);
