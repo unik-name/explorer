@@ -69,8 +69,8 @@ export default class TableNetworkMonitor extends Vue {
       {
         label: this.$t("WALLET.DELEGATE.USERNAME"),
         field: "username",
-        thClass: `text-left  "start-cell"}`,
-        tdClass: `text-left  "start-cell"}`,
+        thClass: "text-left  start-cell",
+        tdClass: "text-left  start-cell",
         sortFn: this.sortByExplicitValue,
       },
       {
