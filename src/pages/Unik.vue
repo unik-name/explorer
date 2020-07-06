@@ -22,7 +22,7 @@
               `mr-6 flex-none${unik.type ? ` unik-icon-container unik-icon-container-${unikClass(unik.type)}` : ''}`
             "
           >
-            <font-awesome-icon v-if="unik.type" class="unik-view-logo" :icon="unikLogo(unik.type)" />
+            <img v-if="unik.type" :src="unikLogo(unik.type)" alt="" class="unik-view-logo" />
             <SvgIcon v-else class="icon" name="unik" view-box="0 0 64 64" />
           </div>
           <div class="flex-auto min-w-0">
@@ -142,11 +142,11 @@ export default class Unik extends Vue {
 }
 
 .unik-icon-container.unik-icon-container-network {
-  background-color: #47a09f;
+  background-color: #16c8c0;
 }
 
 .unik-icon-container .unik-view-logo {
-  font-size: 2.5em;
+  width: 2.5em;
   padding: 0.05em;
   color: #fff;
 }

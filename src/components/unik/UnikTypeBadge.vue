@@ -1,6 +1,6 @@
 <template>
   <span :class="`unik-badge unik-badge-${unikClass(type)}`">
-    <font-awesome-icon v-if="type" class="unik-view-logo" :icon="unikLogo(type)" />
+    <img v-if="type" :src="unikLogo(type)" alt="" class="unik-view-logo" />
     {{ $t(unikTypeReadableLabelTranslationKey(type)) }}
   </span>
 </template>
@@ -25,9 +25,9 @@ export default class UnikTypeBadge extends Vue {
   margin-right: 0.5em;
 }
 
-.unik-badge svg {
+.unik-badge img {
   margin-right: 0.5em;
-  font-size: 1.2em;
+  width: 1.2em;
 }
 
 .unik-badge.unik-badge-individual {

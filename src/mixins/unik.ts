@@ -1,10 +1,10 @@
 import { DIDType } from "@uns/ts-sdk";
-import { getUnikLogoName, getUnikClass, getUnikTypeReadableLabelTranslationKey } from "@/utils/unik-utils";
+import { getUnikClass, getUnikTypeReadableLabelTranslationKey } from "@/utils/unik-utils";
 
 export default {
   methods: {
     unikLogo(type: DIDType): string {
-      return getUnikLogoName(type);
+      return require(`@/assets/images/unik/unik-${type.toLowerCase()}.png`);
     },
     unikClass(type: DIDType): string {
       return getUnikClass(type);
