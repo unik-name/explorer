@@ -24,17 +24,6 @@ function getDIDTypeByDIDTypes(type: DIDType): DIDTypes {
   return parsedType;
 }
 
-export function getUnikLogoName(type: DIDType): string {
-  switch (getDIDTypeByDIDTypes(type)) {
-    case DIDTypes.INDIVIDUAL:
-      return "user";
-    case DIDTypes.ORGANIZATION:
-      return "globe";
-    case DIDTypes.NETWORK:
-      return "network-wired";
-  }
-}
-
 export function getUnikClass(type: DIDType): string {
   switch (getDIDTypeByDIDTypes(type)) {
     case DIDTypes.INDIVIDUAL:

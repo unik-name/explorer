@@ -1,5 +1,5 @@
 <template>
-  <font-awesome-icon v-if="type" :icon="`${unikLogo(type)}`" :class="`unik unik-${unikClass(type)}`" />
+  <img v-if="type" :src="unikLogo(type)" :class="`unik unik-${unikClass(type)}`" />
 </template>
 
 <script lang="ts">
