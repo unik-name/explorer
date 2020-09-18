@@ -18,7 +18,7 @@
       }"
       class="ml-auto"
     >
-      <span v-if="!isFee && isIncoming">+</span>
+      <span v-if="!isFee && isIncoming && source > 0">+</span>
       <span v-else-if="!isFee && isOutgoing && source > 0">-</span>
       {{ readableCrypto(source) }}
     </span>
@@ -42,6 +42,7 @@ import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/
 import { mapGetters } from "vuex";
 import { getMilestone } from "./utils";
 import { DIDType, DIDHelpers } from "@uns/ts-sdk";
+import { Identities } from "@uns/ark-crypto";
 
 @Component({
   computed: {
@@ -57,11 +58,19 @@ export default class TransactionAmount extends Vue {
   private initialBlockHeight = 0;
   private networkConfig;
   private initialMilestone = null;
+  private foundationWallet: string = null;
 
   @Watch("height")
   public onHeightChanged(newValue: number, oldValue: number) {
     if (!oldValue) {
       this.setInitialBlockHeight();
+    }
+  }
+
+  private setFoundationWallet() {
+    if (!this.foundationWallet) {
+      const foundationPubKey = this.networkConfig.network.foundation.publicKey;
+      this.foundationWallet = Identities.Address.fromPublicKey(foundationPubKey, this.networkConfig.network.pubKeyHash);
     }
   }
 
@@ -109,7 +118,15 @@ export default class TransactionAmount extends Vue {
       this.setInitialMilestone();
       const rewards = this.initialMilestone.voucherRewards[type.toLowerCase()];
 
-      if (this.transaction.recipient === this.$route.params.address) {
+      // Forge factory wallet
+      const issuerAddress = this.transaction.recipient;
+      if (this.$route.params.address === issuerAddress) {
+        return this.transaction.amount;
+      }
+
+      // Foundation wallet
+      this.setFoundationWallet();
+      if (this.$route.params.address === this.foundationWallet) {
         return rewards.foundation;
       }
       return rewards.sender + rewards.forger;
@@ -171,8 +188,15 @@ export default class TransactionAmount extends Vue {
     }
 
     // @ts-ignore
-    if (this.isVoucherUnsCertifiedNftMint(this.transaction)) {
-      return true;
+    if (this.isUnsCertifiedNftMint(this.transaction.type, this.transaction.typeGroup)) {
+      // @ts-ignore
+      if (this.isVoucherUnsCertifiedNftMint(this.transaction)) {
+        return true;
+      }
+      // forge factory case
+      if (this.$route.params.address === this.transaction.recipient) {
+        return true;
+      }
     }
 
     return (
