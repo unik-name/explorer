@@ -84,12 +84,12 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { IWallet } from "@/interfaces";
 import WalletVoters from "@/components/wallet/Voters.vue";
-import UnikDisplay from "@/components/unik/UnikDisplay.vue";
+import LinkUNIK from "@/components/links/LinkUNIK.vue";
 
 @Component({
   components: {
     WalletVoters,
-    UnikDisplay,
+    LinkUNIK,
   },
 })
 export default class WalletDelegate extends Vue {
