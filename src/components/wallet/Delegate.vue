@@ -3,7 +3,11 @@
     <div class="list-row-border-b">
       <div>{{ $t("WALLET.DELEGATE.DELEGATE") }}</div>
       <div v-if="delegate.unikname">
-        <UnikDisplay style="color: inherit" :unikname="delegate.unikname" :type="delegate.unikType" />
+        <LinkUNIK
+          :id="delegate.username"
+          :unikname="delegate.unikname"
+          :type="delegate.unikType"
+        ></LinkUNIK>
       </div>
       <div v-else>{{ delegate.username }}</div>
     </div>
