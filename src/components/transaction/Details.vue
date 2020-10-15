@@ -60,12 +60,12 @@
           </div>
         </div>
 
-        <div v-if="isVoucherUnsCertifiedNftMint(transaction)">
+        <div v-if="rewards">
           <div class="list-row-border-b">
             <LinkUNIK
               :id="transaction.asset.nft.unik.tokenId"
               :unikname="$t('TRANSACTION.REWARDS.SENDER')"
-              :type="getUnikType()"
+              :type="didType"
             ></LinkUNIK>
             <div
               v-tooltip="{
@@ -97,7 +97,7 @@
         </div>
 
         <div class="list-row-border-b">
-          <div v-if="isVoucherUnsCertifiedNftMint(transaction)" class="mr-4">
+          <div v-if="rewards" class="mr-4">
             {{ $t("TRANSACTION.REWARDS.FORGER") }}
           </div>
           <div v-else class="mr-4">{{ $t("TRANSACTION.FEE") }}</div>
@@ -269,9 +269,9 @@ import { mapGetters } from "vuex";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { CryptoCompareService, LockService, TransactionService, WalletService } from "@/services";
-import { DIDType, DIDHelpers } from "@uns/ts-sdk";
-import { Identities, Managers } from "@uns/ark-crypto";
-import { getMilestone } from "../utils/utils";
+import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
+import { Identities } from "@uns/ark-crypto";
+import { getdidTypeFromRewardTransaction, getMilestone } from "../utils/utils";
 
 @Component({
   computed: {
@@ -290,8 +290,8 @@ export default class TransactionDetails extends Vue {
   private timelockStatus: TranslateResult | null = null;
   private timelockLink: string | null = null;
   private networkConfig;
-  private initialMilestone = null;
   private foundationUnikid = "";
+  private isTokenEcoV2 = false;
 
   get confirmations() {
     return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
@@ -341,10 +341,20 @@ export default class TransactionDetails extends Vue {
   }
 
   get rewards() {
-    if (!this.initialMilestone) {
-      this.setInitialMilestone();
+    this.setTokenEco();
+    // @ts-ignore
+    if (this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
+      return getMilestone(this.networkConfig, this.initialBlockHeight).voucherRewards[
+        DIDHelpers.fromCode(this.didType).toLowerCase()
+      ];
     }
-    return this.initialMilestone.voucherRewards[this.getUnikType().toLowerCase()];
+  }
+
+  get didType(): DIDTypes {
+    // @ts-ignore
+    if (this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
+      return getdidTypeFromRewardTransaction(this.transaction, this.isTokenEcoV2);
+    }
   }
 
   @Watch("transaction")
@@ -368,15 +378,18 @@ export default class TransactionDetails extends Vue {
     }
   }
 
+  private setTokenEco() {
+    if (!this.initialBlockHeight) {
+      this.setInitialBlockHeight();
+    }
+    this.isTokenEcoV2 = !!getMilestone(this.networkConfig, this.initialBlockHeight).unsTokenEcoV2;
+  }
+
   public async mounted() {
     this.updatePrice();
     this.handleMultipayment();
     this.getTimelockStatus();
     this.setFoundationInfos();
-  }
-
-  private getUnikType(): DIDType {
-    return DIDHelpers.fromCode(parseInt(this.transaction.asset.nft.unik.properties.type));
   }
 
   private async updatePrice() {
@@ -387,23 +400,15 @@ export default class TransactionDetails extends Vue {
     this.initialBlockHeight = this.height - this.transaction.confirmations;
   }
 
-  private setInitialMilestone() {
-    if (!this.initialBlockHeight) {
-      this.setInitialBlockHeight();
-    }
-    this.initialMilestone = getMilestone(this.networkConfig, this.initialBlockHeight);
-  }
-
   private async setFoundationInfos() {
     const foundationPubKey = this.networkConfig.network.foundation.publicKey;
     const wallet = await WalletService.find(
       Identities.Address.fromPublicKey(foundationPubKey, this.networkConfig.network.pubKeyHash),
     );
-    let unikid: string;
-    if (wallet.attributes.tokens && wallet.attributes.tokens.tokens.length) {
-      unikid = wallet.attributes.tokens.tokens[0];
+
+    if (wallet.attributes.tokens && wallet.attributes.tokens.length) {
+      this.foundationUnikid = Object.keys(wallet.attributes.tokens)[0];
     }
-    this.foundationUnikid = unikid;
   }
 
   private handleMultipayment() {
