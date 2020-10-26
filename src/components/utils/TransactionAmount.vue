@@ -1,10 +1,10 @@
 <template>
   <span
     :class="
-      !isFee && source > 0
+      source > 0
         ? {
-            'text-red': isOutgoing,
-            'text-green': isIncoming,
+            'text-red': isFee ? isOutgoingFee : isOutgoing,
+            'text-green': !isFee && isIncoming,
           }
         : ''
     "
@@ -19,7 +19,7 @@
       class="ml-auto"
     >
       <span v-if="!isFee && isIncoming && source > 0">+</span>
-      <span v-else-if="!isFee && isOutgoing && source > 0">-</span>
+      <span v-else-if="(isFee ? isOutgoingFee : isOutgoing) && source > 0">-</span>
       {{ readableCrypto(source) }}
     </span>
     <SvgIcon
@@ -168,6 +168,10 @@ export default class TransactionAmount extends Vue {
       return true;
     }
 
+    return this.transaction.sender === this.$route.params.address;
+  }
+
+  get isOutgoingFee() {
     return this.transaction.sender === this.$route.params.address;
   }
 
