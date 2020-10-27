@@ -92,6 +92,7 @@ export default class TableTransactionsDesktop extends Vue {
   })
   public transactions: ITransaction[] | null;
   @Prop({ required: false, default: false }) public showConfirmations: boolean;
+  @Prop({ required: false, default: true }) public unsflow: boolean;
 
   private activeDelegates: IDelegate[];
   private isListed: boolean;
@@ -99,8 +100,13 @@ export default class TableTransactionsDesktop extends Vue {
 
   get columns() {
     const feeClasses = ["hidden", "lg:table-cell"];
+    const textClasses = ["cell-smartbridge"];
 
     feeClasses.push(this.showConfirmations ? "pr-10 xl:pr-4" : "end-cell");
+
+    if (this.unsflow) {
+      textClasses.push("text-right");
+    }
 
     let columns = [
       {
@@ -129,24 +135,29 @@ export default class TableTransactionsDesktop extends Vue {
       {
         label: this.$t("TRANSACTION.SMARTBRIDGE"),
         field: "vendorField",
-        thClass: "text-right cell-smartbridge",
-        tdClass: "text-right cell-smartbridge",
-      },
-      {
-        label: this.$t("TRANSACTION.FLOW"),
-        field: "amount",
-        type: "number",
-        thClass: "end-cell lg:base-cell",
-        tdClass: "end-cell lg:base-cell",
-      },
-      {
-        label: this.$t("TRANSACTION.FEE"),
-        field: "fee",
-        type: "number",
-        thClass: feeClasses.join(" "),
-        tdClass: feeClasses.join(" "),
+        thClass: textClasses.join(" "),
+        tdClass: textClasses.join(" "),
       },
     ];
+
+    if (this.unsflow) {
+      columns.push(
+        {
+          label: this.$t("TRANSACTION.FLOW"),
+          field: "amount",
+          type: "number",
+          thClass: "end-cell lg:base-cell",
+          tdClass: "end-cell lg:base-cell",
+        },
+        {
+          label: this.$t("TRANSACTION.FEE"),
+          field: "fee",
+          type: "number",
+          thClass: feeClasses.join(" "),
+          tdClass: feeClasses.join(" "),
+        },
+      );
+    }
 
     if (this.showConfirmations) {
       columns = columns.filter((column) => column.field !== "vendorField");
