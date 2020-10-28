@@ -1,4 +1,11 @@
-import { BADGE_PIONEER_KEY } from "@uns/ts-sdk";
+import {
+  BADGE_DELEGATE_KEY,
+  BADGE_PIONEER_KEY,
+  BADGE_SECOND_PASSPHRASE_KEY,
+  BADGE_XP_LEVEL_KEY,
+  PioneerBadgeGrades,
+  XPLevelBadgeGrades,
+} from "@uns/ts-sdk";
 
 export default {
   COMMON: {
@@ -223,18 +230,26 @@ export default {
 
   PROPERTIES: {
     BADGES: "Badges",
-    "Badges/Security/SecondPassphrase": {
+    [BADGE_SECOND_PASSPHRASE_KEY]: {
       key: "Seconde clé secrète",
-      value: "Activée",
+      true: "Activée",
     },
-    "Badges/NP/Delegate": {
+    [BADGE_DELEGATE_KEY]: {
       key: "NetworkPlayer",
-      value: "Delegué",
+      true: "Delegué",
     },
     [BADGE_PIONEER_KEY]: {
       key: "Pionnier",
-      innovator: "Innovateur",
-      early: "Primo adoptant",
+      [PioneerBadgeGrades.INNOVATOR]: "Innovateur",
+      [PioneerBadgeGrades.EARLY_ADOPTER]: "Primo adoptant",
+    },
+    [BADGE_XP_LEVEL_KEY]: {
+      key: "XP Level",
+      [XPLevelBadgeGrades.NEWCOMER]: "Nouvel arrivant",
+      [XPLevelBadgeGrades.BEGINNER]: "Débutant",
+      [XPLevelBadgeGrades.ADVANCED]: "Avancé",
+      [XPLevelBadgeGrades.LEADER]: "Leader",
+      [XPLevelBadgeGrades.MAVEN]: "Expert",
     },
     "Authentications/CosmicNonce": {
       key: "Nonce cosmic",
