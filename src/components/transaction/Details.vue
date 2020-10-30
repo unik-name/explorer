@@ -26,6 +26,7 @@
               :trunc="false"
               :type-group="transaction.typeGroup"
               :show-as-type="true"
+              :transaction="transaction"
               tooltip-placement="left"
             />
           </div>

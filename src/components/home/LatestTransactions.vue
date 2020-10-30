@@ -4,12 +4,13 @@
       <div class="hidden sm:block">
         <TableTransactionsDesktop
           :transactions="transactions"
+          :unsflow="false"
           :sort-query="sortParams"
           @on-sort-change="onSortChange"
         />
       </div>
       <div class="sm:hidden">
-        <TableTransactionsMobile :transactions="transactions" />
+        <TableTransactionsMobile :transactions="transactions" :unsflow="false" />
       </div>
       <div
         v-if="transactions && transactions.length === paginationLimit"
