@@ -391,7 +391,7 @@ export default {
       true: "Delegate",
     },
     [BADGE_PIONEER_KEY]: {
-      key: "Pionnier",
+      key: "Pioneer",
       [PioneerBadgeGrades.INNOVATOR]: "Innovator",
       [PioneerBadgeGrades.EARLY_ADOPTER]: "Early adopter",
     },
