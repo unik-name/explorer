@@ -99,9 +99,44 @@
     <span v-else-if="isUnsDelegateResignation(type, typeGroup)">{{
       $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION")
     }}</span>
+    <span v-else-if="transaction && isIndividualCertifiedNftMint(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT_INDIV") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isOrganizationCertifiedNftMint(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT_ORG") }}
+      </RouterLink>
+    </span>
     <span v-else-if="isUnsCertifiedNftMint(type, typeGroup)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
         >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isUnsVerifyUrl(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_VERIFY_URL") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isUnsAliveDemand(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_ALIVE_DEMAND") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isUnsXPLevelDemand(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_XPLEVEL_DEMAND") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isUnsPioneerDemand(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_PIONEER_CLAIM") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isUnsUserPropertyUpdate(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_USER_PROPERTY") }}
       </RouterLink>
     </span>
     <span v-else-if="isUnsCertifiedNftUpdate(type, typeGroup)">
@@ -126,7 +161,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
-import { IDelegate } from "@/interfaces";
+import { IDelegate, ITransaction } from "@/interfaces";
 import UnikDisplay from "@/components/unik/UnikDisplay.vue";
 import WalletVoters from "@/pages/Wallet/Voters.vue";
 import LinkAddress from "./LinkAddress.vue";
@@ -151,6 +186,7 @@ export default class LinkWallet extends Vue {
   @Prop({ required: false, default: false }) public simple: boolean;
   @Prop({ required: false, default: false }) public showTimelockIcon: boolean;
   @Prop({ required: false, default: false }) public showAsType: boolean;
+  @Prop({ required: false, default: null }) public transaction: ITransaction | null;
 
   private delegates: IDelegate[];
 

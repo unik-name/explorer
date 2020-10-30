@@ -33,6 +33,7 @@
             :asset="data.row.asset"
             :type-group="data.row.typeGroup"
             :show-timelock-icon="true"
+            :transaction="data.row"
           />
         </div>
 
