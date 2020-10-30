@@ -162,6 +162,7 @@ export default {
       FOUNDATION: "UNS organization rewards",
       FORGER: "Forger rewards",
     },
+    UPDATED_PROPERTIES: "Updated properties",
   },
 
   WALLET: {

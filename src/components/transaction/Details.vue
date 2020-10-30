@@ -113,6 +113,13 @@
           </div>
         </div>
 
+        <div v-if="isUnsUserPropertyUpdate(transaction)" class="list-row-border-b">
+          <div class="mr-4">{{ $t("TRANSACTION.UPDATED_PROPERTIES") }}</div>
+          <div class="overflow-hidden break-words">
+            {{ Object.keys(transaction.asset.nft.unik.properties).join(", ") }}
+          </div>
+        </div>
+
         <div class="list-row-border-b-no-wrap">
           <div class="mr-4">{{ $t("COMMON.TIMESTAMP") }}</div>
           <div v-if="transaction.timestamp">{{ readableTimestamp(transaction.timestamp.unix) }}</div>
