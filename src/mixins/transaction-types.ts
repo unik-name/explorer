@@ -1,7 +1,14 @@
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, NftTransaction, UNSTransaction } from "@/enums";
 import { ITransaction } from "@/interfaces";
 import { BigNumber } from "@/utils";
-import { LifeCycleGrades, LIFE_CYCLE_PROPERTY_KEY } from "@uns/ts-sdk";
+import {
+  BADGE_PIONEER_KEY,
+  BADGE_XP_LEVEL_KEY,
+  DIDTypes,
+  LifeCycleGrades,
+  LIFE_CYCLE_PROPERTY_KEY,
+  VERIFIED_URL_KEY_PREFIX,
+} from "@uns/ts-sdk";
 
 const isCoreTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.CORE;
@@ -116,6 +123,18 @@ export default {
     isUnsCertifiedNftMint(type: number, typeGroup: number): boolean {
       return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_MINT;
     },
+    isIndividualCertifiedNftMint(transaction): boolean {
+      const type = transaction.asset.nft.unik.properties.type;
+      return (
+        this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) && type === DIDTypes.INDIVIDUAL.toString()
+      );
+    },
+    isOrganizationCertifiedNftMint(transaction): boolean {
+      const type = transaction.asset.nft.unik.properties.type;
+      return (
+        this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) && type === DIDTypes.ORGANIZATION.toString()
+      );
+    },
     isVoucherUnsCertifiedNftMint(transaction: ITransaction): boolean {
       return !!(
         this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) &&
@@ -149,6 +168,26 @@ export default {
       } else {
         return this.isVoucherUnsCertifiedNftMint(transaction);
       }
+    },
+    isUnsVerifyUrl(transaction: ITransaction): boolean {
+      const pattern = new RegExp(VERIFIED_URL_KEY_PREFIX);
+      return (
+        this.isUnsUpdateService(transaction) &&
+        Object.keys(transaction.asset.nft.unik.properties).some((propkey) => pattern.test(propkey))
+      );
+    },
+    isUnsXPLevelDemand(transaction: ITransaction): boolean {
+      return this.isUnsUpdateService(transaction) && !!transaction.asset.nft.unik.properties[BADGE_XP_LEVEL_KEY];
+    },
+    isUnsPioneerDemand(transaction: ITransaction): boolean {
+      return this.isUnsUpdateService(transaction) && !!transaction.asset.nft.unik.properties[BADGE_PIONEER_KEY];
+    },
+    isUnsUserPropertyUpdate(transaction: ITransaction): boolean {
+      const pattern = new RegExp("usr/");
+      return (
+        this.isUnsCertifiedNftUpdate(transaction.type, transaction.typeGroup) &&
+        Object.keys(transaction.asset.nft.unik.properties).some((propkey) => pattern.test(propkey))
+      );
     },
   },
 };
