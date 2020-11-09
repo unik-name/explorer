@@ -18,12 +18,12 @@
 
         <div v-else-if="data.column.field === 'balance'">
           <span>
-            {{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}
+            {{ readableCrypto(cappedVoteBalance(data.row), true, truncateBalance ? 2 : 8) }}
           </span>
         </div>
 
         <div v-else-if="data.column.field === 'supply'">
-          {{ supplyPercentage(data.row.balance) }}
+          {{ supplyPercentage(data.row) }}
         </div>
       </template>
     </TableWrapper>
@@ -37,10 +37,12 @@ import { mapGetters } from "vuex";
 import { BigNumber } from "@/utils";
 import WalletVoters from "@/pages/Wallet/Voters.vue";
 import { paginationLimit } from "@/constants";
+import { getMilestone } from "../utils/utils";
+import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 
 @Component({
   computed: {
-    ...mapGetters("network", ["supply"]),
+    ...mapGetters("network", ["supply", "height", "networkConfig"]),
   },
 })
 export default class TableWalletsDesktop extends Vue {
@@ -90,6 +92,9 @@ export default class TableWalletsDesktop extends Vue {
 
   private windowWidth = 0;
   private supply: string;
+  private isCappedVotes = false;
+  private height: number;
+  private networkConfig;
 
   public mounted() {
     this.windowWidth = window.innerWidth;
@@ -101,14 +106,39 @@ export default class TableWalletsDesktop extends Vue {
     });
   }
 
-  public supplyPercentage(balance: string): string {
+  private setCappedVotesMilestone() {
+    this.isCappedVotes = !!getMilestone(this.networkConfig, this.height).voterMaximumWeight;
+  }
+
+  public supplyPercentage(wallet: any): string {
+    const balance = this.cappedVoteBalance(wallet);
     // @ts-ignore
     return this.percentageString(
-      BigNumber.make(balance)
+      balance
         .dividedBy(this.total)
         .times(100)
         .toNumber(),
     );
+  }
+
+  public cappedVoteBalance(wallet: any): BigNumber {
+    const balance = BigNumber.make(wallet.balance);
+    this.setCappedVotesMilestone();
+
+    const isTopWalletTable = this.total === this.supply;
+
+    if (!isTopWalletTable && this.isCappedVotes && wallet.attributes.tokens) {
+      const didType: DIDTypes = parseInt((Object.values(wallet.attributes.tokens).shift() as any).type);
+      if (didType === DIDTypes.INDIVIDUAL) {
+        const voteCap = BigNumber.make(
+          getMilestone(this.networkConfig, this.height).voterMaximumWeight[DIDHelpers.fromCode(didType).toLowerCase()],
+        );
+        if (balance.isGreaterThanOrEqualTo(voteCap)) {
+          return voteCap;
+        }
+      }
+    }
+    return balance;
   }
 
   private getRank(index: number) {
