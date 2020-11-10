@@ -46,7 +46,7 @@
 <script lang="ts">
 import { Vue, Prop, Component } from "vue-property-decorator";
 import UnikProperties from "@/components/unik/UnikProperties.vue";
-import { LIFE_CYCLE_PROPERTY_KEY, LifeCycleGrades } from "@uns/ts-sdk/dist/types";
+import { LIFE_CYCLE_PROPERTY_KEY, LifeCycleGrades } from "@uns/ts-sdk";
 
 export type property = { key: string; value: string };
 
