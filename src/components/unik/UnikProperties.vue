@@ -50,13 +50,8 @@ export default class UnikProperties extends Vue {
   }
 
   private getValue(entry: property): string {
-    if (entry.key === BADGE_PIONEER_KEY) {
-      return entry.value === PioneerBadgeGrades.INNOVATOR.toString()
-        ? this.$t(`PROPERTIES.${BADGE_PIONEER_KEY}.innovator`).toString()
-        : this.$t(`PROPERTIES.${BADGE_PIONEER_KEY}.early`).toString();
-    }
-    return this.$te(`PROPERTIES.${entry.key}.value`)
-      ? this.$t(`PROPERTIES.${entry.key}.value`).toString()
+    return this.$te(`PROPERTIES.${entry.key}.${entry.value}`)
+      ? this.$t(`PROPERTIES.${entry.key}.${entry.value}`).toString()
       : entry.value;
   }
 

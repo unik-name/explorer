@@ -1,10 +1,10 @@
 <template>
   <span
     :class="
-      !isFee && source > 0
+      source > 0
         ? {
-            'text-red': isOutgoing,
-            'text-green': isIncoming,
+            'text-red': isFee ? isOutgoingFee : isOutgoing,
+            'text-green': !isFee && isIncoming,
           }
         : ''
     "
@@ -19,7 +19,7 @@
       class="ml-auto"
     >
       <span v-if="!isFee && isIncoming && source > 0">+</span>
-      <span v-else-if="!isFee && isOutgoing && source > 0">-</span>
+      <span v-else-if="(isFee ? isOutgoingFee : isOutgoing) && source > 0">-</span>
       {{ readableCrypto(source) }}
     </span>
     <SvgIcon
@@ -40,8 +40,8 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { mapGetters } from "vuex";
-import { getMilestone } from "./utils";
-import { DIDType, DIDHelpers } from "@uns/ts-sdk";
+import { getdidTypeFromRewardTransaction, getMilestone } from "./utils";
+import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 import { Identities } from "@uns/ark-crypto";
 
 @Component({
@@ -57,13 +57,14 @@ export default class TransactionAmount extends Vue {
   private height: number;
   private initialBlockHeight = 0;
   private networkConfig;
-  private initialMilestone = null;
   private foundationWallet: string = null;
+  private isTokenEcoV2 = false;
 
   @Watch("height")
   public onHeightChanged(newValue: number, oldValue: number) {
     if (!oldValue) {
       this.setInitialBlockHeight();
+      this.setTokenEco();
     }
   }
 
@@ -78,11 +79,22 @@ export default class TransactionAmount extends Vue {
     this.initialBlockHeight = this.height - this.transaction.confirmations;
   }
 
-  private setInitialMilestone() {
+  private setTokenEco() {
     if (!this.initialBlockHeight) {
       this.setInitialBlockHeight();
     }
-    this.initialMilestone = getMilestone(this.networkConfig, this.initialBlockHeight);
+    this.isTokenEcoV2 = !!getMilestone(this.networkConfig, this.initialBlockHeight).unsTokenEcoV2;
+  }
+
+  get rewards() {
+    this.setTokenEco();
+    // @ts-ignore
+    if (this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
+      const didType = getdidTypeFromRewardTransaction(this.transaction, this.isTokenEcoV2);
+      return getMilestone(this.networkConfig, this.initialBlockHeight).voucherRewards[
+        DIDHelpers.fromCode(didType).toLowerCase()
+      ];
+    }
   }
 
   get transactionTab() {
@@ -112,24 +124,13 @@ export default class TransactionAmount extends Vue {
       return this.calculateMultipaymentAmount(this.transaction, this.address, this.transactionTab);
     }
 
-    // @ts-ignore
-    if (this.isVoucherUnsCertifiedNftMint(this.transaction)) {
-      const type: DIDType = DIDHelpers.fromCode(parseInt(this.transaction.asset.nft.unik.properties.type));
-      this.setInitialMilestone();
-      const rewards = this.initialMilestone.voucherRewards[type.toLowerCase()];
-
-      // Forge factory wallet
-      const issuerAddress = this.transaction.recipient;
-      if (this.$route.params.address === issuerAddress) {
-        return this.transaction.amount;
-      }
-
+    if (this.rewards) {
       // Foundation wallet
       this.setFoundationWallet();
       if (this.$route.params.address === this.foundationWallet) {
-        return rewards.foundation;
+        return this.rewards.foundation;
       }
-      return rewards.sender + rewards.forger;
+      return this.rewards.sender + this.rewards.forger;
     }
 
     return this.transaction.amount;
@@ -163,10 +164,14 @@ export default class TransactionAmount extends Vue {
     }
 
     // @ts-ignore
-    if (this.isUnsUpdateService(this.transaction)) {
+    if (this.isUnsUpdateService(this.transaction) || this.isUnsNftMintService(this.transaction)) {
       return true;
     }
 
+    return this.transaction.sender === this.$route.params.address;
+  }
+
+  get isOutgoingFee() {
     return this.transaction.sender === this.$route.params.address;
   }
 
@@ -187,16 +192,8 @@ export default class TransactionAmount extends Vue {
       );
     }
 
-    // @ts-ignore
-    if (this.isUnsCertifiedNftMint(this.transaction.type, this.transaction.typeGroup)) {
-      // @ts-ignore
-      if (this.isVoucherUnsCertifiedNftMint(this.transaction)) {
-        return true;
-      }
-      // forge factory case
-      if (this.$route.params.address === this.transaction.recipient) {
-        return true;
-      }
+    if (this.rewards) {
+      return true;
     }
 
     return (
@@ -204,7 +201,9 @@ export default class TransactionAmount extends Vue {
       // @ts-ignore
       (this.isTransfer(this.transaction.type, this.transaction.typeGroup) ||
         // @ts-ignore
-        this.isUnsUpdateService(this.transaction))
+        this.isUnsUpdateService(this.transaction) ||
+        // @ts-ignore
+        this.isUnsNftMintService(this.transaction))
     );
   }
 }

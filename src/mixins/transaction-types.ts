@@ -1,6 +1,7 @@
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction, NftTransaction, UNSTransaction } from "@/enums";
 import { ITransaction } from "@/interfaces";
 import { BigNumber } from "@/utils";
+import { LifeCycleGrades, LIFE_CYCLE_PROPERTY_KEY } from "@uns/ts-sdk";
 
 const isCoreTypeGroup = (typeGroup: number): boolean => {
   return typeGroup === TypeGroupTransaction.CORE;
@@ -121,13 +122,33 @@ export default {
         transaction.asset.nft.unik.properties.UnikVoucherId
       );
     },
+    isUnsNftMintService(transaction: ITransaction): boolean {
+      return (
+        this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) &&
+        !BigNumber.make(this.transaction.amount).isZero()
+      );
+    },
     isUnsCertifiedNftUpdate(type: number, typeGroup: number): boolean {
       return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_UPDATE;
     },
     isUnsUpdateService(transaction: ITransaction): boolean {
       return (
-        this.isUnsCertifiedNftUpdate(transaction.type, transaction.typeGroup) && transaction.amount !== BigNumber.ZERO
+        this.isUnsCertifiedNftUpdate(transaction.type, transaction.typeGroup) &&
+        !BigNumber.make(this.transaction.amount).isZero()
       );
+    },
+    isUnsAliveDemand(transaction: ITransaction): boolean {
+      return (
+        this.isUnsCertifiedNftUpdate(transaction.type, transaction.typeGroup) &&
+        transaction.asset.nft.unik.properties[LIFE_CYCLE_PROPERTY_KEY] === LifeCycleGrades.LIVE.toString()
+      );
+    },
+    isUnsRewardedTransaction(transaction: ITransaction, isTokenEcov2: boolean): boolean {
+      if (isTokenEcov2) {
+        return this.isUnsAliveDemand(transaction) && BigNumber.make(this.transaction.amount).isZero();
+      } else {
+        return this.isVoucherUnsCertifiedNftMint(transaction);
+      }
     },
   },
 };
