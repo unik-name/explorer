@@ -28,6 +28,7 @@ export default class UnikTypeBadge extends Vue {
 .unik-badge img {
   margin-right: 0.5em;
   width: 1.2em;
+  height: 1.2em;
 }
 
 .unik-badge.unik-badge-individual {

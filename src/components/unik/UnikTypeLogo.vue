@@ -20,6 +20,7 @@ export default class UnikTypeLogo extends Vue {
   margin-right: 0.2em;
   border-radius: 2px;
   width: 1em;
+  height: 1em;
 }
 
 .unik.unik-individual {
