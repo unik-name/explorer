@@ -1,5 +1,6 @@
 import store from "@/store";
 import { BigNumber } from "@/utils";
+import { unsFormat } from "@uns/ts-sdk/dist/utils/numbers";
 
 const locale = store.getters["ui/locale"];
 
@@ -61,6 +62,10 @@ export default {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           });
+    },
+
+    unsAmount(value: string): string | void {
+      return unsFormat(value, store.getters["network/symbol"] || store.getters["network/defaults"].symbol || "");
     },
   },
 };

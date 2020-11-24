@@ -125,6 +125,7 @@ export interface IWallet {
   isDelegate: boolean;
   isResigned?: boolean;
   lockedBalance?: BigNumber;
+  attributes?: any;
 }
 
 export interface IApiResponse {
@@ -360,6 +361,7 @@ export interface IBlockSearchParams {
 
 export interface IWalletSearchParams {
   address?: string;
+  addresses?: string[];
   username?: string;
   vote?: string;
   balance?: { from?: number; to?: number };

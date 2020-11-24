@@ -22,6 +22,14 @@
           </span>
         </div>
 
+        <div v-else-if="data.column.field === 'sender' && uniksInfos[data.row.sender]">
+          <LinkUNIK
+            :id="uniksInfos[data.row.sender].id"
+            :unikname="uniksInfos[data.row.sender].explicitValue"
+            :type="uniksInfos[data.row.sender].type"
+          />
+        </div>
+
         <div v-else-if="data.column.field === 'sender'">
           <LinkWallet :address="data.row.sender" />
         </div>
@@ -34,11 +42,10 @@
             :type-group="data.row.typeGroup"
             :show-timelock-icon="true"
             :transaction="data.row"
+            :unik-infos="uniksInfos[data.row.recipient]"
+            :show-as-type="true"
           />
-        </div>
-
-        <div v-else-if="data.column.field === 'vendorField'">
-          <div class="cell-smartbridge-truncate">
+          <div v-if="data.row.vendorField" class="vendorfield">
             {{ data.row.vendorField }}
           </div>
         </div>
@@ -67,6 +74,9 @@
             </div>
           </div>
         </div>
+        <div v-else-if="data.column.field === 'handeled'">
+          <TransactionAmount :transaction="data.row" :is-handeled-u-n-s="true" />
+        </div>
       </template>
     </TableWrapper>
   </Loader>
@@ -77,6 +87,8 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ISortParameters, ITransaction } from "@/interfaces";
 import CryptoCompareService from "@/services/crypto-compare";
+import { getUniksInfos } from "../utils/utils";
+import store from "@/store";
 
 @Component({
   computed: {
@@ -93,11 +105,12 @@ export default class TableTransactionsDesktop extends Vue {
   })
   public transactions: ITransaction[] | null;
   @Prop({ required: false, default: false }) public showConfirmations: boolean;
-  @Prop({ required: false, default: true }) public unsflow: boolean;
+  @Prop({ required: false, default: true }) public handeledUNS: boolean;
 
   private activeDelegates: IDelegate[];
   private isListed: boolean;
   private currencySymbol: string;
+  private uniksInfos: Record<string, any> = {};
 
   get columns() {
     const feeClasses = ["hidden", "lg:table-cell"];
@@ -105,11 +118,7 @@ export default class TableTransactionsDesktop extends Vue {
 
     feeClasses.push(this.showConfirmations ? "pr-10 xl:pr-4" : "end-cell");
 
-    if (this.unsflow) {
-      textClasses.push("text-right");
-    }
-
-    let columns = [
+    const columns = [
       {
         label: this.$t("COMMON.ID"),
         field: "id",
@@ -132,16 +141,18 @@ export default class TableTransactionsDesktop extends Vue {
         label: this.$t("TRANSACTION.RECIPIENT_OR_TYPE"),
         field: "recipient",
         tdClass: "break-all",
-      },
-      {
-        label: this.$t("TRANSACTION.SMARTBRIDGE"),
-        field: "vendorField",
-        thClass: textClasses.join(" "),
-        tdClass: textClasses.join(" "),
+        thClass: "mr-50 not-sortable",
       },
     ];
-
-    if (this.unsflow) {
+    if (this.handeledUNS) {
+      columns.push({
+        label: store.getters["network/symbol"],
+        field: "handeled",
+        type: "number",
+        thClass: "end-cell lg:base-cell text-right",
+        tdClass: "end-cell lg:base-cell text-right",
+      });
+    } else {
       columns.push(
         {
           label: this.$t("TRANSACTION.FLOW"),
@@ -161,8 +172,6 @@ export default class TableTransactionsDesktop extends Vue {
     }
 
     if (this.showConfirmations) {
-      columns = columns.filter((column) => column.field !== "vendorField");
-
       columns.push({
         label: this.$t("COMMON.CONFIRMATIONS"),
         field: "confirmations",
@@ -186,6 +195,9 @@ export default class TableTransactionsDesktop extends Vue {
   @Watch("transactions")
   public async onTransactionsChanged() {
     await this.prepareTransactions();
+    if (this.transactions) {
+      this.uniksInfos = await getUniksInfos(this.transactions);
+    }
   }
 
   @Watch("currencySymbol")
@@ -194,7 +206,7 @@ export default class TableTransactionsDesktop extends Vue {
   }
 
   public async created() {
-    this.prepareTransactions();
+    await this.prepareTransactions();
   }
 
   private async prepareTransactions() {
@@ -226,6 +238,12 @@ export default class TableTransactionsDesktop extends Vue {
 .icon {
   width: 16px;
   height: 16px;
+}
+
+.vendorfield {
+  @apply .ml-auto .truncate;
+  max-width: 250px;
+  margin: 5px 0px 0px 8px;
 }
 
 .wrap-timestamp {

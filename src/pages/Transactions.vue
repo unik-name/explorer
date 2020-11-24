@@ -25,6 +25,8 @@
         <TableTransactionsDesktop
           :transactions="transactions"
           :sort-query="sortParams"
+          :show-confirmations="true"
+          :handeled-u-n-s="true"
           @on-sort-change="onSortChange"
         />
       </div>
@@ -33,7 +35,7 @@
           <SelectionType @change="setType" />
         </div>
 
-        <TableTransactionsMobile :transactions="transactions" />
+        <TableTransactionsMobile :transactions="transactions" :handeled-u-n-s="true" />
       </div>
       <Pagination v-if="showPagination" :meta="meta" :current-page="currentPage" @page-change="onPageChange" />
     </section>

@@ -1,5 +1,9 @@
 <template>
+  <span v-if="isHandeledUNS" class="ml-auto">
+    {{ unsAmount(handeledUns) }}
+  </span>
   <span
+    v-else
     :class="
       source > 0
         ? {
@@ -43,6 +47,7 @@ import { mapGetters } from "vuex";
 import { getdidTypeFromRewardTransaction, getFoundationAddress, getMilestone } from "./utils";
 import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 import { Identities } from "@uns/ark-crypto";
+import { BigNumber } from "@/utils";
 
 @Component({
   computed: {
@@ -53,6 +58,7 @@ export default class TransactionAmount extends Vue {
   @Prop({ required: true }) public transaction: ITransaction;
   @Prop({ required: false, default: false }) public isFee: boolean;
   @Prop({ required: false, default: "top" }) public tooltipPlacement: string;
+  @Prop({ required: false, default: false }) public isHandeledUNS: boolean;
 
   private height: number;
   private initialBlockHeight = 0;
@@ -206,6 +212,15 @@ export default class TransactionAmount extends Vue {
         // @ts-ignore
         this.isUnsNftMintService(this.transaction))
     );
+  }
+
+  get handeledUns(): string {
+    let handeledUns: BigNumber = BigNumber.make(this.transaction.fee).plus(this.transaction.amount);
+    if (this.rewards) {
+      handeledUns = handeledUns.plus(this.rewards.sender).plus(this.rewards.forger);
+    }
+    console.log("handeledUns", handeledUns.toString());
+    return handeledUns.toString();
   }
 }
 </script>
