@@ -1,6 +1,7 @@
 import { DIDTypes, UNSClient, Unik } from "@uns/ts-sdk";
-import { TransactionService } from "@/services";
+import { ApiService, TransactionService } from "@/services";
 import { IUnik, IUnikProperties } from "@/interfaces";
+import { paginationLimit } from "@/constants";
 
 export class UnikService {
   public unsClient: UNSClient;

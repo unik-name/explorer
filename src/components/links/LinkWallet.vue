@@ -1,17 +1,22 @@
 <template>
   <span class="flex items-center">
     <template v-if="isTransfer(type, typeGroup) || isTimelock(type, typeGroup)">
-      <span v-if="showAsType">
-        {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup) ? "TRANSFER" : "TIMELOCK"}`) }}
-      </span>
-      <div v-else class="flex items-center w-full">
-        <LinkAddress
-          :address="address"
-          :public-key="publicKey"
-          :trunc="trunc"
-          :tooltip-placement="tooltipPlacement"
-          container-class="w-full"
-        />
+      <div class="flex items-center w-full whitespace-no-wrap">
+        <span v-if="showAsType" class="mr-2">
+          {{ $t(`TRANSACTION.TYPES.${isTransfer(type, typeGroup) ? "TRANSFER_TO" : "TIMELOCK"}`) }}:
+        </span>
+        <div v-if="!!unikInfos">
+          <LinkUNIK :id="unikInfos.id" :unikname="unikInfos.explicitValue" :type="unikInfos.type" />
+        </div>
+        <div v-else>
+          <LinkAddress
+            :address="address"
+            :public-key="publicKey"
+            :trunc="trunc"
+            :tooltip-placement="tooltipPlacement"
+            container-class="w-full"
+          />
+        </div>
         <div v-if="isTimelock(type, typeGroup) && showTimelockIcon">
           <SvgIcon
             v-tooltip="{
@@ -26,7 +31,18 @@
       </div>
     </template>
 
-    <span v-else-if="isSecondSignature(type, typeGroup)">{{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}</span>
+    <span v-else-if="isSecondSignature(type, typeGroup)">
+      <RouterLink
+        v-tooltip="{
+          content: address,
+          placement: tooltipPlacement,
+        }"
+        :to="{ name: 'wallet', params: { address: address } }"
+        :trunc="trunc"
+      >
+        {{ $t("TRANSACTION.TYPES.SECOND_SIGNATURE") }}
+      </RouterLink>
+    </span>
     <span v-else-if="isDelegateRegistration(type, typeGroup)">{{ $t("TRANSACTION.TYPES.DELEGATE_REGISTRATION") }}</span>
     <span v-else-if="isVote(type, typeGroup)">
       <RouterLink
@@ -52,11 +68,22 @@
         </span>
       </RouterLink>
     </span>
-    <span v-else-if="isMultiSignature(type, typeGroup)">{{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}</span>
+    <span v-else-if="isMultiSignature(type, typeGroup)">
+      <RouterLink
+        v-tooltip="{
+          content: address,
+          placement: tooltipPlacement,
+        }"
+        :to="{ name: 'wallet', params: { address: address } }"
+        :trunc="trunc"
+      >
+        {{ $t("TRANSACTION.TYPES.MULTI_SIGNATURE") }}
+      </RouterLink>
+    </span>
     <span v-else-if="isIpfs(type, typeGroup)">{{ $t("TRANSACTION.TYPES.IPFS") }}</span>
-    <span v-else-if="isMultiPayment(type, typeGroup)"
-      >{{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})</span
-    >
+    <span v-else-if="isMultiPayment(type, typeGroup)">
+      {{ $t("TRANSACTION.TYPES.MULTI_PAYMENT") }} ({{ multiPaymentRecipientsCount }})
+    </span>
     <span v-else-if="isDelegateResignation(type, typeGroup)">{{ $t("TRANSACTION.TYPES.DELEGATE_RESIGNATION") }}</span>
     <span v-else-if="isTimelockClaim(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_CLAIM") }}</span>
     <span v-else-if="isTimelockRefund(type, typeGroup)">{{ $t("TRANSACTION.TYPES.TIMELOCK_REFUND") }}</span>
@@ -72,9 +99,19 @@
     <span v-else-if="isBridgechainUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE") }}</span>
 
     <span v-else-if="isNftTransfer(type, typeGroup)">
-      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
-        >{{ $t("UNIK.TRANSFER") }}
-      </RouterLink>
+      {{ $t("UNIK.TRANSFER_TO") }}
+      <div v-if="!!unikInfos" class="flex items-center w-full" style="white-space: pre-wrap">
+        <LinkUNIK :id="unikInfos.id" :unikname="unikInfos.explicitValue" :type="unikInfos.type" />
+      </div>
+      <div v-else class="flex items-center w-full">
+        <LinkAddress
+          :address="address"
+          :public-key="publicKey"
+          :trunc="trunc"
+          :tooltip-placement="tooltipPlacement"
+          container-class="w-full"
+        />
+      </div>
     </span>
     <span v-else-if="isNftUpdate(type, typeGroup)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
@@ -90,15 +127,30 @@
       <RouterLink
         v-tooltip="asset['disclose-demand'].payload.sub"
         :to="{ name: 'unik', params: { id: asset['disclose-demand'].payload.sub } }"
-        >{{ $t("UNIK.DISCLOSE") }}
+        >{{ $t("TRANSACTION.TYPES.UNS_DISCLOSE") }}
       </RouterLink>
     </span>
-    <span v-else-if="isUnsDelegateRegistration(type, typeGroup)">{{
-      $t("TRANSACTION.TYPES.UNS_DELEGATE_REGISTRATION")
-    }}</span>
-    <span v-else-if="isUnsDelegateResignation(type, typeGroup)">{{
-      $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION")
-    }}</span>
+    <span v-else-if="isUnsDelegateRegistration(type, typeGroup)">
+      <div v-if="unikInfos">
+        <RouterLink v-tooltip="unikInfos.id" :to="{ name: 'unik', params: { id: unikInfos.id } }"
+          >{{ $t("TRANSACTION.TYPES.UNS_DELEGATE_REGISTRATION") }}
+        </RouterLink>
+      </div>
+      <div v-else>
+        {{ $t("TRANSACTION.TYPES.UNS_DELEGATE_REGISTRATION") }}
+      </div>
+    </span>
+
+    <span v-else-if="isUnsDelegateResignation(type, typeGroup)">
+      <div v-if="unikInfos">
+        <RouterLink v-tooltip="unikInfos.id" :to="{ name: 'unik', params: { id: unikInfos.id } }"
+          >{{ $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION") }}
+        </RouterLink>
+      </div>
+      <div v-else>
+        {{ $t("TRANSACTION.TYPES.UNS_DELEGATE_RESIGNATION") }}
+      </div>
+    </span>
     <span v-else-if="transaction && isIndividualCertifiedNftMint(transaction)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
         >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT_INDIV") }}
@@ -107,6 +159,11 @@
     <span v-else-if="transaction && isOrganizationCertifiedNftMint(transaction)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
         >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT_ORG") }}
+      </RouterLink>
+    </span>
+    <span v-else-if="transaction && isNetworkCertifiedNftMint(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_CERTIFIED_NFT_MINT_NETWORK") }}
       </RouterLink>
     </span>
     <span v-else-if="isUnsCertifiedNftMint(type, typeGroup)">
@@ -124,6 +181,11 @@
         >{{ $t("TRANSACTION.TYPES.UNS_ALIVE_DEMAND") }}
       </RouterLink>
     </span>
+    <span v-else-if="transaction && isUnsEverlastingDemand(transaction)">
+      <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
+        >{{ $t("TRANSACTION.TYPES.UNS_EVERLASTING") }}
+      </RouterLink>
+    </span>
     <span v-else-if="transaction && isUnsXPLevelDemand(transaction)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
         >{{ $t("TRANSACTION.TYPES.UNS_XPLEVEL_DEMAND") }}
@@ -136,7 +198,7 @@
     </span>
     <span v-else-if="transaction && isUnsUserPropertyUpdate(transaction)">
       <RouterLink v-tooltip="asset.nft.unik.tokenId" :to="{ name: 'unik', params: { id: asset.nft.unik.tokenId } }"
-        >{{ $t("TRANSACTION.TYPES.UNS_USER_PROPERTY") }}
+        >{{ $t("TRANSACTION.TYPES.UNS_USER_PROPERTY") }}:{{ " " + updatedUsrProps }}
       </RouterLink>
     </span>
     <span v-else-if="isUnsCertifiedNftUpdate(type, typeGroup)">
@@ -187,6 +249,7 @@ export default class LinkWallet extends Vue {
   @Prop({ required: false, default: false }) public showTimelockIcon: boolean;
   @Prop({ required: false, default: false }) public showAsType: boolean;
   @Prop({ required: false, default: null }) public transaction: ITransaction | null;
+  @Prop({ required: false, default: null }) public unikInfos: Record<string, any> | null;
 
   private delegates: IDelegate[];
 
@@ -252,6 +315,15 @@ export default class LinkWallet extends Vue {
         address: this.votedDelegateAddress,
       };
     }
+  }
+
+  get updatedUsrProps(): string {
+    if ((this.asset.nft as any).unik.properties) {
+      return Object.keys((this.asset.nft as any).unik.properties)
+        .map((key) => key.substr(4))
+        .join(", ");
+    }
+    return "";
   }
 }
 </script>

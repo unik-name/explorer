@@ -5,7 +5,13 @@
         <div class="list-row-border-b">
           <div class="mr-4">{{ $t("TRANSACTION.FROM") }}</div>
           <div class="truncate">
-            <LinkWallet :address="transaction.sender" :trunc="false" tooltip-placement="left" />
+            <LinkUNIK
+              v-if="uniksInfos[transaction.sender]"
+              :id="uniksInfos[transaction.sender].id"
+              :unikname="uniksInfos[transaction.sender].explicitValue"
+              :type="uniksInfos[transaction.sender].type"
+            />
+            <LinkWallet v-else :address="transaction.sender" :trunc="false" tooltip-placement="left" />
           </div>
         </div>
 
@@ -27,6 +33,7 @@
               :type-group="transaction.typeGroup"
               :show-as-type="true"
               :transaction="transaction"
+              :unik-infos="uniksInfos[transaction.recipient]"
               tooltip-placement="left"
             />
           </div>
@@ -272,7 +279,7 @@ import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/
 import { CryptoCompareService, LockService, TransactionService, WalletService } from "@/services";
 import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 import { Identities } from "@uns/ark-crypto";
-import { getdidTypeFromRewardTransaction, getFoundationAddress, getMilestone } from "../utils/utils";
+import { getdidTypeFromRewardTransaction, getFoundationAddress, getMilestone, getUniksInfos } from "../utils/utils";
 
 @Component({
   computed: {
@@ -293,6 +300,7 @@ export default class TransactionDetails extends Vue {
   private networkConfig;
   private foundationUnikid = "";
   private isTokenEcoV2 = false;
+  private uniksInfos: Record<string, any> = {};
 
   get confirmations() {
     return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations;
@@ -365,6 +373,9 @@ export default class TransactionDetails extends Vue {
     this.getTimelockStatus();
     this.setInitialBlockHeight();
     this.setFoundationInfos();
+    if (this.transaction) {
+      this.uniksInfos = await getUniksInfos([this.transaction]);
+    }
   }
 
   @Watch("currencySymbol")

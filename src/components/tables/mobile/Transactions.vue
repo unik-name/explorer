@@ -22,7 +22,13 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.SENDER") }}
           </div>
-          <LinkWallet :address="transaction.sender" />
+          <LinkUNIK
+            v-if="uniksInfos[transaction.sender]"
+            :id="uniksInfos[transaction.sender].id"
+            :unikname="uniksInfos[transaction.sender].explicitValue"
+            :type="uniksInfos[transaction.sender].type"
+          />
+          <LinkWallet v-else :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
@@ -35,6 +41,8 @@
             :asset="transaction.asset"
             :type-group="transaction.typeGroup"
             :show-timelock-icon="true"
+            :transaction="transaction"
+            :unik-infos="uniksInfos[transaction.recipient]"
           />
         </div>
 
@@ -46,22 +54,34 @@
             {{ transaction.vendorField }}
           </div>
         </div>
-
-        <div class="list-row-border-b">
-          <div class="mr-4">
-            {{ $t("TRANSACTION.FLOW") }}
-          </div>
-          <div>
-            <TransactionAmount :transaction="transaction" tooltip-placement="left" />
+        <div v-if="handeledUNS">
+          <div class="list-row-border-b">
+            <div class="mr-4">
+              {{ $t("TRANSACTION.FLOW") }}
+            </div>
+            <div>
+              <TransactionAmount :transaction="transaction" :is-handeled-u-n-s="true" tooltip-placement="left" />
+            </div>
           </div>
         </div>
 
-        <div class="list-row">
-          <div class="mr-4">
-            {{ $t("TRANSACTION.FEE") }}
+        <div v-else>
+          <div class="list-row-border-b">
+            <div class="mr-4">
+              {{ $t("TRANSACTION.FLOW") }}
+            </div>
+            <div>
+              <TransactionAmount :transaction="transaction" tooltip-placement="left" />
+            </div>
           </div>
-          <div>
-            <TransactionAmount :transaction="transaction" :is-fee="true" tooltip-placement="left" />
+
+          <div class="list-row">
+            <div class="mr-4">
+              {{ $t("TRANSACTION.FEE") }}
+            </div>
+            <div>
+              <TransactionAmount :transaction="transaction" :is-fee="true" tooltip-placement="left" />
+            </div>
           </div>
         </div>
 
@@ -98,9 +118,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ITransaction, IDelegate } from "@/interfaces";
 import { mapGetters } from "vuex";
+import { getUniksInfos } from "../../utils/utils";
 
 @Component({
   computed: {
@@ -116,8 +137,17 @@ export default class TableTransactionsMobile extends Vue {
   })
   public transactions: ITransaction[] | null;
   @Prop({ required: false, default: false }) public showConfirmations: boolean;
+  @Prop({ required: false, default: true }) public handeledUNS: boolean;
 
+  private uniksInfos: Record<string, any> = {};
   private activeDelegates: IDelegate[];
+
+  @Watch("transactions")
+  public async onTransactionsChanged() {
+    if (this.transactions) {
+      this.uniksInfos = await getUniksInfos(this.transactions);
+    }
+  }
 }
 </script>
 

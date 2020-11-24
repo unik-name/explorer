@@ -20,7 +20,13 @@
           <div class="mr-4">
             {{ $t("TRANSACTION.SENDER") }}
           </div>
-          <LinkWallet :address="transaction.sender" />
+          <LinkUNIK
+            v-if="uniksInfos[transaction.sender]"
+            :id="uniksInfos[transaction.sender].id"
+            :unikname="uniksInfos[transaction.sender].explicitValue"
+            :type="uniksInfos[transaction.sender].type"
+          />
+          <LinkWallet v-else :address="transaction.sender" />
         </div>
 
         <div class="list-row-border-b">
@@ -32,6 +38,8 @@
             :type="transaction.type"
             :asset="transaction.asset"
             :type-group="transaction.typeGroup"
+            :transaction="transaction"
+            :unik-infos="uniksInfos[transaction.recipient]"
           />
         </div>
 
@@ -88,9 +96,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ITransaction, IDelegate } from "@/interfaces";
 import { mapGetters } from "vuex";
+import { getUniksInfos } from "@/components/utils/utils";
 
 @Component({
   computed: {
@@ -105,8 +114,15 @@ export default class TableTransactionsDetailMobile extends Vue {
     },
   })
   public transactions: ITransaction[] | null;
-
   private activeDelegates: IDelegate[];
+  private uniksInfos: Record<string, any> = {};
+
+  @Watch("transactions")
+  public async onTransactionsChanged() {
+    if (this.transactions) {
+      this.uniksInfos = await getUniksInfos(this.transactions);
+    }
+  }
 }
 </script>
 

@@ -135,6 +135,12 @@ export default {
         this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) && type === DIDTypes.ORGANIZATION.toString()
       );
     },
+    isNetworkCertifiedNftMint(transaction): boolean {
+      const type = transaction.asset.nft.unik.properties.type;
+      return (
+        this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) && type === DIDTypes.NETWORK.toString()
+      );
+    },
     isVoucherUnsCertifiedNftMint(transaction: ITransaction): boolean {
       return !!(
         this.isUnsCertifiedNftMint(transaction.type, transaction.typeGroup) &&
@@ -160,6 +166,12 @@ export default {
       return (
         this.isUnsCertifiedNftUpdate(transaction.type, transaction.typeGroup) &&
         transaction.asset.nft.unik.properties[LIFE_CYCLE_PROPERTY_KEY] === LifeCycleGrades.LIVE.toString()
+      );
+    },
+    isUnsEverlastingDemand(transaction: ITransaction): boolean {
+      return (
+        this.isUnsCertifiedNftUpdate(transaction.type, transaction.typeGroup) &&
+        transaction.asset.nft.unik.properties[LIFE_CYCLE_PROPERTY_KEY] === LifeCycleGrades.EVERLASTING.toString()
       );
     },
     isUnsRewardedTransaction(transaction: ITransaction, isTokenEcov2: boolean): boolean {
