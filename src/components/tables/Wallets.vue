@@ -107,7 +107,9 @@ export default class TableWalletsDesktop extends Vue {
   }
 
   private setCappedVotesMilestone() {
-    this.isCappedVotes = !!getMilestone(this.networkConfig, this.height).voterMaximumWeight;
+    if (this.networkConfig) {
+      this.isCappedVotes = !!getMilestone(this.networkConfig, this.height).voterMaximumWeight;
+    }
   }
 
   public supplyPercentage(wallet: any): string {
