@@ -5,7 +5,7 @@
         <div class="list-row">
           <div class="mr-4">{{ title }}</div>
         </div>
-        <div class="py-2">
+        <div class="py-2 break-all">
           <TableWrapper v-bind="$attrs" :columns="columns" :rows="properties">
             <template slot-scope="data">
               <div v-if="data.column.field === 'key'">{{ getKey(data.row) }}</div>
