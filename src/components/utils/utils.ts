@@ -1,5 +1,6 @@
 import { ITransaction } from "@/interfaces";
 import { DIDTypes } from "@uns/ts-sdk";
+import { Identities } from "@uns/ark-crypto";
 
 export function getMilestone(config, height?: number): { [key: string]: any } {
   if (!height) {
@@ -21,4 +22,9 @@ export function getdidTypeFromRewardTransaction(transaction: ITransaction, isTok
     // token eco v1: type is in transaction asset
     return parseInt(transaction.asset.nft.unik.properties.type);
   }
+}
+
+export function getFoundationAddress(config): string {
+  const foundationPubKey = config.network.foundation.publicKey;
+  return Identities.Address.fromPublicKey(foundationPubKey, config.network.pubKeyHash);
 }

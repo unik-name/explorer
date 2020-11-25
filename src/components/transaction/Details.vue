@@ -271,7 +271,7 @@ import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/
 import { CryptoCompareService, LockService, TransactionService, WalletService } from "@/services";
 import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 import { Identities } from "@uns/ark-crypto";
-import { getdidTypeFromRewardTransaction, getMilestone } from "../utils/utils";
+import { getdidTypeFromRewardTransaction, getFoundationAddress, getMilestone } from "../utils/utils";
 
 @Component({
   computed: {
@@ -343,7 +343,7 @@ export default class TransactionDetails extends Vue {
   get rewards() {
     this.setTokenEco();
     // @ts-ignore
-    if (this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
+    if (this.networkConfig && this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
       return getMilestone(this.networkConfig, this.initialBlockHeight).voucherRewards[
         DIDHelpers.fromCode(this.didType).toLowerCase()
       ];
@@ -382,7 +382,9 @@ export default class TransactionDetails extends Vue {
     if (!this.initialBlockHeight) {
       this.setInitialBlockHeight();
     }
-    this.isTokenEcoV2 = !!getMilestone(this.networkConfig, this.initialBlockHeight).unsTokenEcoV2;
+    if (this.networkConfig) {
+      this.isTokenEcoV2 = !!getMilestone(this.networkConfig, this.initialBlockHeight).unsTokenEcoV2;
+    }
   }
 
   public async mounted() {
@@ -401,13 +403,12 @@ export default class TransactionDetails extends Vue {
   }
 
   private async setFoundationInfos() {
-    const foundationPubKey = this.networkConfig.network.foundation.publicKey;
-    const wallet = await WalletService.find(
-      Identities.Address.fromPublicKey(foundationPubKey, this.networkConfig.network.pubKeyHash),
-    );
+    if (this.networkConfig) {
+      const wallet = await WalletService.find(getFoundationAddress(this.networkConfig));
 
-    if (wallet.attributes.tokens && wallet.attributes.tokens.length) {
-      this.foundationUnikid = Object.keys(wallet.attributes.tokens)[0];
+      if (wallet.attributes.tokens && Object.keys(wallet.attributes.tokens).length) {
+        this.foundationUnikid = Object.keys(wallet.attributes.tokens)[0];
+      }
     }
   }
 

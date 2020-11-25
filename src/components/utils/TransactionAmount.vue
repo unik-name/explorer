@@ -40,7 +40,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { ITransaction } from "@/interfaces";
 import { CoreTransaction, MagistrateTransaction, TypeGroupTransaction } from "@/enums";
 import { mapGetters } from "vuex";
-import { getdidTypeFromRewardTransaction, getMilestone } from "./utils";
+import { getdidTypeFromRewardTransaction, getFoundationAddress, getMilestone } from "./utils";
 import { DIDHelpers, DIDTypes } from "@uns/ts-sdk";
 import { Identities } from "@uns/ark-crypto";
 
@@ -57,7 +57,7 @@ export default class TransactionAmount extends Vue {
   private height: number;
   private initialBlockHeight = 0;
   private networkConfig;
-  private foundationWallet: string = null;
+  private foundationAddress: string = null;
   private isTokenEcoV2 = false;
 
   @Watch("height")
@@ -68,10 +68,9 @@ export default class TransactionAmount extends Vue {
     }
   }
 
-  private setFoundationWallet() {
-    if (!this.foundationWallet) {
-      const foundationPubKey = this.networkConfig.network.foundation.publicKey;
-      this.foundationWallet = Identities.Address.fromPublicKey(foundationPubKey, this.networkConfig.network.pubKeyHash);
+  private setfoundationAddress() {
+    if (!this.foundationAddress && this.networkConfig) {
+      this.foundationAddress = getFoundationAddress(this.networkConfig);
     }
   }
 
@@ -83,13 +82,15 @@ export default class TransactionAmount extends Vue {
     if (!this.initialBlockHeight) {
       this.setInitialBlockHeight();
     }
-    this.isTokenEcoV2 = !!getMilestone(this.networkConfig, this.initialBlockHeight).unsTokenEcoV2;
+    if (this.networkConfig) {
+      this.isTokenEcoV2 = !!getMilestone(this.networkConfig, this.initialBlockHeight).unsTokenEcoV2;
+    }
   }
 
   get rewards() {
     this.setTokenEco();
     // @ts-ignore
-    if (this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
+    if (this.networkConfig && this.isUnsRewardedTransaction(this.transaction, this.isTokenEcoV2)) {
       const didType = getdidTypeFromRewardTransaction(this.transaction, this.isTokenEcoV2);
       return getMilestone(this.networkConfig, this.initialBlockHeight).voucherRewards[
         DIDHelpers.fromCode(didType).toLowerCase()
@@ -126,8 +127,8 @@ export default class TransactionAmount extends Vue {
 
     if (this.rewards) {
       // Foundation wallet
-      this.setFoundationWallet();
-      if (this.$route.params.address === this.foundationWallet) {
+      this.setfoundationAddress();
+      if (this.$route.params.address === this.foundationAddress) {
         return this.rewards.foundation;
       }
       return this.rewards.sender + this.rewards.forger;
