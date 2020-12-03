@@ -219,7 +219,6 @@ export default class TransactionAmount extends Vue {
     if (this.rewards) {
       handeledUns = handeledUns.plus(this.rewards.sender).plus(this.rewards.forger);
     }
-    console.log("handeledUns", handeledUns.toString());
     return handeledUns.toString();
   }
 }
