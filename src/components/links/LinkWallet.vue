@@ -98,19 +98,23 @@
     }}</span>
     <span v-else-if="isBridgechainUpdate(type, typeGroup)">{{ $t("TRANSACTION.TYPES.BRIDGECHAIN_UPDATE") }}</span>
 
-    <span v-else-if="isNftTransfer(type, typeGroup)">
-      {{ $t("UNIK.TRANSFER_TO") }}
-      <div v-if="!!unikInfos" class="flex items-center w-full" style="white-space: pre-wrap">
-        <LinkUNIK :id="unikInfos.id" :unikname="unikInfos.explicitValue" :type="unikInfos.type" />
-      </div>
-      <div v-else class="flex items-center w-full">
-        <LinkAddress
-          :address="address"
-          :public-key="publicKey"
-          :trunc="trunc"
-          :tooltip-placement="tooltipPlacement"
-          container-class="w-full"
-        />
+    <span v-else-if="isNftCertifiedTransfer(type, typeGroup)">
+      <div class="flex items-center w-full whitespace-no-wrap">
+        <span v-if="showAsType" class="mr-2">
+          {{ $t("UNIK.TRANSFER_TO") }}
+        </span>
+        <div v-if="!!unikInfos">
+          <LinkUNIK :id="unikInfos.id" :unikname="unikInfos.explicitValue" :type="unikInfos.type" />
+        </div>
+        <div v-else>
+          <LinkAddress
+            :address="address"
+            :public-key="publicKey"
+            :trunc="trunc"
+            :tooltip-placement="tooltipPlacement"
+            container-class="w-full"
+          />
+        </div>
       </div>
     </span>
     <span v-else-if="isNftUpdate(type, typeGroup)">
@@ -225,7 +229,6 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import { mapGetters } from "vuex";
 import { IDelegate, ITransaction } from "@/interfaces";
 import UnikDisplay from "@/components/unik/UnikDisplay.vue";
-import WalletVoters from "@/pages/Wallet/Voters.vue";
 import LinkAddress from "./LinkAddress.vue";
 
 @Component({

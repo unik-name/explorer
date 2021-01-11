@@ -34,6 +34,7 @@ export enum UNSTransaction {
   CERTIFIED_NFT_MINT = 3,
   CERTIFIED_NFT_UPDATE = 4,
   VOTE = 5,
+  CERTIFIED_NFT_TRANSFER = 6,
 }
 
 export enum TypeGroupTransaction {
