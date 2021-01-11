@@ -107,6 +107,10 @@ export default {
       return isNFTTypeGroup(typeGroup) && type === NftTransaction.NFT_TRANSFER;
     },
 
+    isNftCertifiedTransfer(type: number, typeGroup: number): boolean {
+      return isUNSTypeGroup(typeGroup) && type === UNSTransaction.CERTIFIED_NFT_TRANSFER;
+    },
+
     isNftUpdate(type: number, typeGroup: number): boolean {
       return isNFTTypeGroup(typeGroup) && type === NftTransaction.NFT_UPDATE;
     },
