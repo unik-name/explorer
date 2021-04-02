@@ -1,4 +1,5 @@
 import {
+  BADGES_PREFIX,
   BADGE_DELEGATE_KEY,
   BADGE_PIONEER_KEY,
   BADGE_SECOND_PASSPHRASE_KEY,
@@ -269,6 +270,9 @@ export default {
     },
     "Authentications/CosmicNonce": {
       key: "Nonce cosmic",
+    },
+    [`${BADGES_PREFIX}Event/easteregg2021`]: {
+      key: "Easter Egg 2021",
     },
     VERIFIED_URL: "URL verifiée",
     VERIFIED_URL_PROOF: "Preuve de vérification",
