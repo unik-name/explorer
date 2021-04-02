@@ -1658,17 +1658,16 @@
     "@uns/ark-crypto" "^5.6.0-dev.20406.5821+43a070cfc"
     "@uns/core-nft-crypto" "^5.6.0-dev.20406.5821+43a070cfc"
 
-"@uns/ts-sdk@^4.0.0-dev":
-  version "4.0.0-dev.20201125085411"
-  resolved "https://registry.yarnpkg.com/@uns/ts-sdk/-/ts-sdk-4.0.0-dev.20201125085411.tgz#a7e8afd88535c60eeb7282b6e006d6de908b917b"
-  integrity sha512-PacvpwXMtXZwCqfAtGoUuJE8jEs1DjzlOpY37HecW5FCy3718yqvSZAdAd4pJp7qN4veV3nhRTiX/aiNFT0J9w==
+"@uns/ts-sdk@^4.1.0-dev":
+  version "4.1.0-dev.20210402123807"
+  resolved "https://registry.yarnpkg.com/@uns/ts-sdk/-/ts-sdk-4.1.0-dev.20210402123807.tgz#596dada54931457c381cdb0bab6c8c00db1dac88"
+  integrity sha512-3dMCRMQG0SjF8ulKfKn26QJ1gk6tOybgciXlM6nFJTXaWeqUUi880AuZdDFZL1f0P0CQuk99tIjrI/ZCt5eV3Q==
   dependencies:
     "@uns/ark-crypto" "^5.6.0-dev"
     "@uns/core-nft-crypto" "^5.6.0-dev"
     "@uns/crypto" "^5.6.0-dev"
     deepmerge "^4.0.0"
     did-jwt "^4.0.0"
-    elliptic "^6.5.2"
     is-url-superb "^3.0.0"
     ky "^0.13.0"
     ky-universal "^0.3.0"
@@ -4773,7 +4772,7 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-elliptic@^6.4.0, elliptic@^6.5.2, elliptic@^6.5.3:
+elliptic@^6.4.0, elliptic@^6.5.3:
   version "6.5.3"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.3.tgz#cb59eb2efdaf73a0bd78ccd7015a62ad6e0f93d6"
   integrity sha512-IMqzv5wNQf+E6aHeIqATs0tOLeOTwj1QKbRcS3jBbYkl5oLAserA8yJTT7/VyHUYG91PRmPyeQDObKLPpeS4dw==

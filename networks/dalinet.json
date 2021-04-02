@@ -2,7 +2,7 @@
   "title": "uns.network DALINET Explorer",
   "server": "https://forger1.dalinet.uns.network/api/v2",
   "alias": "Dalinet",
-  "activeDelegates": 3,
+  "activeDelegates": 6,
   "rewardOffset": 1,
   "currencies": [],
   "knownWallets": {},
