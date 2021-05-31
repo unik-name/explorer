@@ -2,7 +2,7 @@
   <footer class="AppFooter px-5 md:px-10 flex-col lg:flex-row">
     <div class="mb-4 lg:mb-0 text-center md:text-left">
       <span class="block md:inline-block mb-4 md:mb-0 text-center"
-        >&copy; <a :href="brandData.footer.url" target="_blank">{{ brandData.footer.text }} 2019-2020</a></span
+        >&copy; <a :href="brandData.footer.url" target="_blank">{{ brandData.footer.text }} 2019-2021</a></span
       >
       <div class="block md:inline-block">
         <span class="hidden md:inline-block px-1">|</span>
