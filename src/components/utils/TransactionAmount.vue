@@ -140,6 +140,11 @@ export default class TransactionAmount extends Vue {
       return this.rewards.sender + this.rewards.forger;
     }
 
+    // @ts-ignore
+    if (this.isNftCertifiedTransfer(this.transaction.type, this.transaction.typeGroup)) {
+      return this.transaction.asset.certification.payload.cost;
+    }
+
     return this.transaction.amount;
   }
 
@@ -218,6 +223,10 @@ export default class TransactionAmount extends Vue {
     let handeledUns: BigNumber = BigNumber.make(this.transaction.fee).plus(this.transaction.amount);
     if (this.rewards) {
       handeledUns = handeledUns.plus(this.rewards.sender).plus(this.rewards.forger);
+    }
+    // @ts-ignore
+    if (this.isNftCertifiedTransfer(this.transaction.type, this.transaction.typeGroup)) {
+      handeledUns = handeledUns.plus(this.transaction.asset.certification.payload.cost);
     }
     return handeledUns.toString();
   }
