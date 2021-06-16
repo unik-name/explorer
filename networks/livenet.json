@@ -1,5 +1,5 @@
 {
-  "title": "uns.network Explorer",
+  "title": "unikname.network explorer",
   "server": "https://api.uns.network/api/v2",
   "alias": "Livenet",
   "activeDelegates": 23,
@@ -7,8 +7,8 @@
   "currencies": [],
   "knownWallets": {},
   "defaults": {
-    "token": "UNS",
-    "symbol": "UNS",
+    "token": "UNIK",
+    "symbol": "UNIK",
     "currency": null,
     "priceChartOptions": {
       "enabled": false
