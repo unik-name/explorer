@@ -13,7 +13,7 @@
         </div>
         <div :class="{ 'pr-6': isMainWithCurrency }">
           {{ $t("HEADER.SUPPLY") }}:
-          <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIK</span>
+          <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIKNAME</span>
         </div>
         <div v-if="showMarketCap">
           {{ $t("HEADER.MARKET_CAP") }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
@@ -34,7 +34,7 @@
       <div>
         <span>{{ $t("HEADER.SUPPLY") }}:</span>
         <span class="block md:inline-block whitespace-no-wrap"
-          >{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIK</span
+          >{{ readableCrypto(supply, true, 0) }} / {{ unikSupply }} UNIKNAME</span
         >
       </div>
     </div>
@@ -62,7 +62,7 @@ export default class ContentHeader extends Vue {
   private token: string;
 
   get isMainWithCurrency() {
-    return this.alias === "Main" && this.name && this.name !== "UNS";
+    return false;
   }
 
   get showMarketCap() {
