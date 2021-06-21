@@ -23,7 +23,7 @@ export const socialMedia = [
   // },
   {
     name: "twitter",
-    url: "https://twitter.com/UnikName_UNS",
+    url: "https://twitter.com/UniknameNetwork",
     viewBox: "0 0 16 16",
   },
   // {

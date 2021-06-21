@@ -1,13 +1,16 @@
 .theme-light {
-  --color-theme-text-thead: #C5C7CB;
+  --color-theme-text-thead: #c5c7cb;
   --color-theme-table-row-sticky: #fff;
-  --color-theme-accents: #EF192D;
+  --color-theme-accents: #c605c7;
+  --color-theme-accents-darker: #9b049b;
+  --color-theme-accents-dark: #7c027c;
+  --color-theme-accents-lighter: #da04da;
   --color-theme-transaction-icon: #037cff;
 
-  --color-theme-page-background-primary: #0F2852;
+  --color-theme-page-background-primary: #f5f6fa;
   --color-theme-content-background-primary: #fff;
   --color-theme-feature-background: #20222d;
-  --color-theme-table-row: #f3f3f3;
+  --color-theme-table-row: #fcf6fc;
   --color-theme-table-row-hover: #fff;
   --color-theme-text-primary: #172130;
   --color-theme-text-secondary: #395174;
@@ -24,15 +27,12 @@
   --ark-meter: #e4ece9;
   --chart-active: #395174;
   --chart-inactive: #a0a6c8;
-  --theme-button: #00A099;
-  --theme-button-active: #c5dbed;
-  --theme-button-text: #FFFFFF;
-  --theme-button-close: #a0a6c8;
+  --theme-button: #fce6fc;
+  --theme-button-active: #eeceee;
+  --theme-button-text: #c605c7;
+  --theme-button-close: #c2a1d1;
   --language-icon: #395174;
   --theme-resigned-label: #c53a4a;
-  --theme-input-field-border: #abbbca;
-  --theme-input-field-border-focus: #000000;
-  --theme-input-field-border-hover: #037cff;
 }
 
 .theme-light footer a {
@@ -43,9 +43,12 @@
 }
 
 .theme-dark {
-  --color-theme-text-thead: #A1A2A6;
+  --color-theme-text-thead: #a1a2a6;
   --color-theme-table-row-sticky: #25262c;
-  --color-theme-accents: #EF192D;
+  --color-theme-accents: #c605c7;
+  --color-theme-accents-darker: #9b049b;
+  --color-theme-accents-dark: #7c027c;
+  --color-theme-accents-lighter: #da04da;
   --color-theme-transaction-icon: #037cff;
 
   --color-theme-page-background-primary: #1a1b1f;
@@ -74,9 +77,6 @@
   --theme-button-close: #787a86;
   --language-icon: #a1a2a6;
   --theme-resigned-label: #c53a4a;
-  --theme-input-field-border: #3d4852;
-  --theme-input-field-border-focus: #3d4852;
-  --theme-input-field-border-hover: #037cff;
 }
 
 .theme-dark footer a {
