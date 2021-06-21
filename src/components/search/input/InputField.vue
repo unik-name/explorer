@@ -58,7 +58,7 @@ export default class InputField extends Vue {
 }
 
 .InputField__input:focus {
-  @apply .border-blue;
+  @apply .border-theme-input-field-border-hover;
 }
 
 .InputField__input:hover {
@@ -112,9 +112,9 @@ export default class InputField extends Vue {
 .InputField--warning .InputField__label,
 .InputField--warning .InputField__helper,
 .InputField--warning .InputField__label__textarea {
-  @apply .text-turquoise-dark;
+  @apply .text-theme-accents-dark;
 }
 .InputField--warning .InputField__input {
-  @apply .border-turquoise-dark;
+  @apply .border-theme-accents-dark;
 }
 </style>

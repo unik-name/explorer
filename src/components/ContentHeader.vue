@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="flex justify-between flex-wrap px-5 sm:px-10 xl:px-0">
-      <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-white sm:mr-5">
+      <h1 class="text-2xl md:text-3xl mb-5 md:mb-6 text-theme-text-primary sm:mr-5">
         <slot />
       </h1>
       <div
         class="hidden sm:flex items-center text-theme-text-tertiary text-xs px-3 sm:px-8 xl:px-6 py-3 mb-5 md:mb-6 bg-stat-background rounded-md"
       >
         <div class="pr-6">{{ $t("COMMON.HEIGHT") }}: {{ readableNumber(height) }}</div>
-        <div class="pr-6" :class="{ 'text-turquoise font-black': !isMainWithCurrency }">
+        <div class="pr-6" :class="{ 'text-theme-accents font-black': !isMainWithCurrency }">
           {{ $t("HEADER.NETWORK") }}: {{ $t(`HEADER.${alias.replace(" ", "_").toUpperCase()}`) }}
         </div>
         <div :class="{ 'pr-6': isMainWithCurrency }">

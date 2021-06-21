@@ -7,9 +7,9 @@ module.exports = {
       xl: "1200px",
     },
 
-    backgroundColor: theme => theme("colors"),
+    backgroundColor: (theme) => theme("colors"),
 
-    borderColor: theme => ({
+    borderColor: (theme) => ({
       default: theme("colors.theme-border"),
       ...theme("colors"),
     }),
@@ -66,6 +66,9 @@ module.exports = {
       "theme-button-close": "var(--theme-button-close)",
       "language-icon": "var(--language-icon)",
       "theme-accents": "var(--color-theme-accents)",
+      "theme-accents-darker": "var(--color-theme-accents-darker)",
+      "theme-accents-dark": "var(--color-theme-accents-dark)",
+      "theme-accents-lighter": "var(--color-theme-accents-lighter)",
       "theme-transaction-icon": "var(--color-theme-transaction-icon)",
       "theme-resigned-label": "var(--theme-resigned-label)",
       "theme-input-field-border": "var(--theme-input-field-border)",
@@ -342,7 +345,7 @@ module.exports = {
       current: "currentColor",
     },
 
-    textColor: theme => theme("colors"),
+    textColor: (theme) => theme("colors"),
 
     width: {
       auto: "auto",
