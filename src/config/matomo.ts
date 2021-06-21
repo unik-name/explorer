@@ -20,7 +20,14 @@ export function setupMatomoConfig() {
   window._paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
   window._paq.push([
     "setDomains",
-    ["*.unikname.network", "*.uns.network", "*.unik-name.com", "*.unikname.com", "*.unikname.app"],
+    [
+      "*.unikname.network",
+      "*.uns.network",
+      "*.unik-name.com",
+      "*.unikname.com",
+      "*.unikname.app",
+      "*.unikname.network",
+    ],
   ]);
   window._paq.push(["enableCrossDomainLinking"]);
   window._paq.push(["setDoNotTrack", true]);
