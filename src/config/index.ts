@@ -61,11 +61,11 @@ export const socialMedia = [
   //   url: "https://slack.ark.io",
   //   viewBox: "0 0 14 16",
   // },
-  // {
-  //   name: "discord",
-  //   url: "https://discord.ark.io",
-  //   viewBox: "0 0 14 16",
-  // },
+  {
+    name: "discord",
+    url: "https://join-discord.unikname.network",
+    viewBox: "0 0 14 16",
+  },
   // {
   //   name: "steemit",
   //   url: "https://steemit.ark.io",
