@@ -36,11 +36,11 @@ export const socialMedia = [
     url: "mailto:contact@unikname.com",
     viewBox: "0 0 16 16",
   },
-  // {
-  //   name: "telegram",
-  //   url: "https://telegram.me/ArkEcosystem",
-  //   viewBox: "0 0 14 16",
-  // },
+  {
+    name: "telegram",
+    url: "https://t.me/UniknameAnnouncements",
+    viewBox: "0 0 14 16",
+  },
   // {
   //   name: "reddit",
   //   url: "https://reddit.ark.io",
