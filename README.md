@@ -53,7 +53,7 @@ $ yarn test
 
 ## Naming convention
 
-⚠️ **universal-name-system, UNS, uns.network** is the previous name of the **unikname.network blockchain**.
+⚠️ **universal-name-system, UNS, uns.network** are previous names of the **unikname.network blockchain**.
 
 ⚠️ **UNIK** is the previous name of the **UNIKNAME nft token**
 
