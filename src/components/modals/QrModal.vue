@@ -24,9 +24,9 @@
         <Clipboard :value="qrValue" />
       </div>
 
-      <button class="mt-8 mx-auto pager-button items-center" @click="isCollapsed = !isCollapsed">
+      <!-- <button class="mt-8 mx-auto pager-button items-center" @click="isCollapsed = !isCollapsed">
         {{ $t(`WALLET.ADVANCED_QR.${isCollapsed ? "EXPAND" : "COLLAPSE"}`) }}
-      </button>
+      </button> -->
     </div>
   </Modal>
 </template>

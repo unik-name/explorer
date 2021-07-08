@@ -239,11 +239,11 @@ export default class WalletTransactions extends Vue {
 }
 
 .TransactionsNavigation--tab:hover {
-  @apply .text-theme-text-primary .border-turquoise;
+  @apply .text-theme-text-primary .border-theme-accents;
 }
 
 .TransactionsNavigation--tab.active {
-  @apply .text-2xl .border-turquoise .text-theme-text-primary;
+  @apply .text-2xl .border-theme-accents .text-theme-text-primary;
 }
 
 .TransactionsNavigation--tab.disabled {

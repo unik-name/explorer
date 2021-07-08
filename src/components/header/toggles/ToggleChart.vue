@@ -2,7 +2,7 @@
   <button
     :class="[
       isChartEnabled ? 'text-chart-active' : 'text-chart-inactive',
-      'px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-turquoise hover:text-turquoise transition',
+      'px-2 py-4 hidden md:flex flex-none items-center border-b-2 mt-2px border-transparent hover:border-theme-accents hover:text-theme-accents transition',
     ]"
     @click="toggleChart()"
   >

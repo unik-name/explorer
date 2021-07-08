@@ -90,16 +90,16 @@
       <div class="flex-none px-8">
         <button
           :disabled="!wallet.publicKey"
-          :class="view === 'public' ? 'bg-turquoise-darker' : 'bg-transparent text-turquoise-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-turquoise transition"
+          :class="view === 'public' ? 'bg-theme-accents-darker' : 'bg-transparent text-theme-accents-lighter'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-theme-accents transition"
           @click="setView('public')"
         >
           <SvgIcon class="block" name="globe" view-box="0 0 17 17" />
         </button>
         <button
           v-if="wallet.publicKey"
-          :class="view === 'private' ? 'bg-turquoise-darker' : 'bg-transparent text-turquoise-light'"
-          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-turquoise transition"
+          :class="view === 'private' ? 'bg-theme-accents-darker' : 'bg-transparent text-theme-accents-lighter'"
+          class="py-3 px-3 rounded-md text-white font-normal text-xs hover:text-theme-accents transition"
           @click="setView('private')"
         >
           <SvgIcon class="block" name="key" view-box="0 0 13 14" />
@@ -264,11 +264,11 @@ export default class WalletDetails extends Vue {
 }
 
 .address-button {
-  background-color: #0f2852;
+  background-color: var(--color-theme-accents-dark);
 }
 
 .address-button:hover {
-  background-color: #0f2852;
+  background-color: var(--color-theme-accents-dark);
   transform: scale(1.1);
 }
 </style>
