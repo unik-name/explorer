@@ -41,8 +41,8 @@ export default class PaginationSearchButton extends Vue {
 }
 
 .Pagination__Button--search:hover {
-  @apply .bg-blue .text-white .rounded;
-  box-shadow: 0 5px 15px rgba(9, 100, 228, 0.34);
+  @apply .bg-theme-accents-dark .text-white .rounded;
+  box-shadow: 0 5px 15px rgba(210, 9, 228, 0.34);
 }
 
 .Pagination__Button--search .icon {

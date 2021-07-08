@@ -274,7 +274,7 @@ const router = new Router({
       path: "/uniks/:id",
       name: "unik",
       component: UnikComponent,
-      meta: { title: (route: Route) => getTitle("UNIK " + route.params.id.substr(0, 5)) },
+      meta: { title: (route: Route) => getTitle("UNIKNAME " + route.params.id.substr(0, 5)) },
     },
   ],
   scrollBehavior(

@@ -23,7 +23,7 @@ export const socialMedia = [
   // },
   {
     name: "twitter",
-    url: "https://twitter.com/UnikName_UNS",
+    url: "https://twitter.com/UniknameNetwork",
     viewBox: "0 0 16 16",
   },
   // {
@@ -36,11 +36,11 @@ export const socialMedia = [
     url: "mailto:contact@unikname.com",
     viewBox: "0 0 16 16",
   },
-  // {
-  //   name: "telegram",
-  //   url: "https://telegram.me/ArkEcosystem",
-  //   viewBox: "0 0 14 16",
-  // },
+  {
+    name: "telegram",
+    url: "https://t.me/UniknameAnnouncements",
+    viewBox: "0 0 14 16",
+  },
   // {
   //   name: "reddit",
   //   url: "https://reddit.ark.io",
@@ -61,11 +61,11 @@ export const socialMedia = [
   //   url: "https://slack.ark.io",
   //   viewBox: "0 0 14 16",
   // },
-  // {
-  //   name: "discord",
-  //   url: "https://discord.ark.io",
-  //   viewBox: "0 0 14 16",
-  // },
+  {
+    name: "discord",
+    url: "https://join-discord.unikname.network",
+    viewBox: "0 0 14 16",
+  },
   // {
   //   name: "steemit",
   //   url: "https://steemit.ark.io",

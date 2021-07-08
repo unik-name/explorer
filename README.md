@@ -1,10 +1,10 @@
-# UNS.network Explorer
+# Unikname.network Explorer
 
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
 
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
-You can access it at [https://explorer.uns.network/](https://explorer.uns.network/).
+You can access it at [https://explorer.unikname.network/](https://explorer.unikname.network/).
 
 ## Build Setup
 
@@ -49,7 +49,17 @@ $ yarn test
 ## Contributing
 
 - If you find any bugs, submit an [issue](../../issues) or open a [pull-request](../../pulls) against `develop` branch, helping us catch and fix them.
-- Engage with other users and developers on the [UNS.network Forum](https://forum.unikname.com/c/uns-network/7).
+- Engage with other users and developers on the [unikname.network Forum](https://forum.unikname.com/c/uns-network/7).
+
+## Naming convention
+
+⚠️ **universal-name-system, UNS, uns.network** are previous names of the **unikname.network blockchain**.
+
+⚠️ **UNIK** is the previous name of the **UNIKNAME nft token**
+
+⚠️ **UNS** is the previous name of the **UNIK protocol token**
+
+_=> Renaming in codebase will be made progressively._
 
 ## Security
 

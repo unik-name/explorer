@@ -1,5 +1,5 @@
 {
-  "title": "uns.network DALINET Explorer",
+  "title": "[DALINET] unikname.network explorer",
   "server": "https://forger1.dalinet.uns.network/api/v2",
   "alias": "Dalinet",
   "activeDelegates": 6,
@@ -7,8 +7,8 @@
   "currencies": [],
   "knownWallets": {},
   "defaults": {
-    "token": "DUNS",
-    "symbol": "DUNS",
+    "token": "DUNIK",
+    "symbol": "DUNIK",
     "currency": null,
     "priceChartOptions": {
       "enabled": false
